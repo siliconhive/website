@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SiliconHive | Semiconductor Knowledge & Insights</title>
+  <style>
+    :root {
+      --bg-color: #0b1120;
+      --card-bg: #1e293b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #0284c7;
+      --gold: #fbbf24;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Navigation */
+    header {
+      border-bottom: 1px solid #1e293b;
+      padding: 1.25rem 2rem;
+      background-color: rgba(11, 17, 32, 0.95);
+      position: sticky;
+      top: 0;
+    }
+
+    .nav-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--text-main);
+      text-decoration: none;
+      letter-spacing: -0.5px;
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+
+    nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    /* Hero Section */
+    main {
+      flex: 1;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .hero-text h1 {
+      font-size: 2.75rem;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .hero-text p {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+      background-color: var(--accent);
+      color: #0b1120;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--accent-hover);
+      color: #ffffff;
+    }
+
+    .btn-secondary {
+      background-color: var(--card-bg);
+      color: var(--text-main);
+      border: 1px solid #334155;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent);
+    }
+
+    /* Chip Graphic Container */
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: radial-gradient(circle, rgba(56,189,248,0.12) 0%, rgba(11,17,32,0) 70%);
+      padding: 2rem;
+      border-radius: 16px;
+    }
+
+    .chip-svg {
+      width: 100%;
+      max-width: 340px;
+      height: auto;
+      filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.5));
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      border-top: 1px solid #1e293b;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      main {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding-top: 2.5rem;
+      }
+
+      .cta-buttons {
+        justify-content: center;
+      }
+
+      .nav-container {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="nav-container">
+      <a href="index.html" class="logo">Silicon<span>Hive</span></a>
+      <nav>
+        <ul>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="book.html">Book</a></li>
+          <li><a href="about.html">About Me</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero-text">
+      <h1>Welcome to SiliconHive</h1>
+      <p>
+        This blog is dedicated to sharing my semiconductor knowledge—breaking down chip architecture, fabrication processes, and industry insights into clear, practical concepts.
+      </p>
+      <div class="cta-buttons">
+        <a href="blog.html" class="btn btn-primary">Read the Blog</a>
+        <a href="book.html" class="btn btn-secondary">Explore My Book</a>
+      </div>
+    </section>
+
+    <section class="hero-visual">
+      <!-- Custom Vector Silicon Chip Illustration -->
+      <svg class="chip-svg" viewBox="0 0 300 300" xmlns="http://w3.org">
+        <!-- Circuit Traces / Pins -->
+        <g stroke="#fbbf24" stroke-width="4" stroke-linecap="round">
+          <!-- Top Pins -->
+          <line x1="90" y1="25" x2="90" y2="65" />
+          <line x1="120" y1="25" x2="120" y2="65" />
+          <line x1="150" y1="25" x2="150" y2="65" />
+          <line x1="180" y1="25" x2="180" y2="65" />
+          <line x1="210" y1="25" x2="210" y2="65" />
+          <!-- Bottom Pins -->
+          <line x1="90" y1="235" x2="90" y2="275" />
+          <line x1="120" y1="235" x2="120" y2="275" />
+          <line x1="150" y1="235" x2="150" y2="275" />
+          <line x1="180" y1="235" x2="180" y2="275" />
+          <line x1="210" y1="235" x2="210" y2="275" />
+          <!-- Left Pins -->
+          <line x1="25" y1="90" x2="65" y2="90" />
+          <line x1="25" y1="120" x2="65" y2="120" />
+          <line x1="25" y1="150" x2="65" y2="150" />
+          <line x1="25" y1="180" x2="65" y2="180" />
+          <line x1="25" y1="210" x2="65" y2="210" />
+          <!-- Right Pins -->
+          <line x1="235" y1="90" x2="275" y2="90" />
+          <line x1="235" y1="120" x2="275" y2="120" />
+          <line x1="235" y1="150" x2="275" y2="150" />
+          <line x1="235" y1="180" x2="275" y2="180" />
+          <line x1="235" y1="210" x2="275" y2="210" />
+        </g>
+
+        <!-- Outer Substrate Package -->
+        <rect x="65" y="65" width="170" height="170" rx="16" fill="#1e293b" stroke="#38bdf8" stroke-width="3"/>
+        
+        <!-- Inner Silicon Die -->
+        <rect x="90" y="90" width="120" height="120" rx="8" fill="#0f172a" stroke="#fbbf24" stroke-width="2"/>
+
+        <!-- Die Core Grid Pattern -->
+        <g fill="#38bdf8" opacity="0.8">
+          <rect x="105" y="105" width="38" height="38" rx="4"/>
+          <rect x="157" y="105" width="38" height="38" rx="4"/>
+          <rect x="105" y="157" width="38" height="38" rx="4"/>
+          <rect x="157" y="157" width="38" height="38" rx="4"/>
+        </g>
+
+        <!-- Center Micro-traces -->
+        <circle cx="150" cy="150" r="8" fill="#fbbf24"/>
+      </svg>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 SiliconHive. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

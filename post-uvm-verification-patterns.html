@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UVM Architecture, Factory Overrides &amp; Scoreboard Patterns | SiliconHive</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400&display=swap" rel="stylesheet">
+<script>
+  (function() {
+    var saved = localStorage.getItem('siliconhive-theme');
+    var theme = saved || 'light';
+    document.documentElement.setAttribute('data-theme', theme);
+    if (theme === 'dark') document.documentElement.classList.add('dark');
+  })();
+</script>
+<style>
+  :root, html[data-theme="light"] {
+    --sh-bg: #faf9f6;
+    --sh-surface: #ffffff;
+    --sh-card: #ffffff;
+    --sh-card-alt: #f3f1ec;
+    --sh-text: #18181b;
+    --sh-muted: #52525b;
+    --sh-border: #e4e2dd;
+    --sh-border-strong: #d4d0c8;
+    --sh-header-bg: rgba(250, 249, 246, 0.96);
+    --sh-accent: #9a3412;
+    --sh-accent-hover: #7c2d12;
+    --sh-accent-soft: #fff7ed;
+    --sh-gold: #854d0e;
+    --sh-pill-bg: #f3f1ec;
+    --sh-code-bg: #1c1b1a;
+    --sh-code-text: #f4f3ef;
+    --sh-warn-bg: #fefce8;
+    --sh-warn-border: #ca8a04;
+    --sh-shadow: 0 1px 2px rgba(24, 24, 27, 0.04);
+    --font-serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+
+  html[data-theme="dark"] {
+    --sh-bg: #141413;
+    --sh-surface: #1b1a18;
+    --sh-card: #1f1e1c;
+    --sh-card-alt: #272522;
+    --sh-text: #f4f3ef;
+    --sh-muted: #a19e95;
+    --sh-border: #2e2c28;
+    --sh-border-strong: #3f3c37;
+    --sh-header-bg: rgba(20, 20, 19, 0.96);
+    --sh-accent: #e07a5f;
+    --sh-accent-hover: #f29b83;
+    --sh-accent-soft: rgba(224, 122, 95, 0.12);
+    --sh-gold: #eab308;
+    --sh-pill-bg: #272522;
+    --sh-code-bg: #0f0e0d;
+    --sh-code-text: #f4f3ef;
+    --sh-warn-bg: rgba(234, 179, 8, 0.08);
+    --sh-warn-border: #ca8a04;
+    --sh-shadow: none;
+  }
+
+  /* Editorial Top Masthead */
+  .sh-navbar {
+    border-bottom: 1px solid var(--sh-border);
+    padding: 0.9rem 1.5rem;
+    background-color: var(--sh-header-bg);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .sh-nav-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+  .sh-logo {
+    font-family: var(--font-serif);
+    font-size: 1.55rem;
+    font-weight: 700;
+    color: var(--sh-text);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.25rem;
+  }
+  .sh-logo span {
+    color: var(--sh-accent);
+    font-style: italic;
+  }
+  .sh-nav-links {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.4rem;
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-sans);
+    font-size: 0.88rem;
+  }
+  .sh-nav-links a {
+    color: var(--sh-muted);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.25rem 0;
+    border-bottom: 1.5px solid transparent;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+  .sh-nav-links a:hover, .sh-nav-links a.active {
+    color: var(--sh-text);
+    border-bottom-color: var(--sh-accent);
+  }
+  .sh-theme-btn {
+    background: transparent;
+    color: var(--sh-muted);
+    border: 1px solid var(--sh-border-strong);
+    padding: 0.32rem 0.72rem;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+  .sh-theme-btn:hover {
+    border-color: var(--sh-text);
+    color: var(--sh-text);
+  }
+
+  .sh-footer {
+    padding: 2.5rem 1.5rem;
+    color: var(--sh-muted);
+    font-size: 0.84rem;
+    border-top: 1px solid var(--sh-border);
+    background: var(--sh-bg);
+    font-family: var(--font-sans);
+  }
+  .sh-footer-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+  .sh-footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+  }
+  .sh-footer-links a {
+    color: var(--sh-muted);
+    text-decoration: none;
+  }
+  .sh-footer-links a:hover {
+    color: var(--sh-accent);
+    text-decoration: underline;
+  }
+  @media print {
+    .sh-navbar, .sh-footer { display: none !important; }
+  }
+</style>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--sh-bg);
+    color: var(--sh-text);
+    line-height: 1.72;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  main.article-wrap {
+    flex: 1;
+    max-width: 820px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 4.5rem 1.5rem;
+  }
+  .breadcrumb {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--sh-muted);
+    margin-bottom: 1.5rem;
+  }
+  .breadcrumb a { color: var(--sh-accent); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+
+  .article-header {
+    border-bottom: 1px solid var(--sh-border);
+    padding-bottom: 1.75rem;
+    margin-bottom: 2.25rem;
+  }
+  .article-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--sh-muted);
+    margin-bottom: 0.85rem;
+  }
+  .tag {
+    color: var(--sh-accent);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .article-header h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4.2vw, 2.75rem);
+    font-weight: 700;
+    line-height: 1.18;
+    margin-bottom: 0.85rem;
+    letter-spacing: -0.02em;
+  }
+  .article-lead {
+    font-size: 1.12rem;
+    color: var(--sh-muted);
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+  }
+  .playground-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    background: var(--sh-text);
+    color: var(--sh-bg);
+    text-decoration: none;
+    padding: 0.58rem 1.1rem;
+    border-radius: 5px;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 0.82rem;
+  }
+  .playground-cta:hover {
+    background: var(--sh-accent);
+    color: #ffffff;
+  }
+
+  .article-body h2 {
+    font-family: var(--font-serif);
+    font-size: 1.55rem;
+    font-weight: 700;
+    margin: 2.5rem 0 0.9rem 0;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--sh-border);
+    color: var(--sh-text);
+  }
+  .article-body h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 1.6rem 0 0.6rem 0;
+    color: var(--sh-accent);
+  }
+  .article-body p {
+    margin-bottom: 1.15rem;
+    font-size: 1.02rem;
+  }
+  .article-body ul, .article-body ol {
+    margin: 0.5rem 0 1.35rem 1.5rem;
+    font-size: 1.01rem;
+  }
+  .article-body li { margin-bottom: 0.45rem; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.35rem 0 1.85rem 0;
+    font-size: 0.92rem;
+    background: var(--sh-surface);
+  }
+  th, td {
+    border: 1px solid var(--sh-border);
+    padding: 0.65rem 0.85rem;
+    text-align: left;
+    vertical-align: top;
+  }
+  th {
+    background: var(--sh-card-alt);
+    font-weight: 600;
+    color: var(--sh-text);
+  }
+
+  .code-block-wrap {
+    border: 1px solid var(--sh-border-strong);
+    border-radius: 6px;
+    overflow: hidden;
+    margin: 1.15rem 0 1.65rem 0;
+    background: var(--sh-code-bg);
+  }
+  .code-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.45rem 1rem;
+    background: #272522;
+    border-bottom: 1px solid #3f3c37;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: #d6d3cd;
+  }
+  .copy-btn {
+    background: #3f3c37;
+    color: #f4f3ef;
+    border: none;
+    padding: 0.22rem 0.6rem;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    cursor: pointer;
+  }
+  .copy-btn:hover { background: var(--sh-accent); color: #ffffff; }
+
+  pre {
+    background: var(--sh-code-bg);
+    color: var(--sh-code-text);
+    border: 1px solid var(--sh-border);
+    border-radius: 6px;
+    padding: 1.1rem 1.25rem;
+    overflow-x: auto;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    line-height: 1.58;
+    margin: 1.1rem 0 1.6rem 0;
+  }
+  .code-block-wrap pre {
+    border: none;
+    border-radius: 0;
+    margin: 0;
+  }
+  code {
+    font-family: var(--font-mono);
+    background: var(--sh-card-alt);
+    color: var(--sh-accent);
+    padding: 0.12rem 0.34rem;
+    border-radius: 3px;
+    font-size: 0.88em;
+  }
+  pre code {
+    background: transparent;
+    color: inherit;
+    padding: 0;
+    font-size: inherit;
+  }
+
+  .tip-box {
+    background: var(--sh-warn-bg);
+    border-left: 3px solid var(--sh-warn-border);
+    padding: 1rem 1.25rem;
+    margin: 1.65rem 0;
+    font-size: 0.96rem;
+  }
+  .tip-box strong.tip-title {
+    display: block;
+    font-family: var(--font-mono);
+    color: var(--sh-gold);
+    margin-bottom: 0.35rem;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .svg-box {
+    background: var(--sh-surface);
+    border: 1px solid var(--sh-border);
+    border-radius: 6px;
+    padding: 1.1rem;
+    margin: 1.35rem 0 1.85rem 0;
+    overflow-x: auto;
+    text-align: center;
+  }
+
+  .article-nav-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+    margin-top: 3.25rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--sh-border);
+  }
+  .nav-card {
+    background: var(--sh-surface);
+    border: 1px solid var(--sh-border);
+    border-radius: 6px;
+    padding: 1.15rem 1.25rem;
+    text-decoration: none;
+    color: var(--sh-text);
+  }
+  .nav-card:hover {
+    border-color: var(--sh-accent);
+    background: var(--sh-card-alt);
+  }
+  .nav-card span {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--sh-muted);
+    margin-bottom: 0.25rem;
+  }
+  .nav-card strong {
+    font-family: var(--font-serif);
+    color: var(--sh-text);
+    font-size: 1.05rem;
+  }
+</style>
+</head>
+<body>
+  <header class="sh-navbar">
+  <div class="sh-nav-inner">
+    <a href="index.html" class="sh-logo">Silicon<span>Hive</span></a>
+    <nav aria-label="Primary Navigation">
+      <ul class="sh-nav-links">
+        <li><a href="index.html">Home</a></li><li><a href="blog.html" class="active">Articles</a></li><li><a href="book.html">Book</a></li><li><a href="study_guide.html">DV Study Guide</a></li><li><a href="dv_cheat_sheet.html">Cheat Sheet</a></li><li><a href="about.html">About</a></li>
+        <li><button type="button" class="sh-theme-btn" onclick="toggleSiliconHiveTheme()"><span data-theme-label>Dark Mode</span></button></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+  <main class="article-wrap">
+    <div class="breadcrumb"><a href="index.html">Home</a> &rarr; <a href="blog.html">Blog</a> &rarr; UVM Verification Patterns</div>
+    <header class="article-header">
+      <div class="article-meta">
+        <span class="tag">UVM Methodology</span>
+        <span>Interview Series</span>
+        <span>&bull; Jagadish Rongali</span>
+      </div>
+      <h1>UVM Architecture, Factory Overrides &amp; Scoreboard Patterns</h1>
+      <p class="article-lead">Essential UVM architectural concepts every Design Verification engineer must master: phase execution order, objection mechanisms, Factory type/instance overrides, TLM analysis ports, and out-of-order scoreboards.</p>
+    </header>
+
+    <article class="article-body">
+      <h2>1. UVM Component Hierarchy &amp; TLM Connectivity</h2>
+      <p>A reusable UVM testbench cleanly separates stimulus generation from pin-level signaling and self-checking:</p>
+      <ul>
+        <li><strong><code>uvm_sequence_item</code> &amp; <code>uvm_sequence</code>:</strong> Transaction objects with <code>rand</code> fields and constraints; sequences generate streams of transactions inside <code>body()</code>.</li>
+        <li><strong><code>uvm_sequencer</code> &amp; <code>uvm_driver</code>:</strong> Connected via TLM <code>seq_item_port</code> &harr; <code>seq_item_export</code>. The driver pulls transactions using <code>get_next_item(req)</code>, drives the virtual interface, and signals completion with <code>item_done()</code>.</li>
+        <li><strong><code>uvm_monitor</code>:</strong> Passively samples virtual interface signals on clock edges, reconstructs transactions, and broadcasts them via <code>uvm_analysis_port</code> to subscribers (Scoreboard &amp; Coverage collector).</li>
+        <li><strong><code>uvm_scoreboard</code>:</strong> Compares predicted reference-model outputs against actual DUT outputs using associative arrays (for out-of-order IDs) or per-source queues.</li>
+      </ul>
+
+      <h2>2. UVM Factory Overrides (Polymorphism in Action)</h2>
+      <p>Registering components with <code>`uvm_component_utils</code> and objects with <code>`uvm_object_utils</code> enables runtime substitution without modifying environment code:</p>
+      <pre><code>// Inside your UVM test's build_phase():
+function void error_injection_test::build_phase(uvm_phase phase);
+  super.build_phase(phase);
+  // Global type override: swaps every base_axi_txn with err_axi_txn
+  base_axi_txn::type_id::set_type_override(err_axi_txn::get_type());
+
+  // Instance-specific override: only swaps agent[1]'s driver
+  set_inst_override_by_type("env.axi_agt[1].drv",
+                            axi_driver::get_type(),
+                            err_axi_driver::get_type());
+endfunction</code></pre>
+
+      <h2>3. Out-of-Order UVM Scoreboard Template</h2>
+      <pre><code>class ooo_scoreboard extends uvm_scoreboard;
+  `uvm_component_utils(ooo_scoreboard)
+  `uvm_analysis_imp_decl(_exp)
+  `uvm_analysis_imp_decl(_act)
+
+  uvm_analysis_imp_exp #(axi_txn, ooo_scoreboard) exp_imp;
+  uvm_analysis_imp_act #(axi_txn, ooo_scoreboard) act_imp;
+
+  axi_txn exp_pool[int unsigned]; // Indexed by unique transaction ID
+
+  function void write_exp(axi_txn tr);
+    exp_pool[tr.tid] = tr;
+  endfunction
+
+  function void write_act(axi_txn act);
+    if (!exp_pool.exists(act.tid)) begin
+      `uvm_error("SCB_UNEXP", $sformatf("Unexpected TID %0d from DUT", act.tid))
+      return;
+    end
+    if (!act.compare(exp_pool[act.tid]))
+      `uvm_error("SCB_MISMATCH", $sformatf("Data mismatch on TID %0d", act.tid))
+    exp_pool.delete(act.tid);
+  endfunction
+
+  function void check_phase(uvm_phase phase);
+    if (exp_pool.num() != 0)
+      `uvm_error("SCB_DRAIN", $sformatf("%0d transactions left uncompleted!", exp_pool.num()))
+  endfunction
+endclass</code></pre>
+    </article>
+
+    <div class="article-nav-cards">
+      <a href="post-sva-guide.html" class="nav-card">
+        <span>&larr; Previous Article</span>
+        <strong>SystemVerilog Assertions (SVA) — A Comprehensive Guide</strong>
+      </a>
+      <a href="post-dv-interview-prep.html" class="nav-card">
+        <span>Next Article &rarr;</span>
+        <strong>DV Interview Prep Playbook: RTL, SV, Formal &amp; Debug</strong>
+      </a>
+    </div>
+  </main>
+  
+  <footer class="sh-footer">
+  <div class="sh-footer-inner">
+    <p>&copy; 2026 SiliconHive &mdash; Jagadish Rongali. Semiconductor Architecture &amp; Verification Notes.</p>
+    <div class="sh-footer-links">
+      <a href="blog.html">Articles</a>
+      <a href="book.html">From Vision to Wafer</a>
+      <a href="study_guide.html">DV Study Guide</a>
+      <a href="dv_cheat_sheet.html">Cheat Sheet</a>
+      <a href="about.html">About</a>
+      <a href="https://www.linkedin.com/in/jagadishrs" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    </div>
+  </div>
+</footer>
+  <script>
+    function copyCodeBlock(btn) {
+      var pre = btn.closest('.code-block-wrap').querySelector('pre');
+      if (!pre) return;
+      var ta = document.createElement('textarea');
+      ta.value = pre.innerText;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand('copy');
+        var orig = btn.textContent;
+        btn.textContent = 'Copied!';
+        setTimeout(function() { btn.textContent = orig; }, 1500);
+      } finally {
+        document.body.removeChild(ta);
+      }
+    }
+  </script>
+  <script>
+  function toggleSiliconHiveTheme() {
+    var html = document.documentElement;
+    var current = html.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+    var next = current === 'light' ? 'dark' : 'light';
+    html.setAttribute('data-theme', next);
+    html.classList.toggle('dark', next === 'dark');
+    localStorage.setItem('siliconhive-theme', next);
+    updateThemeButtons(next);
+  }
+  function updateThemeButtons(theme) {
+    document.querySelectorAll('[data-theme-label]').forEach(function(el) {
+      el.textContent = theme === 'light' ? 'Dark Mode' : 'Light Mode';
+    });
+  }
+  document.addEventListener('DOMContentLoaded', function() {
+    var current = document.documentElement.getAttribute('data-theme') || 'light';
+    updateThemeButtons(current);
+  });
+</script>
+</body>
+</html>

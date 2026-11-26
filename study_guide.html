@@ -28,16 +28,17 @@
           },
           colors: {
             brand: {
-              50: '#eef2ff',
-              100: '#e0e7ff',
-              500: '#6366f1',
-              600: '#4f46e5',
-              700: '#4338ca',
-              900: '#312e81',
+              50: '#fff7ed',
+              100: '#ffedd5',
+              500: '#c2410c',
+              600: '#9a3412',
+              700: '#7c2d12',
+              900: '#431407',
             },
             slate: {
-              850: '#151e2e',
-              950: '#0a0f1d',
+              850: '#1f1e1c',
+              900: '#1b1a18',
+              950: '#141413',
             }
           }
         }
@@ -85,158 +86,181 @@
       transform: rotate(-90deg);
     }
   </style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400&display=swap" rel="stylesheet">
 <script>
   (function() {
     var saved = localStorage.getItem('siliconhive-theme');
-    var theme = saved || ((window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark');
+    var theme = saved || 'light';
     document.documentElement.setAttribute('data-theme', theme);
     if (theme === 'dark') document.documentElement.classList.add('dark');
   })();
 </script>
 <style>
-  :root, html[data-theme="dark"] {
-    --sh-bg: #0b1120;
-    --sh-surface: #111827;
-    --sh-card: #1e293b;
-    --sh-card-alt: #151e2e;
-    --sh-text: #f8fafc;
-    --sh-muted: #94a3b8;
-    --sh-border: #334155;
-    --sh-header-bg: rgba(11, 17, 32, 0.94);
-    --sh-accent: #38bdf8;
-    --sh-accent-hover: #0284c7;
-    --sh-accent-soft: rgba(56, 189, 248, 0.14);
-    --sh-gold: #fbbf24;
-    --sh-pill-bg: #0f172a;
-    --sh-code-bg: #020617;
-    --sh-code-text: #f1f5f9;
-    --sh-warn-bg: rgba(245, 158, 11, 0.12);
-    --sh-warn-border: #f59e0b;
-    --sh-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
-  }
-  html[data-theme="light"] {
-    --sh-bg: #f8fafc;
+  :root, html[data-theme="light"] {
+    --sh-bg: #faf9f6;
     --sh-surface: #ffffff;
     --sh-card: #ffffff;
-    --sh-card-alt: #f1f5f9;
-    --sh-text: #0f172a;
-    --sh-muted: #475569;
-    --sh-border: #cbd5e1;
-    --sh-header-bg: rgba(255, 255, 255, 0.94);
-    --sh-accent: #0284c7;
-    --sh-accent-hover: #0369a1;
-    --sh-accent-soft: #e0f2fe;
-    --sh-gold: #b45309;
-    --sh-pill-bg: #f1f5f9;
-    --sh-code-bg: #0f172a;
-    --sh-code-text: #f8fafc;
-    --sh-warn-bg: #fffbeb;
-    --sh-warn-border: #d97706;
-    --sh-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    --sh-card-alt: #f3f1ec;
+    --sh-text: #18181b;
+    --sh-muted: #52525b;
+    --sh-border: #e4e2dd;
+    --sh-border-strong: #d4d0c8;
+    --sh-header-bg: rgba(250, 249, 246, 0.96);
+    --sh-accent: #9a3412;
+    --sh-accent-hover: #7c2d12;
+    --sh-accent-soft: #fff7ed;
+    --sh-gold: #854d0e;
+    --sh-pill-bg: #f3f1ec;
+    --sh-code-bg: #1c1b1a;
+    --sh-code-text: #f4f3ef;
+    --sh-warn-bg: #fefce8;
+    --sh-warn-border: #ca8a04;
+    --sh-shadow: 0 1px 2px rgba(24, 24, 27, 0.04);
+    --font-serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   }
 
-  /* Unified Top Navbar */
+  html[data-theme="dark"] {
+    --sh-bg: #141413;
+    --sh-surface: #1b1a18;
+    --sh-card: #1f1e1c;
+    --sh-card-alt: #272522;
+    --sh-text: #f4f3ef;
+    --sh-muted: #a19e95;
+    --sh-border: #2e2c28;
+    --sh-border-strong: #3f3c37;
+    --sh-header-bg: rgba(20, 20, 19, 0.96);
+    --sh-accent: #e07a5f;
+    --sh-accent-hover: #f29b83;
+    --sh-accent-soft: rgba(224, 122, 95, 0.12);
+    --sh-gold: #eab308;
+    --sh-pill-bg: #272522;
+    --sh-code-bg: #0f0e0d;
+    --sh-code-text: #f4f3ef;
+    --sh-warn-bg: rgba(234, 179, 8, 0.08);
+    --sh-warn-border: #ca8a04;
+    --sh-shadow: none;
+  }
+
+  /* Editorial Top Masthead */
   .sh-navbar {
     border-bottom: 1px solid var(--sh-border);
-    padding: 0.85rem 1.5rem;
+    padding: 0.9rem 1.5rem;
     background-color: var(--sh-header-bg);
-    backdrop-filter: blur(10px);
     position: sticky;
     top: 0;
     z-index: 100;
   }
   .sh-nav-inner {
-    max-width: 1180px;
+    max-width: 1120px;
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    gap: 0.85rem;
+    gap: 1rem;
   }
   .sh-logo {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    font-size: 1.45rem;
-    font-weight: 800;
+    font-family: var(--font-serif);
+    font-size: 1.55rem;
+    font-weight: 700;
     color: var(--sh-text);
     text-decoration: none;
-    letter-spacing: -0.5px;
+    letter-spacing: -0.02em;
     display: inline-flex;
-    align-items: center;
+    align-items: baseline;
+    gap: 0.25rem;
   }
-  .sh-logo span { color: var(--sh-accent); }
+  .sh-logo span {
+    color: var(--sh-accent);
+    font-style: italic;
+  }
   .sh-nav-links {
     list-style: none;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 1.25rem;
+    gap: 1.4rem;
     margin: 0;
     padding: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    font-size: 0.92rem;
+    font-family: var(--font-sans);
+    font-size: 0.88rem;
   }
   .sh-nav-links a {
     color: var(--sh-muted);
     text-decoration: none;
     font-weight: 500;
-    padding: 0.25rem 0.1rem;
-    border-bottom: 2px solid transparent;
-    transition: color 0.2s ease, border-color 0.2s ease;
+    padding: 0.25rem 0;
+    border-bottom: 1.5px solid transparent;
+    transition: color 0.15s ease, border-color 0.15s ease;
   }
   .sh-nav-links a:hover, .sh-nav-links a.active {
-    color: var(--sh-accent);
+    color: var(--sh-text);
     border-bottom-color: var(--sh-accent);
   }
   .sh-theme-btn {
-    background: var(--sh-card-alt);
-    color: var(--sh-text);
-    border: 1px solid var(--sh-border);
-    padding: 0.36rem 0.78rem;
-    border-radius: 999px;
-    font-size: 0.8rem;
-    font-weight: 600;
+    background: transparent;
+    color: var(--sh-muted);
+    border: 1px solid var(--sh-border-strong);
+    padding: 0.32rem 0.72rem;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
     gap: 0.35rem;
-    transition: all 0.2s ease;
+    transition: color 0.15s ease, border-color 0.15s ease;
   }
   .sh-theme-btn:hover {
-    border-color: var(--sh-accent);
-    color: var(--sh-accent);
+    border-color: var(--sh-text);
+    color: var(--sh-text);
   }
+
   .sh-footer {
-    text-align: center;
-    padding: 2rem 1.5rem;
+    padding: 2.5rem 1.5rem;
     color: var(--sh-muted);
-    font-size: 0.88rem;
+    font-size: 0.84rem;
     border-top: 1px solid var(--sh-border);
-    background: var(--sh-surface);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--sh-bg);
+    font-family: var(--font-sans);
+  }
+  .sh-footer-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
   }
   .sh-footer-links {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     gap: 1.25rem;
-    margin-bottom: 0.65rem;
   }
   .sh-footer-links a {
     color: var(--sh-muted);
     text-decoration: none;
   }
-  .sh-footer-links a:hover { color: var(--sh-accent); }
+  .sh-footer-links a:hover {
+    color: var(--sh-accent);
+    text-decoration: underline;
+  }
   @media print {
     .sh-navbar, .sh-footer { display: none !important; }
   }
 </style>
 </head>
-<body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-200 antialiased transition-colors duration-200 selection:bg-brand-600 selection:text-white">
+<body class="bg-[#faf9f6] text-zinc-900 dark:bg-[#141413] dark:text-[#f4f3ef] antialiased transition-colors duration-200 selection:bg-brand-600 selection:text-white">
 
   <!-- Top Reading Progress Bar -->
   <div class="fixed top-0 left-0 right-0 z-50 h-1 bg-slate-200/70 dark:bg-slate-800/70">
-    <div id="reading-progress" class="h-full bg-gradient-to-r from-brand-600 via-cyan-500 to-emerald-500 w-0 transition-all duration-100"></div>
+    <div id="reading-progress" class="h-full bg-gradient-to-r from-amber-700 via-orange-600 to-amber-500 w-0 transition-all duration-100"></div>
   </div>
 
   <header class="sh-navbar">
@@ -244,8 +268,8 @@
     <a href="index.html" class="sh-logo">Silicon<span>Hive</span></a>
     <nav aria-label="Primary Navigation">
       <ul class="sh-nav-links">
-        <li><a href="index.html">Home</a></li><li><a href="blog.html">Blog</a></li><li><a href="book.html">Book</a></li><li><a href="study_guide.html" class="active">DV Study Guide</a></li><li><a href="dv_cheat_sheet.html">DV Cheat Sheet</a></li><li><a href="about.html">About Me</a></li>
-        <li><button type="button" class="sh-theme-btn" onclick="toggleSiliconHiveTheme()" aria-label="Toggle Light or Dark Theme"><span data-theme-label>☀️ Light</span></button></li>
+        <li><a href="index.html">Home</a></li><li><a href="blog.html">Articles</a></li><li><a href="book.html">Book</a></li><li><a href="study_guide.html" class="active">DV Study Guide</a></li><li><a href="dv_cheat_sheet.html">Cheat Sheet</a></li><li><a href="about.html">About</a></li>
+        <li><button type="button" class="sh-theme-btn" onclick="toggleSiliconHiveTheme()"><span data-theme-label>Dark Mode</span></button></li>
       </ul>
     </nav>
   </div>
@@ -255,7 +279,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 flex flex-wrap items-center justify-between gap-3">
       <div class="flex items-center gap-2 shrink-0">
         <span class="font-bold text-slate-900 dark:text-white text-sm">DV Deep Dive Study Guide</span>
-        <span class="text-xs font-mono px-2 py-0.5 rounded-full bg-brand-50 dark:bg-brand-900/40 text-brand-700 dark:text-indigo-300 border border-brand-200/60 dark:border-indigo-700/50">27 Core Q&amp;As</span>
+        <span class="text-xs font-mono px-2 py-0.5 rounded-full bg-brand-50 dark:bg-brand-900/40 text-brand-700 dark:text-indigo-300 border border-brand-200/60 dark:border-indigo-700/50">37 Core Q&amp;As</span>
       </div>
       <div class="relative flex-1 max-w-md">
         <input id="search-input" type="text" placeholder="Filter questions (e.g., MIPS, NBA, semaphore, MESI, sed)..." class="w-full px-3 py-1.5 text-xs sm:text-sm rounded-lg bg-slate-100 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500" />
@@ -284,7 +308,7 @@
           Comprehensive interview answers, timing diagrams, and runnable code organized strictly from <strong class="text-slate-900 dark:text-white">Part I: Digital Logic, DFT &amp; Verilog RTL</strong> to <strong class="text-slate-900 dark:text-white">Part II: SystemVerilog Language, OOP, Concurrency, Constraints &amp; SVA</strong>, <strong class="text-slate-900 dark:text-white">Part III: UVM Architecture &amp; Sequences</strong>, and <strong class="text-slate-900 dark:text-white">Part IV: Computer Architecture, Cache, Python &amp; Linux</strong>.
         </p>
         <div id="filter-status" class="text-xs font-mono text-slate-500 dark:text-slate-400">
-          Showing all 27 interview topics
+          Showing all 37 interview topics
         </div>
       </div>
     </div>
@@ -302,36 +326,45 @@
             <li><a href="#v1" class="toc-link block pl-3 py-1 -ml-[2px] border-l-2 border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">1. wire vs. reg &amp; SW vs. HDL</a></li>
             <li><a href="#v2" class="toc-link block pl-3 py-1 -ml-[2px] border-l-2 border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">2. Blocking vs. NBA &amp; Tracing</a></li>
             <li><a href="#v3" class="toc-link block pl-3 py-1 -ml-[2px] border-l-2 border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">3. Toggle Edge Pulse Detector</a></li>
-            <li><a href="#v4" class="toc-link block pl-3 py-1 -ml-[2px] border-l-2 border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">4. Freq Divider (/2 and /4)</a></li>
+            <li><a href="#v4" class="toc-link block pl-3 py-1 -ml-[2px] border-l-2 border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">4. Ring Counter &amp; Div /2, /4</a></li>
             <li><a href="#v5" class="toc-link block pl-3 py-1 -ml-[2px] border-l-2 border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">5. LFSR Synthesis &amp; RTL Review</a></li>
             <li><a href="#v6" class="toc-link block pl-3 py-1 -ml-[2px] border-l-2 border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">6. DFT: Stuck-At &amp; At-Speed</a></li>
             <li><a href="#v7" class="toc-link block pl-3 py-1 -ml-[2px] border-l-2 border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">7. Gate-Level &amp; BCD &times;5 Logic</a></li>
 
             <li class="pt-2"><span class="block pl-3 text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Part II: SystemVerilog</span></li>
             <li><a href="#sv1" class="toc-link block pl-3 py-1 -ml-[2px] border-l-2 border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">8. bit vs. logic vs. byte</a></li>
-            <li><a href="#sv2" class="toc-link block pl-3 py-1 -ml-[2px] border-l-2 border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">9. SV Arrays &amp; Built-in Methods</a></li>
-            <li><a href="#sv3" class="toc-link block pl-3 py-1 -ml-[2px] border-l-2 border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">10. Pack 1s to MSB &amp; 2nd Largest</a></li>
-            <li><a href="#sv4" class="toc-link block pl-3 py-1 -ml-[2px] border-l-2 border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">11. Task vs. Function &amp; Fork</a></li>
+            <li><a href="#sv2" class="toc-link block pl-3 py-1 -ml-[2px] border-l-2 border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">9. SV Arrays &amp; Delete Matching</a></li>
+            <li><a href="#sv3" class="toc-link block pl-3 py-1 -ml-[2px] border-l-2 border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">10. Pack 1s, 2nd Largest &amp; Slice</a></li>
+            <li><a href="#sv4" class="toc-link block pl-3 py-1 -ml-[2px] border-l-2 border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">11. Task vs. Func, ref &amp; Lifetime</a></li>
             <li><a href="#sv5" class="toc-link block pl-3 py-1 -ml-[2px] border-l-2 border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">12. Fork-Join, Events &amp; Semaphore</a></li>
             <li><a href="#sv6" class="toc-link block pl-3 py-1 -ml-[2px] border-l-2 border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">13. OOP &amp; Polymorphism Apps</a></li>
-            <li><a href="#sv7" class="toc-link block pl-3 py-1 -ml-[2px] border-l-2 border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">14. Virtual Class &amp; Methods</a></li>
+            <li><a href="#sv7" class="toc-link block pl-3 py-1 -ml-[2px] border-l-2 border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">14. Virtual Class, Cast &amp; Upcast</a></li>
             <li><a href="#sv8" class="toc-link block pl-3 py-1 -ml-[2px] border-l-2 border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">15. SV Constraints (Arrays &amp; Cache)</a></li>
             <li><a href="#sv9" class="toc-link block pl-3 py-1 -ml-[2px] border-l-2 border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">16. SV Matrix Pattern Constraints</a></li>
             <li><a href="#sv10" class="toc-link block pl-3 py-1 -ml-[2px] border-l-2 border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">17. Mailbox Scoreboard &amp; Arbiter</a></li>
             <li><a href="#sv11" class="toc-link block pl-3 py-1 -ml-[2px] border-l-2 border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">18. APB Interface, Driver &amp; SVA</a></li>
             <li><a href="#sv12" class="toc-link block pl-3 py-1 -ml-[2px] border-l-2 border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">19. Code &amp; Functional Coverage</a></li>
             <li><a href="#sv13" class="toc-link block pl-3 py-1 -ml-[2px] border-l-2 border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">20. CLI Parameter Override</a></li>
+            <li><a href="#sv14" class="toc-link block pl-3 py-1 -ml-[2px] border-l-2 border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">21. Deep Copy, super &amp; for-fork</a></li>
+            <li><a href="#sv15" class="toc-link block pl-3 py-1 -ml-[2px] border-l-2 border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">22. soft, Ascending &amp; randomize()</a></li>
+            <li><a href="#sv16" class="toc-link block pl-3 py-1 -ml-[2px] border-l-2 border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">23. Bit-Count &amp; 5-Bit Array Constraints</a></li>
+            <li><a href="#sv17" class="toc-link block pl-3 py-1 -ml-[2px] border-l-2 border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">24. Enums, Structs &amp; Clocking/Modport</a></li>
+            <li><a href="#sv18" class="toc-link block pl-3 py-1 -ml-[2px] border-l-2 border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">25. Upcast/Downcast &amp; 99-Elem XOR</a></li>
 
             <li class="pt-2"><span class="block pl-3 text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Part III: UVM &amp; Planning</span></li>
-            <li><a href="#uvm1" class="toc-link block pl-3 py-1 -ml-[2px] border-l-2 border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">21. UVM Phases &amp; Handshake</a></li>
-            <li><a href="#uvm2" class="toc-link block pl-3 py-1 -ml-[2px] border-l-2 border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">22. UVM Seq, Alignment &amp; TIDs</a></li>
-            <li><a href="#uvm3" class="toc-link block pl-3 py-1 -ml-[2px] border-l-2 border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">23. 8-Bit Shift Reg Verif Plan</a></li>
+            <li><a href="#uvm1" class="toc-link block pl-3 py-1 -ml-[2px] border-l-2 border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">26. UVM Phases &amp; Handshake</a></li>
+            <li><a href="#uvm2" class="toc-link block pl-3 py-1 -ml-[2px] border-l-2 border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">27. UVM Seq, Alignment &amp; TIDs</a></li>
+            <li><a href="#uvm3" class="toc-link block pl-3 py-1 -ml-[2px] border-l-2 border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">28. 8-Bit Shift Reg Verif Plan</a></li>
+            <li><a href="#uvm4" class="toc-link block pl-3 py-1 -ml-[2px] border-l-2 border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">29. uvm_event vs. SV Global Event</a></li>
+            <li><a href="#uvm5" class="toc-link block pl-3 py-1 -ml-[2px] border-l-2 border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">30. Factory Overrides &amp; Callbacks</a></li>
+            <li><a href="#uvm6" class="toc-link block pl-3 py-1 -ml-[2px] border-l-2 border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">31. Component/Object, m_sequencer &amp; TLM</a></li>
+            <li><a href="#uvm7" class="toc-link block pl-3 py-1 -ml-[2px] border-l-2 border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">32. copy() vs. clone() &amp; Field Macros</a></li>
 
             <li class="pt-2"><span class="block pl-3 text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Part IV: Arch, Coding &amp; Behavioral</span></li>
-            <li><a href="#arch1" class="toc-link block pl-3 py-1 -ml-[2px] border-l-2 border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">24. MIPS Pipeline &amp; Data Hazards</a></li>
-            <li><a href="#arch2" class="toc-link block pl-3 py-1 -ml-[2px] border-l-2 border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">25. Cache Policies &amp; MESI Trace</a></li>
-            <li><a href="#code1" class="toc-link block pl-3 py-1 -ml-[2px] border-l-2 border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">26. Python BFS Maze, Logs &amp; Linux</a></li>
-            <li><a href="#beh1" class="toc-link block pl-3 py-1 -ml-[2px] border-l-2 border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">27. Debug Challenge &amp; Project Pitch</a></li>
+            <li><a href="#arch1" class="toc-link block pl-3 py-1 -ml-[2px] border-l-2 border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">33. MIPS Pipeline &amp; Data Hazards</a></li>
+            <li><a href="#arch2" class="toc-link block pl-3 py-1 -ml-[2px] border-l-2 border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">34. Cache Policies &amp; MESI Trace</a></li>
+            <li><a href="#code1" class="toc-link block pl-3 py-1 -ml-[2px] border-l-2 border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">35. Python BFS, Linked List &amp; Linux</a></li>
+            <li><a href="#beh1" class="toc-link block pl-3 py-1 -ml-[2px] border-l-2 border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">36. Debug Challenge &amp; Project Pitch</a></li>
           </ul>
         </nav>
       </aside>
@@ -351,7 +384,7 @@
         <article id="v1" class="qa-card scroll-mt-24 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
           <button type="button" class="qa-header w-full px-6 py-4 text-left flex items-center justify-between gap-4 bg-slate-50/80 dark:bg-slate-850/80 border-b border-slate-200/80 dark:border-slate-800 hover:bg-slate-100/80 dark:hover:bg-slate-800/80 transition-colors">
             <div class="flex items-center gap-3">
-              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-amber-600 text-white">V01</span>
+              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-stone-800 dark:bg-stone-700 text-amber-200">V01</span>
               <h2 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white"><code class="font-mono">wire</code> vs. <code class="font-mono">reg</code>, Software vs. HDL Parallelism &amp; Debugging <code class="font-mono">XXXX</code> Outputs</h2>
             </div>
             <svg class="qa-chevron w-5 h-5 text-slate-400 shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
@@ -380,7 +413,7 @@
         <article id="v2" class="qa-card scroll-mt-24 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
           <button type="button" class="qa-header w-full px-6 py-4 text-left flex items-center justify-between gap-4 bg-slate-50/80 dark:bg-slate-850/80 border-b border-slate-200/80 dark:border-slate-800 hover:bg-slate-100/80 dark:hover:bg-slate-800/80 transition-colors">
             <div class="flex items-center gap-3">
-              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-amber-600 text-white">V02</span>
+              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-stone-800 dark:bg-stone-700 text-amber-200">V02</span>
               <h2 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white">Blocking (<code class="font-mono">=</code>) vs. Non-Blocking (<code class="font-mono">&lt;=</code>), Event Regions &amp; Code Trace</h2>
             </div>
             <svg class="qa-chevron w-5 h-5 text-slate-400 shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
@@ -462,7 +495,7 @@ end
         <article id="v3" class="qa-card scroll-mt-24 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
           <button type="button" class="qa-header w-full px-6 py-4 text-left flex items-center justify-between gap-4 bg-slate-50/80 dark:bg-slate-850/80 border-b border-slate-200/80 dark:border-slate-800 hover:bg-slate-100/80 dark:hover:bg-slate-800/80 transition-colors">
             <div class="flex items-center gap-3">
-              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-amber-600 text-white">V03</span>
+              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-stone-800 dark:bg-stone-700 text-amber-200">V03</span>
               <h2 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white">Verilog Coding: Generate a 1-Cycle Pulse Whenever Signal <code class="font-mono">a</code> Toggles (Dual-Edge Detector)</h2>
             </div>
             <svg class="qa-chevron w-5 h-5 text-slate-400 shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
@@ -507,16 +540,18 @@ endmodule</code></pre>
         <article id="v4" class="qa-card scroll-mt-24 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
           <button type="button" class="qa-header w-full px-6 py-4 text-left flex items-center justify-between gap-4 bg-slate-50/80 dark:bg-slate-850/80 border-b border-slate-200/80 dark:border-slate-800 hover:bg-slate-100/80 dark:hover:bg-slate-800/80 transition-colors">
             <div class="flex items-center gap-3">
-              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-amber-600 text-white">V04</span>
-              <h2 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white">Verilog RTL: Synchronous Frequency Divider by 2 and by 4</h2>
+              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-stone-800 dark:bg-stone-700 text-amber-200">V04</span>
+              <h2 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white">Verilog RTL: Ring Counter vs. Johnson Counter &amp; Frequency Divider by 2 and 4</h2>
             </div>
             <svg class="qa-chevron w-5 h-5 text-slate-400 shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
           </button>
           <div class="qa-body">
             <div class="qa-inner p-6 space-y-4 text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
-              <p>
-                A synchronous 2-bit binary up-counter produces a 50%-duty-cycle divide-by-2 clock on <code class="font-mono text-xs">cnt[0]</code> and a 50%-duty-cycle divide-by-4 clock on <code class="font-mono text-xs">cnt[1]</code> without ripple-clock skew:
-              </p>
+              <ul class="list-disc pl-5 space-y-1 text-xs sm:text-sm">
+                <li><strong>N-Bit Ring Counter:</strong> A circular shift register initialized to a one-hot state (e.g., <code class="font-mono text-xs">4'b0001</code>) feeding <code class="font-mono text-xs">q[N-1]</code> back to <code class="font-mono text-xs">q[0]</code>. It cycles through <strong>N</strong> states and reverts to its initial state after <strong>N clock cycles</strong> (<code class="font-mono text-xs">N &times; T_clk</code>).</li>
+                <li><strong>Johnson (Twisted Ring) Counter:</strong> Feeds the inverted MSB (<code class="font-mono text-xs">~q[N-1]</code>) back to <code class="font-mono text-xs">q[0]</code>, cycling through <strong>2N</strong> states and reverting after <strong>2N clock cycles</strong>.</li>
+                <li><strong>Frequency Divider by 2 &amp; 4:</strong> A synchronous 2-bit binary up-counter produces a 50%-duty-cycle divide-by-2 clock on <code class="font-mono text-xs">cnt[0]</code> and a 50%-duty-cycle divide-by-4 clock on <code class="font-mono text-xs">cnt[1]</code> without ripple-clock skew.</li>
+              </ul>
               <div class="rounded-xl overflow-hidden bg-slate-900 border border-slate-800">
                 <div class="flex items-center justify-between px-4 py-2 bg-slate-850 border-b border-slate-800">
                   <span class="text-xs font-mono text-slate-400">clk_div_2_4.v</span>
@@ -549,7 +584,7 @@ endmodule</code></pre>
         <article id="v5" class="qa-card scroll-mt-24 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
           <button type="button" class="qa-header w-full px-6 py-4 text-left flex items-center justify-between gap-4 bg-slate-50/80 dark:bg-slate-850/80 border-b border-slate-200/80 dark:border-slate-800 hover:bg-slate-100/80 dark:hover:bg-slate-800/80 transition-colors">
             <div class="flex items-center gap-3">
-              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-amber-600 text-white">V05</span>
+              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-stone-800 dark:bg-stone-700 text-amber-200">V05</span>
               <h2 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white">RTL Synthesis &amp; Code Review: 3-Bit LFSR Sequence &amp; Flawed Wrapper Module</h2>
             </div>
             <svg class="qa-chevron w-5 h-5 text-slate-400 shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
@@ -590,7 +625,7 @@ endmodule</code></pre>
         <article id="v6" class="qa-card scroll-mt-24 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
           <button type="button" class="qa-header w-full px-6 py-4 text-left flex items-center justify-between gap-4 bg-slate-50/80 dark:bg-slate-850/80 border-b border-slate-200/80 dark:border-slate-800 hover:bg-slate-100/80 dark:hover:bg-slate-800/80 transition-colors">
             <div class="flex items-center gap-3">
-              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-amber-600 text-white">V06</span>
+              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-stone-800 dark:bg-stone-700 text-amber-200">V06</span>
               <h2 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white">DFT &amp; Fault Testing: Stuck-At Observability, Pipeline WB LSB Fault &amp; At-Speed Faults</h2>
             </div>
             <svg class="qa-chevron w-5 h-5 text-slate-400 shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
@@ -620,7 +655,7 @@ endmodule</code></pre>
         <article id="v7" class="qa-card scroll-mt-24 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
           <button type="button" class="qa-header w-full px-6 py-4 text-left flex items-center justify-between gap-4 bg-slate-50/80 dark:bg-slate-850/80 border-b border-slate-200/80 dark:border-slate-800 hover:bg-slate-100/80 dark:hover:bg-slate-800/80 transition-colors">
             <div class="flex items-center gap-3">
-              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-amber-600 text-white">V07</span>
+              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-stone-800 dark:bg-stone-700 text-amber-200">V07</span>
               <h2 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white">Combinational Logic: NAND-to-NOT, Boolean Reduction, XOR &amp; BCD &times;5 Circuit</h2>
             </div>
             <svg class="qa-chevron w-5 h-5 text-slate-400 shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
@@ -654,7 +689,7 @@ endmodule</code></pre>
         <article id="sv1" class="qa-card scroll-mt-24 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
           <button type="button" class="qa-header w-full px-6 py-4 text-left flex items-center justify-between gap-4 bg-slate-50/80 dark:bg-slate-850/80 border-b border-slate-200/80 dark:border-slate-800 hover:bg-slate-100/80 dark:hover:bg-slate-800/80 transition-colors">
             <div class="flex items-center gap-3">
-              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-brand-600 text-white">SV01</span>
+              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-amber-800 text-white">SV01</span>
               <h2 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white">SystemVerilog Data Types: <code class="font-mono">bit</code> vs. <code class="font-mono">logic</code> vs. <code class="font-mono">byte</code></h2>
             </div>
             <svg class="qa-chevron w-5 h-5 text-slate-400 shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
@@ -705,7 +740,7 @@ endmodule</code></pre>
         <article id="sv2" class="qa-card scroll-mt-24 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
           <button type="button" class="qa-header w-full px-6 py-4 text-left flex items-center justify-between gap-4 bg-slate-50/80 dark:bg-slate-850/80 border-b border-slate-200/80 dark:border-slate-800 hover:bg-slate-100/80 dark:hover:bg-slate-800/80 transition-colors">
             <div class="flex items-center gap-3">
-              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-brand-600 text-white">SV02</span>
+              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-amber-800 text-white">SV02</span>
               <h2 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white">SystemVerilog Array Types, Built-In Methods &amp; DV Applications</h2>
             </div>
             <svg class="qa-chevron w-5 h-5 text-slate-400 shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
@@ -776,7 +811,17 @@ res = q.max();                          // '{80}
 q.sort();                               // '{5, 10, 20, 45, 45, 80}
 q.rsort();                              // '{80, 45, 45, 20, 10, 5}
 q.shuffle();                            // Random permutation
-int total = q.sum();                    // 205</code></pre>
+int total = q.sum();                    // 205
+
+// 3. Delete all items matching a given target number (3 safe approaches)
+int target = 45;
+// Method A (Recommended): Built-in locator filter (works on queues &amp; dynamic arrays)
+q = q.find() with (item != target);
+
+// Method B: Reverse-index loop (avoids forward-loop index-shift bug!)
+for (int i = q.size() - 1; i >= 0; i--) begin
+  if (q[i] == target) q.delete(i);
+end</code></pre>
               </div>
             </div>
           </div>
@@ -786,7 +831,7 @@ int total = q.sum();                    // 205</code></pre>
         <article id="sv3" class="qa-card scroll-mt-24 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
           <button type="button" class="qa-header w-full px-6 py-4 text-left flex items-center justify-between gap-4 bg-slate-50/80 dark:bg-slate-850/80 border-b border-slate-200/80 dark:border-slate-800 hover:bg-slate-100/80 dark:hover:bg-slate-800/80 transition-colors">
             <div class="flex items-center gap-3">
-              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-brand-600 text-white">SV03</span>
+              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-amber-800 text-white">SV03</span>
               <h2 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white">SV Coding: Move All <code class="font-mono">1</code>s in a 32-Bit Integer to MSB &amp; Find 2nd Largest Element</h2>
             </div>
             <svg class="qa-chevron w-5 h-5 text-slate-400 shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
@@ -821,6 +866,23 @@ function automatic int find_second_largest(int arr[]);
     end
   end
   return max2;
+endfunction
+
+// Problem C: Byte/Word Slicing into Dynamic Arrays A[] and B[]
+// Pattern: A[0]=a[7:0], B[0]=a[15:0], A[1]=a[23:16], A[2]=a[31:24], ...
+function automatic void slice_vector #(parameter int P = 31) (
+  input  logic [P:0]  a,
+  output logic [7:0]  A[],
+  output logic [15:0] B[]
+);
+  int num_bytes = (P + 1) / 8;
+  A = new[num_bytes - 1];
+  B = new[1];
+  B[0] = a[15:0];
+  A[0] = a[7:0];
+  for (int b = 2; b < num_bytes; b++) begin
+    A[b - 1] = a[b*8 +: 8]; // Indexed part-select [lsb +: width]
+  end
 endfunction</code></pre>
               </div>
             </div>
@@ -831,7 +893,7 @@ endfunction</code></pre>
         <article id="sv4" class="qa-card scroll-mt-24 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
           <button type="button" class="qa-header w-full px-6 py-4 text-left flex items-center justify-between gap-4 bg-slate-50/80 dark:bg-slate-850/80 border-b border-slate-200/80 dark:border-slate-800 hover:bg-slate-100/80 dark:hover:bg-slate-800/80 transition-colors">
             <div class="flex items-center gap-3">
-              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-brand-600 text-white">SV04</span>
+              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-amber-800 text-white">SV04</span>
               <h2 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white">Task vs. Function Differences &amp; Timing Events Inside a Function</h2>
             </div>
             <svg class="qa-chevron w-5 h-5 text-slate-400 shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
@@ -872,6 +934,10 @@ endfunction</code></pre>
                   <strong>Directly or inside <code class="font-mono text-xs">fork...join</code> / <code class="font-mono text-xs">fork...join_any</code>: NO</strong> (compile error, because <code class="font-mono text-xs">join</code> and <code class="font-mono text-xs">join_any</code> block the function in time). <strong>Inside <code class="font-mono text-xs">fork...join_none</code>: YES!</strong> Because <code class="font-mono text-xs">join_none</code> schedules the child process and returns immediately in 0 time, IEEE 1800 SystemVerilog explicitly allows timing delays and task calls inside <code class="font-mono text-xs">fork...join_none</code> inside a function.
                 </p>
               </div>
+              <ul class="list-disc pl-5 space-y-1 text-xs sm:text-sm">
+                <li><strong>Pass by <code class="font-mono text-xs">ref</code> &amp; <code class="font-mono text-xs">const ref</code>:</strong> Passes a pointer/reference rather than copying large dynamic arrays/queues on subroutine entry/exit—boosting simulation speed and letting tasks observe live variable updates. Requires an <code class="font-mono text-xs">automatic</code> task/function (default inside classes).</li>
+                <li><strong><code class="font-mono text-xs">static</code> vs. <code class="font-mono text-xs">automatic</code> Lifetime:</strong> Module/interface/program tasks and functions default to <code class="font-mono text-xs">static</code> storage (shared across concurrent calls unless declared <code class="font-mono text-xs">automatic</code>); class methods and local variables default to <code class="font-mono text-xs">automatic</code> (per-call stack allocation).</li>
+              </ul>
             </div>
           </div>
         </article>
@@ -880,7 +946,7 @@ endfunction</code></pre>
         <article id="sv5" class="qa-card scroll-mt-24 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
           <button type="button" class="qa-header w-full px-6 py-4 text-left flex items-center justify-between gap-4 bg-slate-50/80 dark:bg-slate-850/80 border-b border-slate-200/80 dark:border-slate-800 hover:bg-slate-100/80 dark:hover:bg-slate-800/80 transition-colors">
             <div class="flex items-center gap-3">
-              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-brand-600 text-white">SV05</span>
+              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-amber-800 text-white">SV05</span>
               <h2 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white">Concurrency Traps: Nested <code class="font-mono">fork...join_any</code> Timeout, <code class="font-mono">@(ev)</code> vs. <code class="font-mono">ev.triggered</code> &amp; Semaphore</h2>
             </div>
             <svg class="qa-chevron w-5 h-5 text-slate-400 shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
@@ -928,7 +994,7 @@ endtask</code></pre>
         <article id="sv6" class="qa-card scroll-mt-24 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
           <button type="button" class="qa-header w-full px-6 py-4 text-left flex items-center justify-between gap-4 bg-slate-50/80 dark:bg-slate-850/80 border-b border-slate-200/80 dark:border-slate-800 hover:bg-slate-100/80 dark:hover:bg-slate-800/80 transition-colors">
             <div class="flex items-center gap-3">
-              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-brand-600 text-white">SV06</span>
+              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-amber-800 text-white">SV06</span>
               <h2 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white">OOP Features &amp; Real-World / Verification Applications of Polymorphism</h2>
             </div>
             <svg class="qa-chevron w-5 h-5 text-slate-400 shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
@@ -961,7 +1027,7 @@ endtask</code></pre>
         <article id="sv7" class="qa-card scroll-mt-24 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
           <button type="button" class="qa-header w-full px-6 py-4 text-left flex items-center justify-between gap-4 bg-slate-50/80 dark:bg-slate-850/80 border-b border-slate-200/80 dark:border-slate-800 hover:bg-slate-100/80 dark:hover:bg-slate-800/80 transition-colors">
             <div class="flex items-center gap-3">
-              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-brand-600 text-white">SV07</span>
+              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-amber-800 text-white">SV07</span>
               <h2 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white"><code class="font-mono">virtual class</code>, <code class="font-mono">virtual</code> Method &amp; Downcasting (<code class="font-mono">$cast</code>)</h2>
             </div>
             <svg class="qa-chevron w-5 h-5 text-slate-400 shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
@@ -1012,7 +1078,7 @@ end</code></pre>
         <article id="sv8" class="qa-card scroll-mt-24 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
           <button type="button" class="qa-header w-full px-6 py-4 text-left flex items-center justify-between gap-4 bg-slate-50/80 dark:bg-slate-850/80 border-b border-slate-200/80 dark:border-slate-800 hover:bg-slate-100/80 dark:hover:bg-slate-800/80 transition-colors">
             <div class="flex items-center gap-3">
-              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-brand-600 text-white">SV08</span>
+              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-amber-800 text-white">SV08</span>
               <h2 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white">SV Constraints: Sorted/Unique Arrays, Min-Spacing, Fibonacci, Alignment &amp; 80% Cache Hit</h2>
             </div>
             <svg class="qa-chevron w-5 h-5 text-slate-400 shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
@@ -1083,6 +1149,9 @@ class cache_mem_txn;
   endfunction
 endclass</code></pre>
               </div>
+              <p class="text-xs sm:text-sm pt-2">
+                <strong>Deep Dive:</strong> Need <em>non-overlapping address pair</em> or multi-region DMA range constraints? See <a href="post-non-overlapping-addr-constraints.html" class="text-brand-600 dark:text-indigo-400 font-semibold hover:underline">Non-Overlapping Address Pair Generation</a> or run the <a href="https://www.edaplayground.com/x/SR7f" target="_blank" rel="noopener noreferrer" class="text-brand-600 dark:text-indigo-400 font-semibold hover:underline">EDA Playground example (x/SR7f) &#8599;</a>.
+              </p>
             </div>
           </div>
         </article>
@@ -1091,7 +1160,7 @@ endclass</code></pre>
         <article id="sv9" class="qa-card scroll-mt-24 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
           <button type="button" class="qa-header w-full px-6 py-4 text-left flex items-center justify-between gap-4 bg-slate-50/80 dark:bg-slate-850/80 border-b border-slate-200/80 dark:border-slate-800 hover:bg-slate-100/80 dark:hover:bg-slate-800/80 transition-colors">
             <div class="flex items-center gap-3">
-              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-brand-600 text-white">SV09</span>
+              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-amber-800 text-white">SV09</span>
               <h2 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white">SystemVerilog 2D Dynamic Matrix Pattern Constraints (Diagonal, Z, X, Triangles, Hourglass)</h2>
             </div>
             <svg class="qa-chevron w-5 h-5 text-slate-400 shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
@@ -1163,7 +1232,7 @@ endclass</code></pre>
         <article id="sv10" class="qa-card scroll-mt-24 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
           <button type="button" class="qa-header w-full px-6 py-4 text-left flex items-center justify-between gap-4 bg-slate-50/80 dark:bg-slate-850/80 border-b border-slate-200/80 dark:border-slate-800 hover:bg-slate-100/80 dark:hover:bg-slate-800/80 transition-colors">
             <div class="flex items-center gap-3">
-              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-brand-600 text-white">SV10</span>
+              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-amber-800 text-white">SV10</span>
               <h2 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white">Mailbox Scoreboard Logic (Fixing <code class="font-mono">=</code> vs <code class="font-mono">==</code> Trap) &amp; Multi-Port Arbiter Grant Order</h2>
             </div>
             <svg class="qa-chevron w-5 h-5 text-slate-400 shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
@@ -1186,7 +1255,7 @@ endclass</code></pre>
         <article id="sv11" class="qa-card scroll-mt-24 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
           <button type="button" class="qa-header w-full px-6 py-4 text-left flex items-center justify-between gap-4 bg-slate-50/80 dark:bg-slate-850/80 border-b border-slate-200/80 dark:border-slate-800 hover:bg-slate-100/80 dark:hover:bg-slate-800/80 transition-colors">
             <div class="flex items-center gap-3">
-              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-brand-600 text-white">SV11</span>
+              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-amber-800 text-white">SV11</span>
               <h2 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white">AMBA APB Interface, Driver &amp; Concurrent SVA Protocol Assertions</h2>
             </div>
             <svg class="qa-chevron w-5 h-5 text-slate-400 shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
@@ -1250,7 +1319,7 @@ endtask</code></pre>
         <article id="sv12" class="qa-card scroll-mt-24 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
           <button type="button" class="qa-header w-full px-6 py-4 text-left flex items-center justify-between gap-4 bg-slate-50/80 dark:bg-slate-850/80 border-b border-slate-200/80 dark:border-slate-800 hover:bg-slate-100/80 dark:hover:bg-slate-800/80 transition-colors">
             <div class="flex items-center gap-3">
-              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-brand-600 text-white">SV12</span>
+              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-amber-800 text-white">SV12</span>
               <h2 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white">Coverages — Code Coverage vs. Functional Coverage &amp; Sign-Off</h2>
             </div>
             <svg class="qa-chevron w-5 h-5 text-slate-400 shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
@@ -1284,7 +1353,7 @@ endtask</code></pre>
         <article id="sv13" class="qa-card scroll-mt-24 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
           <button type="button" class="qa-header w-full px-6 py-4 text-left flex items-center justify-between gap-4 bg-slate-50/80 dark:bg-slate-850/80 border-b border-slate-200/80 dark:border-slate-800 hover:bg-slate-100/80 dark:hover:bg-slate-800/80 transition-colors">
             <div class="flex items-center gap-3">
-              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-brand-600 text-white">SV13</span>
+              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-amber-800 text-white">SV13</span>
               <h2 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white">Command-Line Arguments for Changing SystemVerilog Parameters &amp; Runtime Plusargs</h2>
             </div>
             <svg class="qa-chevron w-5 h-5 text-slate-400 shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
@@ -1322,6 +1391,228 @@ endtask</code></pre>
           </div>
         </article>
 
+        <!-- SV14: DEEP COPY, PARENT CLASS (super) & FOR-FORK AUTOMATIC VARIABLE -->
+        <article id="sv14" class="qa-card scroll-mt-24 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+          <button type="button" class="qa-header w-full px-6 py-4 text-left flex items-center justify-between gap-4 bg-slate-50/80 dark:bg-slate-850/80 border-b border-slate-200/80 dark:border-slate-800 hover:bg-slate-100/80 dark:hover:bg-slate-800/80 transition-colors">
+            <div class="flex items-center gap-3">
+              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-amber-800 text-white">SV14</span>
+              <h2 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white">Deep Copy vs. Shallow Copy, Parent Class (<code class="font-mono">super</code>) &amp; <code class="font-mono">for-fork</code> <code class="font-mono">automatic</code> Loop Variables</h2>
+            </div>
+            <svg class="qa-chevron w-5 h-5 text-slate-400 shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="qa-body">
+            <div class="qa-inner p-6 space-y-4 text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
+              <ul class="list-disc pl-5 space-y-1.5 text-xs sm:text-sm">
+                <li><strong>Shallow Copy (<code class="font-mono text-xs">p2 = new p1;</code>) vs. Deep Copy (<code class="font-mono text-xs">p2.copy(p1);</code>):</strong>
+                  Shallow copy allocates a new outer object and copies primitive properties, but copies only the <em>handle</em> of any nested sub-object—so mutating <code class="font-mono text-xs">p2.hdr.id</code> corrupts <code class="font-mono text-xs">p1.hdr.id</code>. A <strong>Deep Copy</strong> explicitly allocates and copies every nested sub-object so both hierarchies are completely independent in memory.
+                </li>
+                <li><strong>Parent Class Access (<code class="font-mono text-xs">super</code>):</strong> Inside a derived class, <code class="font-mono text-xs">super.new(...)</code> invokes the parent constructor (must be the first statement if the parent <code class="font-mono text-xs">new()</code> takes arguments), and <code class="font-mono text-xs">super.method()</code> invokes the parent's overridden method or property.</li>
+                <li><strong><code class="font-mono text-xs">for { fork ... join }</code> Loop Variable Trap (<code class="font-mono text-xs">automatic</code>):</strong> In a <code class="font-mono text-xs">for</code> loop spawning threads with <code class="font-mono text-xs">fork...join_none</code> (or <code class="font-mono text-xs">join_any</code>), the loop iterator <code class="font-mono text-xs">i</code> is shared across all spawned threads—so without capturing an <code class="font-mono text-xs">automatic</code> copy inside each iteration, every thread observes the final value of <code class="font-mono text-xs">i</code>!</li>
+              </ul>
+
+              <div class="rounded-xl overflow-hidden bg-slate-900 border border-slate-800">
+                <div class="flex items-center justify-between px-4 py-2 bg-slate-850 border-b border-slate-800">
+                  <span class="text-xs font-mono text-slate-400">deep_copy_super_and_fork_auto.sv</span>
+                  <button type="button" class="copy-btn text-xs font-mono px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors">Copy</button>
+                </div>
+                <pre class="p-4 overflow-x-auto"><code class="language-verilog">// 1. Deep Copy + Parent Class ('super') Example
+class Header;
+  bit [7:0] id;
+  function void copy(Header rhs);
+    this.id = rhs.id;
+  endfunction
+endclass
+
+class BasePacket;
+  int    len;
+  Header hdr;
+  function new(int l = 64);
+    this.len = l;
+    this.hdr = new();
+  endfunction
+  virtual function void copy(BasePacket rhs);
+    this.len = rhs.len;
+    this.hdr.copy(rhs.hdr); // Deep-copies nested Header object
+  endfunction
+endclass
+
+class ChildPacket extends BasePacket;
+  bit [31:0] crc;
+  function new(int l = 64, bit [31:0] c = 32'hFFFF_FFFF);
+    super.new(l); // Must call parent constructor first
+    this.crc = c;
+  endfunction
+  virtual function void copy(BasePacket rhs);
+    ChildPacket c_rhs;
+    super.copy(rhs); // Copy parent fields &amp; nested Header
+    if ($cast(c_rhs, rhs)) this.crc = c_rhs.crc;
+  endfunction
+endclass
+
+// 2. Spawning Parallel Threads Inside a Loop with 'automatic' Variable
+task automatic spawn_channels(int num_ch);
+  for (int i = 0; i < num_ch; i++) begin
+    automatic int ch_id = i; // Private per-iteration copy!
+    fork
+      begin
+        #10;
+        $display("Driving channel %0d at %0t", ch_id, $time); // Prints 0, 1, 2, 3
+      end
+    join_none
+  end
+  wait fork; // Wait for all spawned threads to finish
+endtask</code></pre>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- SV15: ASCENDING ARRAY, SOFT CONSTRAINTS & RANDOMIZE() STATUS / NO CONSTRAINTS -->
+        <article id="sv15" class="qa-card scroll-mt-24 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+          <button type="button" class="qa-header w-full px-6 py-4 text-left flex items-center justify-between gap-4 bg-slate-50/80 dark:bg-slate-850/80 border-b border-slate-200/80 dark:border-slate-800 hover:bg-slate-100/80 dark:hover:bg-slate-800/80 transition-colors">
+            <div class="flex items-center gap-3">
+              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-amber-800 text-white">SV15</span>
+              <h2 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white">Ascending Array Order, <code class="font-mono">soft</code> Constraints &amp; Checking <code class="font-mono">randomize()</code> Success (With or Without Constraints)</h2>
+            </div>
+            <svg class="qa-chevron w-5 h-5 text-slate-400 shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="qa-body">
+            <div class="qa-inner p-6 space-y-4 text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
+              <ul class="list-disc pl-5 space-y-1.5 text-xs sm:text-sm">
+                <li><strong>Ascending Order Constraint:</strong> Use <code class="font-mono text-xs">foreach (arr[i]) if (i &gt; 0) arr[i] &gt; arr[i-1];</code> for strictly ascending values (or <code class="font-mono text-xs">&gt;=</code> for non-decreasing order).</li>
+                <li><strong><code class="font-mono text-xs">soft</code> Constraints:</strong> A <code class="font-mono text-xs">soft</code> constraint provides a default rule that the solver automatically drops if a higher-priority hard constraint or inline <code class="font-mono text-xs">randomize() with { ... }</code> conflicts with it—preventing constraint-conflict failures.</li>
+                <li><strong>How to Know If <code class="font-mono text-xs">randomize()</code> Succeeded or Failed:</strong> <code class="font-mono text-xs">obj.randomize()</code> is a built-in function returning <code class="font-mono text-xs">int</code>: <strong><code class="font-mono text-xs">1</code></strong> on success and <strong><code class="font-mono text-xs">0</code></strong> on failure (e.g., conflicting constraints). On failure, all <code class="font-mono text-xs">rand</code> variables retain their previous values and <code class="font-mono text-xs">post_randomize()</code> is skipped. Always check <code class="font-mono text-xs">if (!obj.randomize()) `uvm_fatal(...)</code> (never ignore the return value with <code class="font-mono text-xs">void'()</code> in production tests).</li>
+                <li><strong>What If There Are NO Constraints in the Class?</strong> <code class="font-mono text-xs">randomize()</code> still works! Every <code class="font-mono text-xs">rand</code> variable is assigned a uniformly distributed random value across its full legal bit-width domain (e.g., <code class="font-mono text-xs">0..255</code> for <code class="font-mono text-xs">bit [7:0]</code>), and <code class="font-mono text-xs">randomize()</code> returns <code class="font-mono text-xs">1</code> (provided no <code class="font-mono text-xs">rand_mode(0)</code> issue or external inline conflict exists).</li>
+              </ul>
+
+              <div class="rounded-xl overflow-hidden bg-slate-900 border border-slate-800">
+                <div class="flex items-center justify-between px-4 py-2 bg-slate-850 border-b border-slate-800">
+                  <span class="text-xs font-mono text-slate-400">ascending_soft_and_randomize_check.sv</span>
+                  <button type="button" class="copy-btn text-xs font-mono px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors">Copy</button>
+                </div>
+                <pre class="p-4 overflow-x-auto"><code class="language-verilog">class packet_cfg;
+  rand bit [7:0] asc_arr[6];
+  rand int       burst_len;
+
+  // Strictly ascending array elements
+  constraint c_ascending {
+    foreach (asc_arr[i])
+      if (i > 0) asc_arr[i] > asc_arr[i-1];
+  }
+
+  // Soft default constraint: easily overridden inline without solver conflict
+  constraint c_default_burst {
+    soft burst_len inside {[4:8]};
+  }
+endclass
+
+initial begin
+  packet_cfg cfg = new();
+  // Override soft constraint inline &amp; verify return status (1 = pass, 0 = fail)
+  if (!cfg.randomize() with { burst_len == 64; }) begin
+    $fatal(1, "Randomization failed!");
+  end
+  $display("Randomized OK: burst_len=%0d, asc_arr=%p", cfg.burst_len, cfg.asc_arr);
+end</code></pre>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- SV16: BIT-COUNT CONSTRAINTS ($countones & ARRAY SUM) -->
+        <article id="sv16" class="qa-card scroll-mt-24 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+          <button type="button" class="qa-header w-full px-6 py-4 text-left flex items-center justify-between gap-4 bg-slate-50/80 dark:bg-slate-850/80 border-b border-slate-200/80 dark:border-slate-800 hover:bg-slate-100/80 dark:hover:bg-slate-800/80 transition-colors">
+            <div class="flex items-center gap-3">
+              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-amber-800 text-white">SV16</span>
+              <h2 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white">Bit-Count Constraints: <code class="font-mono">$countones()</code> Range, Unpacked Array <code class="font-mono">sum()</code> &amp; Fixed-Ones Dynamic Array</h2>
+            </div>
+            <svg class="qa-chevron w-5 h-5 text-slate-400 shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="qa-body">
+            <div class="qa-inner p-6 space-y-4 text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
+              <ul class="list-disc pl-5 space-y-1 text-xs sm:text-sm">
+                <li><strong>Inclusive Bounds:</strong> "At least 10 and no more than 18 ones" requires <code class="font-mono text-xs">$countones(myvec1) inside {[10:18]}</code> (using <code class="font-mono text-xs">&lt; 18</code> caps at 17!).</li>
+                <li><strong>Unpacked 1-Bit Array Reduction Trap:</strong> Calling <code class="font-mono text-xs">myvec2.sum()</code> on a 1-bit unpacked array sums in 1-bit arithmetic (wrapping modulo 2!). Always cast each element with <code class="font-mono text-xs">myvec2.sum() with (int'(item))</code>.</li>
+              </ul>
+              <div class="rounded-xl overflow-hidden bg-slate-900 border border-slate-800">
+                <div class="flex items-center justify-between px-4 py-2 bg-slate-850 border-b border-slate-800">
+                  <span class="text-xs font-mono text-slate-400">bit_count_constraints.sv</span>
+                  <button type="button" class="copy-btn text-xs font-mono px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors">Copy</button>
+                </div>
+                <pre class="p-4 overflow-x-auto"><code class="language-verilog">class bit_count_constraints;
+  rand bit [31:0] myvec1;
+  rand bit        myvec2[32];
+  rand bit        dyn5[];
+
+  // a) At least 10 and no more than 18 bits set to 1
+  constraint c_myvec1 {
+    $countones(myvec1) inside {[10:18]};
+  }
+
+  // b) More than 5 ones in myvec2, and strictly fewer ones than myvec1
+  constraint c_myvec2 {
+    myvec2.sum() with (int'(item)) > 5;
+    myvec2.sum() with (int'(item)) < $countones(myvec1);
+  }
+
+  // c) Dynamic array of size 5 with exactly three 1s and two 0s
+  constraint c_dyn5 {
+    dyn5.size() == 5;
+    dyn5.sum() with (int'(item)) == 3;
+  }
+endclass</code></pre>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- SV17: ENUMERATED TYPES, PACKED/UNPACKED STRUCTS & CLOCKING BLOCK / MODPORT -->
+        <article id="sv17" class="qa-card scroll-mt-24 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+          <button type="button" class="qa-header w-full px-6 py-4 text-left flex items-center justify-between gap-4 bg-slate-50/80 dark:bg-slate-850/80 border-b border-slate-200/80 dark:border-slate-800 hover:bg-slate-100/80 dark:hover:bg-slate-800/80 transition-colors">
+            <div class="flex items-center gap-3">
+              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-amber-800 text-white">SV17</span>
+              <h2 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white">Enumerated Types (<code class="font-mono">enum</code>), Packed vs. Unpacked <code class="font-mono">struct</code> &amp; <code class="font-mono">clocking</code> Block vs. <code class="font-mono">modport</code></h2>
+            </div>
+            <svg class="qa-chevron w-5 h-5 text-slate-400 shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="qa-body">
+            <div class="qa-inner p-6 space-y-4 text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
+              <ul class="list-disc pl-5 space-y-1.5 text-xs sm:text-sm">
+                <li><strong>Enumerated Types (<code class="font-mono text-xs">typedef enum bit [1:0] {RED, YELLOW, GREEN} light_e;</code>):</strong> Provide strong type checking (assigning an undeclared name or raw integer without <code class="font-mono text-xs">$cast</code>/cast fails compilation). Always specify an explicit bit width (default is 32-bit <code class="font-mono text-xs">int</code>). Built-in methods: <code class="font-mono text-xs">first()</code>, <code class="font-mono text-xs">last()</code>, <code class="font-mono text-xs">next(n)</code>, <code class="font-mono text-xs">prev(n)</code>, <code class="font-mono text-xs">num()</code>, and <code class="font-mono text-xs">name()</code>.</li>
+                <li><strong>Packed vs. Unpacked <code class="font-mono text-xs">struct</code>:</strong> A <code class="font-mono text-xs">struct packed</code> (optionally <code class="font-mono text-xs">signed</code>) stores members as a contiguous bit vector supporting bit/part-slicing and bitwise/arithmetic ops. An unpacked <code class="font-mono text-xs">struct</code> (default) stores fields independently; slicing the whole struct is illegal.</li>
+                <li><strong><code class="font-mono text-xs">clocking</code> Block vs. <code class="font-mono text-xs">modport</code> (Why Both Are Needed):</strong> A <code class="font-mono text-xs">clocking</code> block defines synchronous sampling (<code class="font-mono text-xs">input #1step</code>) and driving (<code class="font-mono text-xs">output #0</code>) skews to prevent TB/DUT race conditions—but it is <strong>non-synthesizable</strong> and only applies to synchronous signals. A <code class="font-mono text-xs">modport</code> is <strong>synthesizable</strong>, enforces port directions (<code class="font-mono text-xs">input</code>/<code class="font-mono text-xs">output</code>) on RTL modules, and bundles asynchronous signals (like <code class="font-mono text-xs">rst_n</code>) alongside clocking blocks into a single interface port view.</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <!-- SV18: INHERITANCE UPCAST/DOWNCAST PUZZLE & 99-ELEMENT XOR UNIQUE FINDER -->
+        <article id="sv18" class="qa-card scroll-mt-24 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+          <button type="button" class="qa-header w-full px-6 py-4 text-left flex items-center justify-between gap-4 bg-slate-50/80 dark:bg-slate-850/80 border-b border-slate-200/80 dark:border-slate-800 hover:bg-slate-100/80 dark:hover:bg-slate-800/80 transition-colors">
+            <div class="flex items-center gap-3">
+              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-amber-800 text-white">SV18</span>
+              <h2 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white">Inheritance Handle Puzzle (<code class="font-mono">a0 = b0; $cast(b1, a0);</code>) &amp; Finding the Single Unique Element in a 99-Element Memory</h2>
+            </div>
+            <svg class="qa-chevron w-5 h-5 text-slate-400 shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="qa-body">
+            <div class="qa-inner p-6 space-y-4 text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
+              <ul class="list-disc pl-5 space-y-1.5 text-xs sm:text-sm">
+                <li><strong>Inheritance Handle Puzzle (<code class="font-mono text-xs">class B extends A; int ab; endclass</code> with <code class="font-mono text-xs">A a0; B b0, b1;</code>):</strong>
+                  <ol class="list-decimal pl-5 mt-1 space-y-1">
+                    <li><strong><code class="font-mono text-xs">a0 = b0;</code></strong> — <strong>Legal (Upcasting):</strong> Base handle <code class="font-mono text-xs">a0</code> points to the <code class="font-mono text-xs">B</code> object (ensure <code class="font-mono text-xs">b0 = new();</code> is called first).</li>
+                    <li><strong>Can we access <code class="font-mono text-xs">a0.ab</code>?</strong> — <strong>No (Compile Error):</strong> Member lookup uses the handle's declared type (<code class="font-mono text-xs">A</code>), which has no property <code class="font-mono text-xs">ab</code>. However, <code class="font-mono text-xs">ab</code> still exists intact in memory inside the underlying <code class="font-mono text-xs">B</code> object!</li>
+                    <li><strong><code class="font-mono text-xs">$cast(b1, a0);</code> &amp; <code class="font-mono text-xs">b1.ab</code>:</strong> — <strong>Succeeds (Dynamic Downcasting):</strong> Because <code class="font-mono text-xs">a0</code> points to a <code class="font-mono text-xs">B</code> instance at runtime, <code class="font-mono text-xs">$cast(b1, a0)</code> returns <code class="font-mono text-xs">1</code> and <code class="font-mono text-xs">b1.ab</code> can now be read/written directly (or accessed via a <code class="font-mono text-xs">virtual</code> getter method declared in <code class="font-mono text-xs">A</code>).</li>
+                  </ol>
+                </li>
+                <li><strong>99-Element Memory Where 49 Values Repeat in Pairs and 1 Value Is Unique:</strong>
+                  XOR all 99 elements together (<code class="font-mono text-xs">res ^= mem[i]</code>) in <span class="math">O(N)</span> time and <span class="math">O(1)</span> space—every duplicate pair cancels (<code class="font-mono text-xs">x ^ x == 0</code>), leaving only the single non-repeated element! (If elements can repeat 3+ times, count frequencies in an associative array <code class="font-mono text-xs">int freq[int];</code>).
+                </li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
         <!-- =============================================================== -->
         <!-- PART III: UVM & VERIFICATION PLANNING                           -->
         <!-- =============================================================== -->
@@ -1334,7 +1625,7 @@ endtask</code></pre>
         <article id="uvm1" class="qa-card scroll-mt-24 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
           <button type="button" class="qa-header w-full px-6 py-4 text-left flex items-center justify-between gap-4 bg-slate-50/80 dark:bg-slate-850/80 border-b border-slate-200/80 dark:border-slate-800 hover:bg-slate-100/80 dark:hover:bg-slate-800/80 transition-colors">
             <div class="flex items-center gap-3">
-              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-cyan-600 text-white">UVM01</span>
+              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-stone-700 text-orange-200">UVM01</span>
               <h2 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white">UVM Phases, Objections &amp; Sequence-to-Driver Handshake</h2>
             </div>
             <svg class="qa-chevron w-5 h-5 text-slate-400 shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
@@ -1390,7 +1681,7 @@ endtask</code></pre>
         <article id="uvm2" class="qa-card scroll-mt-24 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
           <button type="button" class="qa-header w-full px-6 py-4 text-left flex items-center justify-between gap-4 bg-slate-50/80 dark:bg-slate-850/80 border-b border-slate-200/80 dark:border-slate-800 hover:bg-slate-100/80 dark:hover:bg-slate-800/80 transition-colors">
             <div class="flex items-center gap-3">
-              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-cyan-600 text-white">UVM02</span>
+              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-stone-700 text-orange-200">UVM02</span>
               <h2 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white">UVM Packet Inheritance (32B &rarr; 16B Aligned), CLI <code class="font-mono">N</code>-Txn Sequence &amp; Non-Overlapping TIDs</h2>
             </div>
             <svg class="qa-chevron w-5 h-5 text-slate-400 shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
@@ -1461,7 +1752,7 @@ endclass</code></pre>
         <article id="uvm3" class="qa-card scroll-mt-24 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
           <button type="button" class="qa-header w-full px-6 py-4 text-left flex items-center justify-between gap-4 bg-slate-50/80 dark:bg-slate-850/80 border-b border-slate-200/80 dark:border-slate-800 hover:bg-slate-100/80 dark:hover:bg-slate-800/80 transition-colors">
             <div class="flex items-center gap-3">
-              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-cyan-600 text-white">UVM03</span>
+              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-stone-700 text-orange-200">UVM03</span>
               <h2 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white">Verification Plan for an 8-Bit Shift Register</h2>
             </div>
             <svg class="qa-chevron w-5 h-5 text-slate-400 shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
@@ -1500,6 +1791,178 @@ endclass</code></pre>
           </div>
         </article>
 
+        <!-- UVM4: UVM_EVENT VS SV GLOBAL EVENT -->
+        <article id="uvm4" class="qa-card scroll-mt-24 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+          <button type="button" class="qa-header w-full px-6 py-4 text-left flex items-center justify-between gap-4 bg-slate-50/80 dark:bg-slate-850/80 border-b border-slate-200/80 dark:border-slate-800 hover:bg-slate-100/80 dark:hover:bg-slate-800/80 transition-colors">
+            <div class="flex items-center gap-3">
+              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-stone-700 text-orange-200">UVM04</span>
+              <h2 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white"><code class="font-mono">uvm_event</code> / <code class="font-mono">uvm_event_pool</code> vs. SystemVerilog Global <code class="font-mono">event</code></h2>
+            </div>
+            <svg class="qa-chevron w-5 h-5 text-slate-400 shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="qa-body">
+            <div class="qa-inner p-6 space-y-4 text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
+              <div class="overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-800">
+                <table class="w-full text-left text-xs sm:text-sm">
+                  <thead class="bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">
+                    <tr>
+                      <th class="py-2.5 px-4 font-bold">Feature</th>
+                      <th class="py-2.5 px-4 font-bold">SV <code class="font-mono">event</code> (Global / Interface)</th>
+                      <th class="py-2.5 px-4 font-bold"><code class="font-mono">uvm_event</code> (with <code class="font-mono">uvm_event_pool</code>)</th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-slate-200 dark:divide-slate-800">
+                    <tr>
+                      <td class="py-2.5 px-4 font-semibold">Type &amp; Scope</td>
+                      <td class="py-2.5 px-4">Built-in primitive value; requires package/hierarchical path or <code class="font-mono text-xs">uvm_config_db</code> wrapper to share across distant components.</td>
+                      <td class="py-2.5 px-4">Class wrapper (<code class="font-mono text-xs">uvm_object</code>) retrievable anywhere by string key via <code class="font-mono text-xs">uvm_event_pool::get_global("key")</code> without passing handles.</td>
+                    </tr>
+                    <tr>
+                      <td class="py-2.5 px-4 font-semibold">Data Payload</td>
+                      <td class="py-2.5 px-4">Cannot carry any data payload—purely a synchronization pulse.</td>
+                      <td class="py-2.5 px-4"><strong>Can pass a <code class="font-mono text-xs">uvm_object</code> payload</strong> (<code class="font-mono text-xs">ev.trigger(data_obj)</code> and <code class="font-mono text-xs">ev.get_trigger_data()</code>).</td>
+                    </tr>
+                    <tr>
+                      <td class="py-2.5 px-4 font-semibold">Persistence &amp; Introspection</td>
+                      <td class="py-2.5 px-4">Instantaneous (<code class="font-mono text-xs">-&gt;ev</code>); <code class="font-mono text-xs">@(ev)</code> misses triggers that fired earlier in the same time step (must use <code class="font-mono text-xs">wait(ev.triggered)</code>).</td>
+                      <td class="py-2.5 px-4">Tracks state (<code class="font-mono text-xs">is_on()</code>, <code class="font-mono text-xs">get_trigger_time()</code>, <code class="font-mono text-xs">get_num_waiters()</code>, <code class="font-mono text-xs">reset()</code>) and supports registered <code class="font-mono text-xs">uvm_event_callback</code> hooks.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="rounded-xl overflow-hidden bg-slate-900 border border-slate-800">
+                <div class="flex items-center justify-between px-4 py-2 bg-slate-850 border-b border-slate-800">
+                  <span class="text-xs font-mono text-slate-400">uvm_event_pool_example.sv</span>
+                  <button type="button" class="copy-btn text-xs font-mono px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors">Copy</button>
+                </div>
+                <pre class="p-4 overflow-x-auto"><code class="language-verilog">// Component A (e.g., Monitor) triggers global uvm_event with transaction payload
+uvm_event ev = uvm_event_pool::get_global("dma_done_ev");
+ev.trigger(status_pkt);
+
+// Component B (e.g., Virtual Sequence) waits &amp; retrieves payload without hierarchical paths
+uvm_event ev = uvm_event_pool::get_global("dma_done_ev");
+uvm_object obj;
+ev.wait_trigger_data(obj); // Unblocks when triggered &amp; returns payload object</code></pre>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- UVM5: TYPE VS INSTANCE/OBJECT OVERRIDE & CALLBACKS VS VIRTUAL METHODS -->
+        <article id="uvm5" class="qa-card scroll-mt-24 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+          <button type="button" class="qa-header w-full px-6 py-4 text-left flex items-center justify-between gap-4 bg-slate-50/80 dark:bg-slate-850/80 border-b border-slate-200/80 dark:border-slate-800 hover:bg-slate-100/80 dark:hover:bg-slate-800/80 transition-colors">
+            <div class="flex items-center gap-3">
+              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-stone-700 text-orange-200">UVM05</span>
+              <h2 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white">Factory Type vs. Instance/Object Overrides &amp; UVM Callbacks vs. Virtual Methods</h2>
+            </div>
+            <svg class="qa-chevron w-5 h-5 text-slate-400 shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="qa-body">
+            <div class="qa-inner p-6 space-y-4 text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
+              <ul class="list-disc pl-5 space-y-1.5 text-xs sm:text-sm">
+                <li><strong>Type Override (<code class="font-mono text-xs">set_type_override_by_type</code>):</strong> Replaces <em>every</em> instance of <code class="font-mono text-xs">base_type</code> across the entire testbench hierarchy with <code class="font-mono text-xs">derived_type</code>.</li>
+                <li><strong>Instance / Object Override (<code class="font-mono text-xs">set_inst_override_by_type</code>):</strong> Replaces <code class="font-mono text-xs">base_type</code> <em>only</em> at a specific hierarchical path (e.g., <code class="font-mono text-xs">"env.agt[1].drv"</code> or a specific sequence/transaction path passed to <code class="font-mono text-xs">create("req", this, get_full_name())</code>), leaving all other instances unchanged. Note: Instance overrides take precedence over Type overrides.</li>
+              </ul>
+
+              <div class="overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-800">
+                <table class="w-full text-left text-xs sm:text-sm">
+                  <thead class="bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">
+                    <tr>
+                      <th class="py-2.5 px-4 font-bold">Dimension</th>
+                      <th class="py-2.5 px-4 font-bold">Virtual Methods + Factory Override</th>
+                      <th class="py-2.5 px-4 font-bold">UVM Callbacks (<code class="font-mono">uvm_callback</code>)</th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-slate-200 dark:divide-slate-800">
+                    <tr>
+                      <td class="py-2.5 px-4 font-semibold">Mechanism</td>
+                      <td class="py-2.5 px-4">Extend the component/object class, override its <code class="font-mono text-xs">virtual</code> method, and swap the class via Factory before <code class="font-mono text-xs">build_phase</code> finishes.</td>
+                      <td class="py-2.5 px-4">VIP exposes hook calls (<code class="font-mono text-xs">`uvm_do_callbacks</code>); test attaches one or more external callback objects via <code class="font-mono text-xs">uvm_callbacks#()::add()</code>.</td>
+                    </tr>
+                    <tr>
+                      <td class="py-2.5 px-4 font-semibold">Composability</td>
+                      <td class="py-2.5 px-4"><strong>Single inheritance chain:</strong> Only one derived class override can be active on an instance at a time.</td>
+                      <td class="py-2.5 px-4"><strong>Highly composable:</strong> Multiple independent callbacks (e.g., error injection + latency delay + custom coverage) can stack on the same driver simultaneously.</td>
+                    </tr>
+                    <tr>
+                      <td class="py-2.5 px-4 font-semibold">Runtime Control</td>
+                      <td class="py-2.5 px-4">Fixed at build/creation time; cannot be added or removed mid-simulation.</td>
+                      <td class="py-2.5 px-4">Can be dynamically added, enabled, or deleted during <code class="font-mono text-xs">run_phase</code> without modifying VIP source code.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="rounded-xl overflow-hidden bg-slate-900 border border-slate-800">
+                <div class="flex items-center justify-between px-4 py-2 bg-slate-850 border-b border-slate-800">
+                  <span class="text-xs font-mono text-slate-400">factory_overrides_and_callbacks.sv</span>
+                  <button type="button" class="copy-btn text-xs font-mono px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors">Copy</button>
+                </div>
+                <pre class="p-4 overflow-x-auto"><code class="language-verilog">// 1. Type Override vs. Instance (Object) Override in build_phase()
+base_pkt::type_id::set_type_override(err_pkt::get_type()); // Global across whole TB
+base_pkt::type_id::set_inst_override(short_pkt::get_type(), "uvm_test_top.env.agt0.*");
+
+// 2. UVM Callback Hook inside VIP Driver &amp; Registration in Test
+class drv_cb extends uvm_callback;
+  virtual task pre_drive(base_pkt req); endtask
+endclass
+
+class my_driver extends uvm_driver #(base_pkt);
+  `uvm_component_utils(my_driver)
+  `uvm_register_cb(my_driver, drv_cb)
+  task run_phase(uvm_phase phase);
+    seq_item_port.get_next_item(req);
+    `uvm_do_callbacks(my_driver, drv_cb, pre_drive(req)) // Executes all attached callbacks
+    drive_pins(req);
+    seq_item_port.item_done();
+  endtask
+endclass</code></pre>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- UVM6: COMPONENT VS OBJECT, HIERARCHY, m_sequencer & TLM PORT/EXPORT/IMP -->
+        <article id="uvm6" class="qa-card scroll-mt-24 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+          <button type="button" class="qa-header w-full px-6 py-4 text-left flex items-center justify-between gap-4 bg-slate-50/80 dark:bg-slate-850/80 border-b border-slate-200/80 dark:border-slate-800 hover:bg-slate-100/80 dark:hover:bg-slate-800/80 transition-colors">
+            <div class="flex items-center gap-3">
+              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-stone-700 text-orange-200">UVM06</span>
+              <h2 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white"><code class="font-mono">uvm_component</code> vs. <code class="font-mono">uvm_object</code>, Hierarchy, <code class="font-mono">m_sequencer</code> &amp; TLM <code class="font-mono">port</code> / <code class="font-mono">export</code> / <code class="font-mono">imp</code></h2>
+            </div>
+            <svg class="qa-chevron w-5 h-5 text-slate-400 shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="qa-body">
+            <div class="qa-inner p-6 space-y-4 text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
+              <ul class="list-disc pl-5 space-y-1.5 text-xs sm:text-sm">
+                <li><strong><code class="font-mono text-xs">uvm_component</code> vs. <code class="font-mono text-xs">uvm_object</code>:</strong> Components (<code class="font-mono text-xs">uvm_env</code>, <code class="font-mono text-xs">uvm_agent</code>, <code class="font-mono text-xs">uvm_driver</code>, <code class="font-mono text-xs">uvm_monitor</code>, <code class="font-mono text-xs">uvm_scoreboard</code>) are quasi-static structural blocks created in <code class="font-mono text-xs">build_phase</code> that persist for the entire simulation, execute UVM phases, and form a parent-child hierarchy (<code class="font-mono text-xs">new(name, parent)</code>). Objects (<code class="font-mono text-xs">uvm_sequence_item</code>, <code class="font-mono text-xs">uvm_sequence</code>, config objects) are transient data/stimulus items created dynamically (<code class="font-mono text-xs">new(name)</code>) with no phases or hierarchy.</li>
+                <li><strong>Why Components Have Hierarchy:</strong> Enables deterministic top-down <code class="font-mono text-xs">build_phase</code> configuration, bottom-up <code class="font-mono text-xs">connect_phase</code> wiring, scoped <code class="font-mono text-xs">uvm_config_db</code> lookups, and path-targeted Factory instance overrides.</li>
+                <li><strong><code class="font-mono text-xs">m_sequencer</code> vs. <code class="font-mono text-xs">p_sequencer</code>:</strong> Calling <code class="font-mono text-xs">seq.start(sqr)</code> binds the sequence to <code class="font-mono text-xs">sqr</code> and sets its built-in <code class="font-mono text-xs">uvm_sequencer_base</code> handle <code class="font-mono text-xs">m_sequencer</code>. Declaring <code class="font-mono text-xs">`uvm_declare_p_sequencer(my_sqr)</code> downcasts <code class="font-mono text-xs">m_sequencer</code> into <code class="font-mono text-xs">p_sequencer</code> so the sequence can directly access custom config/RAL handles inside <code class="font-mono text-xs">my_sqr</code>.</li>
+                <li><strong>TLM <code class="font-mono text-xs">port</code> vs. <code class="font-mono text-xs">export</code> vs. <code class="font-mono text-xs">imp</code>:</strong> A <code class="font-mono text-xs">port</code> initiates TLM calls (<code class="font-mono text-xs">put()</code>/<code class="font-mono text-xs">get()</code>); an <code class="font-mono text-xs">export</code> routes/forwards TLM calls across component hierarchy boundaries; an <code class="font-mono text-xs">imp</code> (implementation port) terminates the connection and <strong>actually implements</strong> the interface task/function.</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <!-- UVM7: COPY() VS CLONE() & FIELD MACROS -->
+        <article id="uvm7" class="qa-card scroll-mt-24 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+          <button type="button" class="qa-header w-full px-6 py-4 text-left flex items-center justify-between gap-4 bg-slate-50/80 dark:bg-slate-850/80 border-b border-slate-200/80 dark:border-slate-800 hover:bg-slate-100/80 dark:hover:bg-slate-800/80 transition-colors">
+            <div class="flex items-center gap-3">
+              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-stone-700 text-orange-200">UVM07</span>
+              <h2 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white">UVM <code class="font-mono">copy()</code> vs. <code class="font-mono">clone()</code> &amp; Advantages of <code class="font-mono">`uvm_field_*</code> Macros</h2>
+            </div>
+            <svg class="qa-chevron w-5 h-5 text-slate-400 shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="qa-body">
+            <div class="qa-inner p-6 space-y-4 text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
+              <ul class="list-disc pl-5 space-y-1.5 text-xs sm:text-sm">
+                <li><strong><code class="font-mono text-xs">copy(rhs)</code> vs. <code class="font-mono text-xs">clone()</code>:</strong> <code class="font-mono text-xs">dst.copy(src)</code> deep-copies fields into an <strong>already-constructed</strong> destination object. <code class="font-mono text-xs">src.clone()</code> allocates a <strong>new</strong> object via the UVM Factory (<code class="font-mono text-xs">create()</code>), calls <code class="font-mono text-xs">copy(src)</code>, and returns a <code class="font-mono text-xs">uvm_object</code> handle (requiring <code class="font-mono text-xs">$cast(dst, src.clone())</code>). Both prevent handle-aliasing corruption when storing transactions in scoreboard queues or broadcasting across analysis ports.</li>
+                <li><strong>Advantages (and Trade-Offs) of <code class="font-mono text-xs">`uvm_field_int</code> / <code class="font-mono text-xs">`uvm_field_object</code> Macros:</strong> Automatically implement <code class="font-mono text-xs">copy()</code>, <code class="font-mono text-xs">compare()</code>, <code class="font-mono text-xs">print()</code>, <code class="font-mono text-xs">pack()</code>, <code class="font-mono text-xs">unpack()</code>, and <code class="font-mono text-xs">record()</code> with minimal code—though high-performance VIPs often implement <code class="font-mono text-xs">do_copy()</code> and <code class="font-mono text-xs">do_compare()</code> directly to avoid macro expansion compile overhead.</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
         <!-- =============================================================== -->
         <!-- PART IV: ARCHITECTURE, CACHE, PYTHON, LINUX & BEHAVIORAL        -->
         <!-- =============================================================== -->
@@ -1512,7 +1975,7 @@ endclass</code></pre>
         <article id="arch1" class="qa-card scroll-mt-24 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
           <button type="button" class="qa-header w-full px-6 py-4 text-left flex items-center justify-between gap-4 bg-slate-50/80 dark:bg-slate-850/80 border-b border-slate-200/80 dark:border-slate-800 hover:bg-slate-100/80 dark:hover:bg-slate-800/80 transition-colors">
             <div class="flex items-center gap-3">
-              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-emerald-600 text-white">ARCH01</span>
+              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-zinc-800 dark:bg-zinc-700 text-emerald-200">ARCH01</span>
               <h2 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white">MIPS 4-Stage Pipeline (7 <code class="font-mono">ADD/SUB</code> Instructions) &amp; Pipeline Data Hazards</h2>
             </div>
             <svg class="qa-chevron w-5 h-5 text-slate-400 shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
@@ -1541,7 +2004,7 @@ endclass</code></pre>
         <article id="arch2" class="qa-card scroll-mt-24 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
           <button type="button" class="qa-header w-full px-6 py-4 text-left flex items-center justify-between gap-4 bg-slate-50/80 dark:bg-slate-850/80 border-b border-slate-200/80 dark:border-slate-800 hover:bg-slate-100/80 dark:hover:bg-slate-800/80 transition-colors">
             <div class="flex items-center gap-3">
-              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-emerald-600 text-white">ARCH02</span>
+              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-zinc-800 dark:bg-zinc-700 text-emerald-200">ARCH02</span>
               <h2 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white">Write-Through vs. Write-Back Cache &amp; MESI State Transition Trace</h2>
             </div>
             <svg class="qa-chevron w-5 h-5 text-slate-400 shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
@@ -1569,7 +2032,7 @@ endclass</code></pre>
         <article id="code1" class="qa-card scroll-mt-24 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
           <button type="button" class="qa-header w-full px-6 py-4 text-left flex items-center justify-between gap-4 bg-slate-50/80 dark:bg-slate-850/80 border-b border-slate-200/80 dark:border-slate-800 hover:bg-slate-100/80 dark:hover:bg-slate-800/80 transition-colors">
             <div class="flex items-center gap-3">
-              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-emerald-600 text-white">CODE01</span>
+              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-zinc-800 dark:bg-zinc-700 text-emerald-200">CODE01</span>
               <h2 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white">Coding &amp; CLI: Python Shortest Path in Maze (BFS), Palindrome Check, Log Filter &amp; Linux Commands</h2>
             </div>
             <svg class="qa-chevron w-5 h-5 text-slate-400 shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
@@ -1584,6 +2047,16 @@ endclass</code></pre>
                 <pre class="p-4 overflow-x-auto"><code class="language-python">from collections import deque
 from pathlib import Path
 import re, subprocess
+
+# 0. Reverse a Singly Linked List in O(N) Time and O(1) Space
+def reverse_linked_list(head):
+    prev, curr = None, head
+    while curr:
+        nxt = curr.next
+        curr.next = prev
+        prev = curr
+        curr = nxt
+    return prev
 
 # 1. Shortest Path in Binary Grid (BFS) — returns edge distance (6 for 4x4 (0,0)->(3,3))
 def shortest_path(grid: list[list[int]], start: tuple[int, int], end: tuple[int, int]) -> int:
@@ -1647,7 +2120,7 @@ find ./rtl -name "*.sv" -exec sed -i 's/foo/bar/g' {} +  # Bulk find & replace a
         <article id="beh1" class="qa-card scroll-mt-24 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
           <button type="button" class="qa-header w-full px-6 py-4 text-left flex items-center justify-between gap-4 bg-slate-50/80 dark:bg-slate-850/80 border-b border-slate-200/80 dark:border-slate-800 hover:bg-slate-100/80 dark:hover:bg-slate-800/80 transition-colors">
             <div class="flex items-center gap-3">
-              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-emerald-600 text-white">BEH01</span>
+              <span class="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-zinc-800 dark:bg-zinc-700 text-emerald-200">BEH01</span>
               <h2 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white">Behavioral &amp; Resume Walkthrough: Debug Challenge (STAR-D) &amp; Project Contribution Pitch</h2>
             </div>
             <svg class="qa-chevron w-5 h-5 text-slate-400 shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
@@ -1667,22 +2140,23 @@ find ./rtl -name "*.sv" -exec sed -i 's/foo/bar/g' {} +  # Bulk find & replace a
   </div>
 
   <footer class="sh-footer">
-  <div class="sh-footer-links">
-    <a href="index.html">Home</a>
-    <a href="blog.html">Blog</a>
-    <a href="book.html">From Vision to Wafer (Book)</a>
-    <a href="study_guide.html">DV Interview Study Guide</a>
-    <a href="dv_cheat_sheet.html">DV Cheat Sheet</a>
-    <a href="about.html">About Jagadish Rongali</a>
-    <a href="https://www.linkedin.com/in/jagadishrs" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+  <div class="sh-footer-inner">
+    <p>&copy; 2026 SiliconHive &mdash; Jagadish Rongali. Semiconductor Architecture &amp; Verification Notes.</p>
+    <div class="sh-footer-links">
+      <a href="blog.html">Articles</a>
+      <a href="book.html">From Vision to Wafer</a>
+      <a href="study_guide.html">DV Study Guide</a>
+      <a href="dv_cheat_sheet.html">Cheat Sheet</a>
+      <a href="about.html">About</a>
+      <a href="https://www.linkedin.com/in/jagadishrs" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    </div>
   </div>
-  <p>&copy; 2026 SiliconHive &bull; Jagadish Rongali. All rights reserved.</p>
 </footer>
   <script>
   function toggleSiliconHiveTheme() {
     var html = document.documentElement;
-    var current = html.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
-    var next = current === 'dark' ? 'light' : 'dark';
+    var current = html.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+    var next = current === 'light' ? 'dark' : 'light';
     html.setAttribute('data-theme', next);
     html.classList.toggle('dark', next === 'dark');
     localStorage.setItem('siliconhive-theme', next);
@@ -1690,121 +2164,13 @@ find ./rtl -name "*.sv" -exec sed -i 's/foo/bar/g' {} +  # Bulk find & replace a
   }
   function updateThemeButtons(theme) {
     document.querySelectorAll('[data-theme-label]').forEach(function(el) {
-      el.textContent = theme === 'dark' ? '☀️ Light' : '🌙 Dark';
+      el.textContent = theme === 'light' ? 'Dark Mode' : 'Light Mode';
     });
   }
   document.addEventListener('DOMContentLoaded', function() {
-    var current = document.documentElement.getAttribute('data-theme') || 'dark';
+    var current = document.documentElement.getAttribute('data-theme') || 'light';
     updateThemeButtons(current);
   });
 </script>
-
-  <!-- Interactive JavaScript -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // 1. Syntax Highlighting
-      if (window.hljs) {
-        hljs.highlightAll();
-      }
-
-      // 2. Dark / Light Theme Toggle
-      const htmlEl = document.documentElement;
-      // Initial theme applied in <head>
-      // Theme toggle handled globally by SiliconHive navbar
-
-      // 3. Copy Code Buttons (iframe-safe execCommand fallback)
-      document.querySelectorAll('.copy-btn').forEach((btn) => {
-        btn.addEventListener('click', () => {
-          const pre = btn.closest('div').nextElementSibling;
-          const codeText = pre ? pre.innerText : '';
-          if (!codeText) return;
-
-          const textarea = document.createElement('textarea');
-          textarea.value = codeText;
-          textarea.style.position = 'fixed';
-          textarea.style.opacity = '0';
-          document.body.appendChild(textarea);
-          textarea.select();
-
-          try {
-            document.execCommand('copy');
-            const orig = btn.textContent;
-            btn.textContent = 'Copied!';
-            btn.classList.add('bg-emerald-600', 'text-white');
-            setTimeout(() => {
-              btn.textContent = orig;
-              btn.classList.remove('bg-emerald-600', 'text-white');
-            }, 1600);
-          } finally {
-            document.body.removeChild(textarea);
-          }
-        });
-      });
-
-      // 4. Collapsible Q&A Cards + Self-Test Mode
-      const qaCards = Array.from(document.querySelectorAll('.qa-card'));
-      const quizBtn = document.getElementById('toggle-quiz-mode');
-      let quizCollapsed = false;
-
-      qaCards.forEach((card) => {
-        const header = card.querySelector('.qa-header');
-        header.addEventListener('click', () => {
-          card.classList.toggle('collapsed');
-        });
-      });
-
-      quizBtn.addEventListener('click', () => {
-        quizCollapsed = !quizCollapsed;
-        qaCards.forEach((card) => {
-          card.classList.toggle('collapsed', quizCollapsed);
-        });
-        quizBtn.textContent = quizCollapsed ? 'Show All Answers' : 'Self-Test Mode';
-      });
-
-      // 5. Live Search Filter
-      const searchInput = document.getElementById('search-input');
-      const filterStatus = document.getElementById('filter-status');
-
-      searchInput.addEventListener('input', () => {
-        const term = searchInput.value.trim().toLowerCase();
-        let visibleCount = 0;
-
-        qaCards.forEach((card) => {
-          const match = !term || card.innerText.toLowerCase().includes(term);
-          card.style.display = match ? 'block' : 'none';
-          if (match) visibleCount++;
-        });
-
-        filterStatus.textContent = term
-          ? `Showing ${visibleCount} of ${qaCards.length} matching topics for "${searchInput.value.trim()}"`
-          : `Showing all ${qaCards.length} interview topics`;
-      });
-
-      // 6. Reading Progress Bar & Active TOC ScrollSpy
-      const progressBar = document.getElementById('reading-progress');
-      const tocLinks = Array.from(document.querySelectorAll('.toc-link'));
-
-      function updateScrollUI() {
-        const scrollTop = window.scrollY;
-        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-        const pct = docHeight > 0 ? Math.min(100, Math.max(0, (scrollTop / docHeight) * 100)) : 0;
-        progressBar.style.width = `${pct}%`;
-
-        let activeHref = '';
-        for (const link of tocLinks) {
-          const target = document.querySelector(link.getAttribute('href'));
-          if (target && target.style.display !== 'none' && target.offsetTop - 150 <= scrollTop) {
-            activeHref = link.getAttribute('href');
-          }
-        }
-        tocLinks.forEach((link) => {
-          link.classList.toggle('active', link.getAttribute('href') === activeHref);
-        });
-      }
-
-      window.addEventListener('scroll', updateScrollUI, { passive: true });
-      updateScrollUI();
-    });
-  </script>
 </body>
 </html>

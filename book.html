@@ -434,148 +434,171 @@ figcaption { font-size: .88rem; color: var(--text-muted); text-align: center; }
 window.MathJax = { tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] } };
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400&display=swap" rel="stylesheet">
 <script>
   (function() {
     var saved = localStorage.getItem('siliconhive-theme');
-    var theme = saved || ((window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark');
+    var theme = saved || 'light';
     document.documentElement.setAttribute('data-theme', theme);
     if (theme === 'dark') document.documentElement.classList.add('dark');
   })();
 </script>
 <style>
-  :root, html[data-theme="dark"] {
-    --sh-bg: #0b1120;
-    --sh-surface: #111827;
-    --sh-card: #1e293b;
-    --sh-card-alt: #151e2e;
-    --sh-text: #f8fafc;
-    --sh-muted: #94a3b8;
-    --sh-border: #334155;
-    --sh-header-bg: rgba(11, 17, 32, 0.94);
-    --sh-accent: #38bdf8;
-    --sh-accent-hover: #0284c7;
-    --sh-accent-soft: rgba(56, 189, 248, 0.14);
-    --sh-gold: #fbbf24;
-    --sh-pill-bg: #0f172a;
-    --sh-code-bg: #020617;
-    --sh-code-text: #f1f5f9;
-    --sh-warn-bg: rgba(245, 158, 11, 0.12);
-    --sh-warn-border: #f59e0b;
-    --sh-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
-  }
-  html[data-theme="light"] {
-    --sh-bg: #f8fafc;
+  :root, html[data-theme="light"] {
+    --sh-bg: #faf9f6;
     --sh-surface: #ffffff;
     --sh-card: #ffffff;
-    --sh-card-alt: #f1f5f9;
-    --sh-text: #0f172a;
-    --sh-muted: #475569;
-    --sh-border: #cbd5e1;
-    --sh-header-bg: rgba(255, 255, 255, 0.94);
-    --sh-accent: #0284c7;
-    --sh-accent-hover: #0369a1;
-    --sh-accent-soft: #e0f2fe;
-    --sh-gold: #b45309;
-    --sh-pill-bg: #f1f5f9;
-    --sh-code-bg: #0f172a;
-    --sh-code-text: #f8fafc;
-    --sh-warn-bg: #fffbeb;
-    --sh-warn-border: #d97706;
-    --sh-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    --sh-card-alt: #f3f1ec;
+    --sh-text: #18181b;
+    --sh-muted: #52525b;
+    --sh-border: #e4e2dd;
+    --sh-border-strong: #d4d0c8;
+    --sh-header-bg: rgba(250, 249, 246, 0.96);
+    --sh-accent: #9a3412;
+    --sh-accent-hover: #7c2d12;
+    --sh-accent-soft: #fff7ed;
+    --sh-gold: #854d0e;
+    --sh-pill-bg: #f3f1ec;
+    --sh-code-bg: #1c1b1a;
+    --sh-code-text: #f4f3ef;
+    --sh-warn-bg: #fefce8;
+    --sh-warn-border: #ca8a04;
+    --sh-shadow: 0 1px 2px rgba(24, 24, 27, 0.04);
+    --font-serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   }
 
-  /* Unified Top Navbar */
+  html[data-theme="dark"] {
+    --sh-bg: #141413;
+    --sh-surface: #1b1a18;
+    --sh-card: #1f1e1c;
+    --sh-card-alt: #272522;
+    --sh-text: #f4f3ef;
+    --sh-muted: #a19e95;
+    --sh-border: #2e2c28;
+    --sh-border-strong: #3f3c37;
+    --sh-header-bg: rgba(20, 20, 19, 0.96);
+    --sh-accent: #e07a5f;
+    --sh-accent-hover: #f29b83;
+    --sh-accent-soft: rgba(224, 122, 95, 0.12);
+    --sh-gold: #eab308;
+    --sh-pill-bg: #272522;
+    --sh-code-bg: #0f0e0d;
+    --sh-code-text: #f4f3ef;
+    --sh-warn-bg: rgba(234, 179, 8, 0.08);
+    --sh-warn-border: #ca8a04;
+    --sh-shadow: none;
+  }
+
+  /* Editorial Top Masthead */
   .sh-navbar {
     border-bottom: 1px solid var(--sh-border);
-    padding: 0.85rem 1.5rem;
+    padding: 0.9rem 1.5rem;
     background-color: var(--sh-header-bg);
-    backdrop-filter: blur(10px);
     position: sticky;
     top: 0;
     z-index: 100;
   }
   .sh-nav-inner {
-    max-width: 1180px;
+    max-width: 1120px;
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    gap: 0.85rem;
+    gap: 1rem;
   }
   .sh-logo {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    font-size: 1.45rem;
-    font-weight: 800;
+    font-family: var(--font-serif);
+    font-size: 1.55rem;
+    font-weight: 700;
     color: var(--sh-text);
     text-decoration: none;
-    letter-spacing: -0.5px;
+    letter-spacing: -0.02em;
     display: inline-flex;
-    align-items: center;
+    align-items: baseline;
+    gap: 0.25rem;
   }
-  .sh-logo span { color: var(--sh-accent); }
+  .sh-logo span {
+    color: var(--sh-accent);
+    font-style: italic;
+  }
   .sh-nav-links {
     list-style: none;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 1.25rem;
+    gap: 1.4rem;
     margin: 0;
     padding: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    font-size: 0.92rem;
+    font-family: var(--font-sans);
+    font-size: 0.88rem;
   }
   .sh-nav-links a {
     color: var(--sh-muted);
     text-decoration: none;
     font-weight: 500;
-    padding: 0.25rem 0.1rem;
-    border-bottom: 2px solid transparent;
-    transition: color 0.2s ease, border-color 0.2s ease;
+    padding: 0.25rem 0;
+    border-bottom: 1.5px solid transparent;
+    transition: color 0.15s ease, border-color 0.15s ease;
   }
   .sh-nav-links a:hover, .sh-nav-links a.active {
-    color: var(--sh-accent);
+    color: var(--sh-text);
     border-bottom-color: var(--sh-accent);
   }
   .sh-theme-btn {
-    background: var(--sh-card-alt);
-    color: var(--sh-text);
-    border: 1px solid var(--sh-border);
-    padding: 0.36rem 0.78rem;
-    border-radius: 999px;
-    font-size: 0.8rem;
-    font-weight: 600;
+    background: transparent;
+    color: var(--sh-muted);
+    border: 1px solid var(--sh-border-strong);
+    padding: 0.32rem 0.72rem;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
     gap: 0.35rem;
-    transition: all 0.2s ease;
+    transition: color 0.15s ease, border-color 0.15s ease;
   }
   .sh-theme-btn:hover {
-    border-color: var(--sh-accent);
-    color: var(--sh-accent);
+    border-color: var(--sh-text);
+    color: var(--sh-text);
   }
+
   .sh-footer {
-    text-align: center;
-    padding: 2rem 1.5rem;
+    padding: 2.5rem 1.5rem;
     color: var(--sh-muted);
-    font-size: 0.88rem;
+    font-size: 0.84rem;
     border-top: 1px solid var(--sh-border);
-    background: var(--sh-surface);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--sh-bg);
+    font-family: var(--font-sans);
+  }
+  .sh-footer-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
   }
   .sh-footer-links {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     gap: 1.25rem;
-    margin-bottom: 0.65rem;
   }
   .sh-footer-links a {
     color: var(--sh-muted);
     text-decoration: none;
   }
-  .sh-footer-links a:hover { color: var(--sh-accent); }
+  .sh-footer-links a:hover {
+    color: var(--sh-accent);
+    text-decoration: underline;
+  }
   @media print {
     .sh-navbar, .sh-footer { display: none !important; }
   }
@@ -604,8 +627,8 @@ window.MathJax = { tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\
     <a href="index.html" class="sh-logo">Silicon<span>Hive</span></a>
     <nav aria-label="Primary Navigation">
       <ul class="sh-nav-links">
-        <li><a href="index.html">Home</a></li><li><a href="blog.html">Blog</a></li><li><a href="book.html" class="active">Book</a></li><li><a href="study_guide.html">DV Study Guide</a></li><li><a href="dv_cheat_sheet.html">DV Cheat Sheet</a></li><li><a href="about.html">About Me</a></li>
-        <li><button type="button" class="sh-theme-btn" onclick="toggleSiliconHiveTheme()" aria-label="Toggle Light or Dark Theme"><span data-theme-label>☀️ Light</span></button></li>
+        <li><a href="index.html">Home</a></li><li><a href="blog.html">Articles</a></li><li><a href="book.html" class="active">Book</a></li><li><a href="study_guide.html">DV Study Guide</a></li><li><a href="dv_cheat_sheet.html">Cheat Sheet</a></li><li><a href="about.html">About</a></li>
+        <li><button type="button" class="sh-theme-btn" onclick="toggleSiliconHiveTheme()"><span data-theme-label>Dark Mode</span></button></li>
       </ul>
     </nav>
   </div>
@@ -16843,8 +16866,8 @@ Security Incident /
 <script>
   function toggleSiliconHiveTheme() {
     var html = document.documentElement;
-    var current = html.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
-    var next = current === 'dark' ? 'light' : 'dark';
+    var current = html.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+    var next = current === 'light' ? 'dark' : 'light';
     html.setAttribute('data-theme', next);
     html.classList.toggle('dark', next === 'dark');
     localStorage.setItem('siliconhive-theme', next);
@@ -16852,11 +16875,11 @@ Security Incident /
   }
   function updateThemeButtons(theme) {
     document.querySelectorAll('[data-theme-label]').forEach(function(el) {
-      el.textContent = theme === 'dark' ? '☀️ Light' : '🌙 Dark';
+      el.textContent = theme === 'light' ? 'Dark Mode' : 'Light Mode';
     });
   }
   document.addEventListener('DOMContentLoaded', function() {
-    var current = document.documentElement.getAttribute('data-theme') || 'dark';
+    var current = document.documentElement.getAttribute('data-theme') || 'light';
     updateThemeButtons(current);
   });
 </script>

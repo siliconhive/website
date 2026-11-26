@@ -3,194 +3,217 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Design Verification (DV) Technical Interview Complete Cheat Sheet | SiliconHive</title>
+<title>Design Verification (DV) Technical Interview Cheat Sheet &mdash; SiliconHive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400&display=swap" rel="stylesheet">
 <script>
   (function() {
     var saved = localStorage.getItem('siliconhive-theme');
-    var theme = saved || ((window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark');
+    var theme = saved || 'light';
     document.documentElement.setAttribute('data-theme', theme);
     if (theme === 'dark') document.documentElement.classList.add('dark');
   })();
 </script>
 <style>
-  :root, html[data-theme="dark"] {
-    --sh-bg: #0b1120;
-    --sh-surface: #111827;
-    --sh-card: #1e293b;
-    --sh-card-alt: #151e2e;
-    --sh-text: #f8fafc;
-    --sh-muted: #94a3b8;
-    --sh-border: #334155;
-    --sh-header-bg: rgba(11, 17, 32, 0.94);
-    --sh-accent: #38bdf8;
-    --sh-accent-hover: #0284c7;
-    --sh-accent-soft: rgba(56, 189, 248, 0.14);
-    --sh-gold: #fbbf24;
-    --sh-pill-bg: #0f172a;
-    --sh-code-bg: #020617;
-    --sh-code-text: #f1f5f9;
-    --sh-warn-bg: rgba(245, 158, 11, 0.12);
-    --sh-warn-border: #f59e0b;
-    --sh-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
-  }
-  html[data-theme="light"] {
-    --sh-bg: #f8fafc;
+  :root, html[data-theme="light"] {
+    --sh-bg: #faf9f6;
     --sh-surface: #ffffff;
     --sh-card: #ffffff;
-    --sh-card-alt: #f1f5f9;
-    --sh-text: #0f172a;
-    --sh-muted: #475569;
-    --sh-border: #cbd5e1;
-    --sh-header-bg: rgba(255, 255, 255, 0.94);
-    --sh-accent: #0284c7;
-    --sh-accent-hover: #0369a1;
-    --sh-accent-soft: #e0f2fe;
-    --sh-gold: #b45309;
-    --sh-pill-bg: #f1f5f9;
-    --sh-code-bg: #0f172a;
-    --sh-code-text: #f8fafc;
-    --sh-warn-bg: #fffbeb;
-    --sh-warn-border: #d97706;
-    --sh-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    --sh-card-alt: #f3f1ec;
+    --sh-text: #18181b;
+    --sh-muted: #52525b;
+    --sh-border: #e4e2dd;
+    --sh-border-strong: #d4d0c8;
+    --sh-header-bg: rgba(250, 249, 246, 0.96);
+    --sh-accent: #9a3412;
+    --sh-accent-hover: #7c2d12;
+    --sh-accent-soft: #fff7ed;
+    --sh-gold: #854d0e;
+    --sh-pill-bg: #f3f1ec;
+    --sh-code-bg: #1c1b1a;
+    --sh-code-text: #f4f3ef;
+    --sh-warn-bg: #fefce8;
+    --sh-warn-border: #ca8a04;
+    --sh-shadow: 0 1px 2px rgba(24, 24, 27, 0.04);
+    --font-serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   }
 
-  /* Unified Top Navbar */
+  html[data-theme="dark"] {
+    --sh-bg: #141413;
+    --sh-surface: #1b1a18;
+    --sh-card: #1f1e1c;
+    --sh-card-alt: #272522;
+    --sh-text: #f4f3ef;
+    --sh-muted: #a19e95;
+    --sh-border: #2e2c28;
+    --sh-border-strong: #3f3c37;
+    --sh-header-bg: rgba(20, 20, 19, 0.96);
+    --sh-accent: #e07a5f;
+    --sh-accent-hover: #f29b83;
+    --sh-accent-soft: rgba(224, 122, 95, 0.12);
+    --sh-gold: #eab308;
+    --sh-pill-bg: #272522;
+    --sh-code-bg: #0f0e0d;
+    --sh-code-text: #f4f3ef;
+    --sh-warn-bg: rgba(234, 179, 8, 0.08);
+    --sh-warn-border: #ca8a04;
+    --sh-shadow: none;
+  }
+
+  /* Editorial Top Masthead */
   .sh-navbar {
     border-bottom: 1px solid var(--sh-border);
-    padding: 0.85rem 1.5rem;
+    padding: 0.9rem 1.5rem;
     background-color: var(--sh-header-bg);
-    backdrop-filter: blur(10px);
     position: sticky;
     top: 0;
     z-index: 100;
   }
   .sh-nav-inner {
-    max-width: 1180px;
+    max-width: 1120px;
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    gap: 0.85rem;
+    gap: 1rem;
   }
   .sh-logo {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    font-size: 1.45rem;
-    font-weight: 800;
+    font-family: var(--font-serif);
+    font-size: 1.55rem;
+    font-weight: 700;
     color: var(--sh-text);
     text-decoration: none;
-    letter-spacing: -0.5px;
+    letter-spacing: -0.02em;
     display: inline-flex;
-    align-items: center;
+    align-items: baseline;
+    gap: 0.25rem;
   }
-  .sh-logo span { color: var(--sh-accent); }
+  .sh-logo span {
+    color: var(--sh-accent);
+    font-style: italic;
+  }
   .sh-nav-links {
     list-style: none;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 1.25rem;
+    gap: 1.4rem;
     margin: 0;
     padding: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    font-size: 0.92rem;
+    font-family: var(--font-sans);
+    font-size: 0.88rem;
   }
   .sh-nav-links a {
     color: var(--sh-muted);
     text-decoration: none;
     font-weight: 500;
-    padding: 0.25rem 0.1rem;
-    border-bottom: 2px solid transparent;
-    transition: color 0.2s ease, border-color 0.2s ease;
+    padding: 0.25rem 0;
+    border-bottom: 1.5px solid transparent;
+    transition: color 0.15s ease, border-color 0.15s ease;
   }
   .sh-nav-links a:hover, .sh-nav-links a.active {
-    color: var(--sh-accent);
+    color: var(--sh-text);
     border-bottom-color: var(--sh-accent);
   }
   .sh-theme-btn {
-    background: var(--sh-card-alt);
-    color: var(--sh-text);
-    border: 1px solid var(--sh-border);
-    padding: 0.36rem 0.78rem;
-    border-radius: 999px;
-    font-size: 0.8rem;
-    font-weight: 600;
+    background: transparent;
+    color: var(--sh-muted);
+    border: 1px solid var(--sh-border-strong);
+    padding: 0.32rem 0.72rem;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
     gap: 0.35rem;
-    transition: all 0.2s ease;
+    transition: color 0.15s ease, border-color 0.15s ease;
   }
   .sh-theme-btn:hover {
-    border-color: var(--sh-accent);
-    color: var(--sh-accent);
+    border-color: var(--sh-text);
+    color: var(--sh-text);
   }
+
   .sh-footer {
-    text-align: center;
-    padding: 2rem 1.5rem;
+    padding: 2.5rem 1.5rem;
     color: var(--sh-muted);
-    font-size: 0.88rem;
+    font-size: 0.84rem;
     border-top: 1px solid var(--sh-border);
-    background: var(--sh-surface);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--sh-bg);
+    font-family: var(--font-sans);
+  }
+  .sh-footer-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
   }
   .sh-footer-links {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     gap: 1.25rem;
-    margin-bottom: 0.65rem;
   }
   .sh-footer-links a {
     color: var(--sh-muted);
     text-decoration: none;
   }
-  .sh-footer-links a:hover { color: var(--sh-accent); }
+  .sh-footer-links a:hover {
+    color: var(--sh-accent);
+    text-decoration: underline;
+  }
   @media print {
     .sh-navbar, .sh-footer { display: none !important; }
   }
 </style>
 <style>
-  :root, html[data-theme="dark"] {
-    --bg: #0b1120;
-    --surface: #111827;
-    --surface-alt: #1e293b;
-    --text: #f8fafc;
-    --muted: #94a3b8;
-    --border: #334155;
-    --accent: #38bdf8;
-    --accent-dark: #7dd3fc;
-    --accent-soft: rgba(56, 189, 248, 0.14);
-    --h2-bg: #1e293b;
-    --h2-text: #f8fafc;
-    --code-bg: #020617;
-    --code-text: #f1f5f9;
-    --inline-code-bg: #1e293b;
-    --inline-code-text: #7dd3fc;
-    --warn-bg: rgba(245, 158, 11, 0.12);
-    --warn-border: #f59e0b;
-    --table-even: #162033;
+  :root, html[data-theme="light"] {
+    --bg: #faf9f6;
+    --surface: #ffffff;
+    --surface-alt: #f5f3ee;
+    --text: #18181b;
+    --muted: #52525b;
+    --border: #dcd8cf;
+    --accent: #9a3412;
+    --accent-dark: #7c2d12;
+    --accent-soft: #fff7ed;
+    --h2-bg: #f0ede6;
+    --h2-text: #18181b;
+    --code-bg: #1c1b1a;
+    --code-text: #f4f3ef;
+    --inline-code-bg: #f0ede6;
+    --inline-code-text: #9a3412;
+    --warn-bg: #fefce8;
+    --warn-border: #ca8a04;
+    --table-even: #faf9f6;
   }
 
-  html[data-theme="light"] {
-    --bg: #f1f5f9;
-    --surface: #ffffff;
-    --surface-alt: #f8fafc;
-    --text: #0f172a;
-    --muted: #475569;
-    --border: #cbd5e1;
-    --accent: #0284c7;
-    --accent-dark: #0369a1;
-    --accent-soft: #e0f2fe;
-    --h2-bg: #e2e8f0;
-    --h2-text: #0f172a;
-    --code-bg: #0f172a;
-    --code-text: #f8fafc;
-    --inline-code-bg: #e2e8f0;
-    --inline-code-text: #0f172a;
-    --warn-bg: #fffbeb;
-    --warn-border: #d97706;
-    --table-even: #f8fafc;
+  html[data-theme="dark"] {
+    --bg: #141413;
+    --surface: #1b1a18;
+    --surface-alt: #24221f;
+    --text: #f4f3ef;
+    --muted: #a19e95;
+    --border: #33302b;
+    --accent: #e07a5f;
+    --accent-dark: #f29b83;
+    --accent-soft: rgba(224, 122, 95, 0.12);
+    --h2-bg: #272522;
+    --h2-text: #f4f3ef;
+    --code-bg: #0f0e0d;
+    --code-text: #f4f3ef;
+    --inline-code-bg: #272522;
+    --inline-code-text: #f29b83;
+    --warn-bg: rgba(234, 179, 8, 0.08);
+    --warn-border: #ca8a04;
+    --table-even: #1f1e1b;
   }
 
   * { box-sizing: border-box; }
@@ -198,15 +221,13 @@
   body {
     margin: 0;
     padding: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: var(--font-sans);
     font-size: 9.5pt;
-    line-height: 1.45;
+    line-height: 1.46;
     color: var(--text);
     background: var(--bg);
-    transition: background-color 0.2s ease, color 0.2s ease;
   }
 
-  /* Sub-Toolbar (hidden when printing) */
   .toolbar {
     background: var(--surface);
     color: var(--text);
@@ -219,13 +240,15 @@
     gap: 0.75rem;
   }
   .toolbar-title {
+    font-family: var(--font-serif);
     font-weight: 700;
-    font-size: 0.95rem;
+    font-size: 1.05rem;
   }
   .toolbar-sub {
-    font-size: 0.8rem;
-    color: var(--accent);
-    margin-left: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    color: var(--muted);
+    margin-left: 0.6rem;
   }
   .toolbar-actions {
     display: flex;
@@ -235,77 +258,78 @@
   }
   .toolbar input {
     padding: 0.42rem 0.75rem;
-    border-radius: 6px;
+    border-radius: 5px;
     border: 1px solid var(--border);
     background: var(--bg);
     color: var(--text);
-    font-size: 0.85rem;
+    font-size: 0.84rem;
     width: 220px;
   }
   .btn {
-    background: var(--accent);
-    color: #0b1120;
+    background: var(--text);
+    color: var(--bg);
     border: none;
     padding: 0.45rem 0.85rem;
-    border-radius: 6px;
-    font-weight: 700;
-    font-size: 0.84rem;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 0.82rem;
     cursor: pointer;
     text-decoration: none;
     display: inline-flex;
     align-items: center;
     gap: 0.35rem;
   }
-  html[data-theme="light"] .btn { color: #ffffff; }
-  .btn:hover { opacity: 0.9; }
+  .btn:hover { background: var(--accent); color: #ffffff; }
   .btn.secondary {
-    background: var(--surface-alt);
+    background: transparent;
     color: var(--text);
     border: 1px solid var(--border);
   }
+  .btn.secondary:hover { border-color: var(--text); background: var(--surface-alt); color: var(--text); }
 
   .sheet-container {
-    max-width: 1180px;
-    margin: 1.25rem auto 2.5rem auto;
+    max-width: 1120px;
+    margin: 1.5rem auto 3rem auto;
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 10px;
-    box-shadow: var(--sh-shadow);
+    border-radius: 6px;
     overflow: hidden;
   }
 
   .header-banner {
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-    color: #ffffff;
-    padding: 1.25rem 1.75rem;
-    border-bottom: 4px solid var(--accent);
+    background: var(--surface-alt);
+    color: var(--text);
+    padding: 1.5rem 1.75rem;
+    border-bottom: 2px solid var(--text);
   }
   .header-banner h1 {
+    font-family: var(--font-serif);
     margin: 0 0 0.3rem 0;
-    font-size: 1.45rem;
+    font-size: 1.65rem;
     font-weight: 700;
-    letter-spacing: -0.2px;
+    letter-spacing: -0.02em;
   }
   .header-banner p {
     margin: 0;
-    font-size: 0.86rem;
-    color: #cbd5e1;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--muted);
   }
 
   .content-pad {
-    padding: 1rem 1.5rem 1.5rem 1.5rem;
+    padding: 1.1rem 1.5rem 1.75rem 1.5rem;
   }
 
   h2 {
-    font-size: 0.98rem;
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
     font-weight: 700;
     color: var(--h2-text);
     background: var(--h2-bg);
-    border-left: 4px solid var(--accent);
-    padding: 0.38rem 0.75rem;
-    margin: 1.1rem 0 0.6rem 0;
-    text-transform: uppercase;
-    letter-spacing: 0.35px;
+    border-left: 3.5px solid var(--accent);
+    padding: 0.4rem 0.75rem;
+    margin: 1.25rem 0 0.65rem 0;
+    letter-spacing: -0.01em;
     page-break-after: avoid;
   }
   h2:first-child { margin-top: 0.2rem; }
@@ -320,7 +344,7 @@
 
   p { margin: 0 0 0.45rem 0; }
   ul, ol { margin: 0.2rem 0 0.55rem 0; padding-left: 1.2rem; }
-  li { margin-bottom: 0.22rem; }
+  li { margin-bottom: 0.24rem; }
 
   .grid-2 {
     display: grid;
@@ -335,8 +359,8 @@
   .box {
     background: var(--surface-alt);
     border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 0.65rem 0.85rem;
+    border-radius: 5px;
+    padding: 0.7rem 0.85rem;
     page-break-inside: avoid;
   }
 
@@ -345,8 +369,8 @@
     border: 1px solid var(--border);
     border-left: 3.5px solid var(--accent);
     padding: 0.55rem 0.8rem;
-    border-radius: 0 5px 5px 0;
-    margin: 0.5rem 0;
+    border-radius: 0 4px 4px 0;
+    margin: 0.55rem 0;
     font-size: 0.88rem;
     page-break-inside: avoid;
   }
@@ -356,8 +380,8 @@
     border: 1px solid var(--warn-border);
     border-left: 3.5px solid var(--warn-border);
     padding: 0.55rem 0.8rem;
-    border-radius: 0 5px 5px 0;
-    margin: 0.5rem 0;
+    border-radius: 0 4px 4px 0;
+    margin: 0.55rem 0;
     font-size: 0.88rem;
     page-break-inside: avoid;
   }
@@ -365,20 +389,20 @@
   table.data-table {
     width: 100%;
     border-collapse: collapse;
-    margin: 0.45rem 0 0.7rem 0;
+    margin: 0.5rem 0 0.75rem 0;
     font-size: 0.86rem;
     background: var(--surface);
   }
   table.data-table th {
-    background: #1e293b;
-    color: #ffffff;
-    font-weight: 600;
+    background: var(--surface-alt);
+    color: var(--text);
+    font-weight: 700;
     text-align: left;
-    padding: 0.42rem 0.6rem;
+    padding: 0.45rem 0.6rem;
     border: 1px solid var(--border);
   }
   table.data-table td {
-    padding: 0.38rem 0.6rem;
+    padding: 0.4rem 0.6rem;
     border: 1px solid var(--border);
     vertical-align: top;
   }
@@ -392,20 +416,20 @@
   pre {
     background: var(--code-bg);
     color: var(--code-text);
-    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
-    font-size: 0.8rem;
-    line-height: 1.38;
-    padding: 0.6rem 0.8rem;
+    font-family: var(--font-mono);
+    font-size: 0.79rem;
+    line-height: 1.4;
+    padding: 0.65rem 0.8rem;
     border-radius: 5px;
     border: 1px solid var(--border);
-    margin: 0.4rem 0 0.55rem 0;
+    margin: 0.45rem 0 0.55rem 0;
     overflow-x: auto;
     white-space: pre-wrap;
     word-wrap: break-word;
     page-break-inside: avoid;
   }
   code {
-    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-family: var(--font-mono);
     font-size: 0.86em;
     background: var(--inline-code-bg);
     color: var(--inline-code-text);
@@ -420,25 +444,23 @@
   }
 
   .math {
-    font-family: Georgia, "Times New Roman", serif;
+    font-family: var(--font-serif);
     font-style: italic;
     font-weight: 700;
     color: var(--accent-dark);
   }
 
   @media print {
-    body { background: #fff !important; color: #0f172a !important; font-size: 8.4pt; line-height: 1.32; }
+    body { background: #fff !important; color: #18181b !important; font-size: 8.4pt; line-height: 1.32; }
     .toolbar { display: none !important; }
     .sheet-container {
       max-width: 100%;
       margin: 0;
       border: none;
       border-radius: 0;
-      box-shadow: none;
-      background: #fff !important;
     }
-    .box, table.data-table, table.data-table tr:nth-child(even) td { background: #fff !important; color: #0f172a !important; }
-    h2 { background: #e2e8f0 !important; color: #0f172a !important; margin: 0.7rem 0 0.4rem 0; padding: 0.25rem 0.5rem; font-size: 9.2pt; }
+    .box, table.data-table, table.data-table tr:nth-child(even) td, .header-banner { background: #fff !important; color: #18181b !important; }
+    h2 { background: #f3f1ec !important; color: #18181b !important; margin: 0.7rem 0 0.4rem 0; padding: 0.25rem 0.5rem; font-size: 9.2pt; }
     .header-banner { padding: 0.8rem 1rem; }
     .content-pad { padding: 0.6rem 0.8rem; }
     .grid-2 { grid-template-columns: 1fr 1fr; gap: 0.55rem; }
@@ -454,21 +476,21 @@
     <a href="index.html" class="sh-logo">Silicon<span>Hive</span></a>
     <nav aria-label="Primary Navigation">
       <ul class="sh-nav-links">
-        <li><a href="index.html">Home</a></li><li><a href="blog.html">Blog</a></li><li><a href="book.html">Book</a></li><li><a href="study_guide.html">DV Study Guide</a></li><li><a href="dv_cheat_sheet.html" class="active">DV Cheat Sheet</a></li><li><a href="about.html">About Me</a></li>
-        <li><button type="button" class="sh-theme-btn" onclick="toggleSiliconHiveTheme()" aria-label="Toggle Light or Dark Theme"><span data-theme-label>☀️ Light</span></button></li>
+        <li><a href="index.html">Home</a></li><li><a href="blog.html">Articles</a></li><li><a href="book.html">Book</a></li><li><a href="study_guide.html">DV Study Guide</a></li><li><a href="dv_cheat_sheet.html" class="active">Cheat Sheet</a></li><li><a href="about.html">About</a></li>
+        <li><button type="button" class="sh-theme-btn" onclick="toggleSiliconHiveTheme()"><span data-theme-label>Dark Mode</span></button></li>
       </ul>
     </nav>
   </div>
 </header>
 <div class="toolbar">
   <div>
-    <span class="toolbar-title">Quick Filter &amp; Print Controls</span>
-    <span class="toolbar-sub">Supports Dark &amp; Light Modes + One-Click PDF Print</span>
+    <span class="toolbar-title">DV Technical Interview Cheat Sheet</span>
+    <span class="toolbar-sub">Light &amp; Dark Themes + Print-Ready Layout</span>
   </div>
   <div class="toolbar-actions">
     <input type="text" id="filterBox" placeholder="Quick filter (e.g. array, byte, UVM)..." onkeyup="filterSheet()">
     <a href="study_guide.html" class="btn secondary">Full Q&amp;A Study Guide &rarr;</a>
-    <button class="btn" onclick="window.print()">&#128424; Print / Save as PDF</button>
+    <button class="btn" onclick="window.print()">Print / Save PDF</button>
   </div>
 </div>
 <div class="sheet-container">
@@ -597,6 +619,7 @@ end</code></pre>
     </table>
 
     <div class="callout">
+      <strong><code>enum</code>, <code>struct</code> &amp; <code>clocking</code>/<code>modport</code>:</strong> <code>typedef enum bit [1:0] {RED, YEL, GRN} light_e;</code> (methods: <code>first, last, next, prev, num, name</code>) &bull; <code>struct packed</code> supports bit-slicing; unpacked does not &bull; <code>clocking</code> block sets TB skews (non-synth), <code>modport</code> sets RTL/TB directions &amp; bundles async reset.<br>
       <strong>Array Locator &amp; Reduction Methods (<code>with</code> clause):</strong> <code>q.find(x) with (x &gt; 10)</code> (returns queue of matches), <code>q.find_first_index(x) with (x == id)</code>, <code>q.unique()</code>, <code>arr.sum() with (int'(item))</code> (cast to avoid bit-width overflow!).
     </div>
 
@@ -620,6 +643,7 @@ end</code></pre>
           <li><strong>Loop Trap:</strong> Always copy loop index into an <code>automatic</code> variable inside <code>for</code> loops before <code>fork...join_none</code>.</li>
           <li><strong>Isolated Watchdog:</strong> Wrap <code>fork ... join_any disable fork; end join</code> inside an outer <code>fork...join</code> so <code>disable fork</code> doesn't kill unrelated background threads.</li>
           <li><strong>Semaphore(1) + 2 Tasks (<code>#10</code> each):</strong> Task 1 runs t=0..10, Task 2 runs t=10..20. Both complete by t=20 (well before <code>#50</code>).</li>
+          <li><strong><code>uvm_event</code> vs. SV <code>event</code>:</strong> SV <code>event</code> is a pulse (<code>-&gt;ev</code>; use <code>wait(ev.triggered)</code>); <code>uvm_event</code> (via <code>uvm_event_pool::get_global()</code>) carries a <code>uvm_object</code> payload and tracks trigger state.</li>
         </ul>
       </div>
     </div>
@@ -630,7 +654,7 @@ end</code></pre>
         <ul>
           <li><code>rand</code> vs. <code>randc</code> (cyclic without repeat).</li>
           <li><code>dist {0 := 10, [1:5] :/ 20};</code> (<code>:=</code> per value; <code>:/</code> split across range).</li>
-          <li><code>solve mode before len;</code> &bull; <code>soft addr == 0;</code></li>
+          <li><code>solve mode before len;</code> &bull; <code>soft addr == 0;</code> (overridable inline) &bull; Ascending: <code>arr[i] &gt; arr[i-1]</code> &bull; <code>randomize()</code> returns <code>1</code>/<code>0</code> (no constraints &rarr; uniform across full bit width).</li>
           <li><strong>Matrix Constraints:</strong> Main diagonal <code>i == j</code>; Anti-diagonal <code>i + j == N - 1</code>; Upper triangle <code>i &lt;= j</code>; Lower triangle <code>i &gt;= j</code>.</li>
           <li><strong>Unique &amp; Spacing:</strong> <code>unique {arr};</code> and <code>arr[i] - arr[j] &gt;= 5</code>.</li>
         </ul>
@@ -712,7 +736,8 @@ endclass</code></pre>
       <div class="box">
         <h3>Factory, Config DB, Sequence Handshake &amp; Verif Plan</h3>
         <ul>
-          <li><strong>Factory Override:</strong> <code>set_type_override_by_type(base::get_type(), child::get_type());</code></li>
+          <li><strong>Component vs. Object &amp; TLM:</strong> Components have hierarchy &amp; phases; Objects are transient. TLM <code>port</code> initiates, <code>export</code> forwards, <code>imp</code> implements. <code>copy()</code> copies into existing object; <code>clone()</code> creates new + copies.</li>
+          <li><strong>Factory Overrides &amp; Callbacks:</strong> Global <code>set_type_override_by_type</code> vs. scoped <code>set_inst_override_by_type</code>; <code>uvm_callback</code> stacks multiple hooks dynamically during <code>run_phase</code> without subclassing.</li>
           <li><strong>Sequence &harr; Driver Handshake:</strong> Sequence calls <code>start_item(req)</code> &rarr; randomizes &rarr; <code>finish_item(req)</code>; Driver calls <code>get_next_item(req)</code> &rarr; drives pins &rarr; <code>item_done()</code>.</li>
           <li><strong>Multi-Sequence Unique TIDs:</strong> Use a <code>static int next_id</code> counter inside the transaction class (incremented atomically in <code>post_randomize()</code>) so parallel sequences never collide.</li>
           <li><strong>8-Bit Shift Register Verif Plan:</strong> (1) <em>Features:</em> reset, parallel load priority, left/right shift, hold; (2) <em>Stimulus:</em> walking-1s/0s, reset-on-the-fly, random control; (3) <em>Checkers:</em> cycle-accurate predictor + SVA hold check; (4) <em>Closure:</em> 100% bit toggle + mode cross coverage.</li>
@@ -828,23 +853,25 @@ function filterSheet() {
 }
 </script>
 
+
 <footer class="sh-footer">
-  <div class="sh-footer-links">
-    <a href="index.html">Home</a>
-    <a href="blog.html">Blog</a>
-    <a href="book.html">From Vision to Wafer (Book)</a>
-    <a href="study_guide.html">DV Interview Study Guide</a>
-    <a href="dv_cheat_sheet.html">DV Cheat Sheet</a>
-    <a href="about.html">About Jagadish Rongali</a>
-    <a href="https://www.linkedin.com/in/jagadishrs" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+  <div class="sh-footer-inner">
+    <p>&copy; 2026 SiliconHive &mdash; Jagadish Rongali. Semiconductor Architecture &amp; Verification Notes.</p>
+    <div class="sh-footer-links">
+      <a href="blog.html">Articles</a>
+      <a href="book.html">From Vision to Wafer</a>
+      <a href="study_guide.html">DV Study Guide</a>
+      <a href="dv_cheat_sheet.html">Cheat Sheet</a>
+      <a href="about.html">About</a>
+      <a href="https://www.linkedin.com/in/jagadishrs" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    </div>
   </div>
-  <p>&copy; 2026 SiliconHive &bull; Jagadish Rongali. All rights reserved.</p>
 </footer>
 <script>
   function toggleSiliconHiveTheme() {
     var html = document.documentElement;
-    var current = html.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
-    var next = current === 'dark' ? 'light' : 'dark';
+    var current = html.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+    var next = current === 'light' ? 'dark' : 'light';
     html.setAttribute('data-theme', next);
     html.classList.toggle('dark', next === 'dark');
     localStorage.setItem('siliconhive-theme', next);
@@ -852,11 +879,11 @@ function filterSheet() {
   }
   function updateThemeButtons(theme) {
     document.querySelectorAll('[data-theme-label]').forEach(function(el) {
-      el.textContent = theme === 'dark' ? '☀️ Light' : '🌙 Dark';
+      el.textContent = theme === 'light' ? 'Dark Mode' : 'Light Mode';
     });
   }
   document.addEventListener('DOMContentLoaded', function() {
-    var current = document.documentElement.getAttribute('data-theme') || 'dark';
+    var current = document.documentElement.getAttribute('data-theme') || 'light';
     updateThemeButtons(current);
   });
 </script>

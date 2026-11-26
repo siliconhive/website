@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>About Me | SiliconHive</title>
+  <script>
+  (function() {
+    var saved = localStorage.getItem('siliconhive-theme');
+    var theme = saved || ((window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark');
+    document.documentElement.setAttribute('data-theme', theme);
+    if (theme === 'dark') document.documentElement.classList.add('dark');
+  })();
+</script>
+<style>
+  :root, html[data-theme="dark"] {
+    --sh-bg: #0b1120;
+    --sh-surface: #111827;
+    --sh-card: #1e293b;
+    --sh-card-alt: #151e2e;
+    --sh-text: #f8fafc;
+    --sh-muted: #94a3b8;
+    --sh-border: #334155;
+    --sh-header-bg: rgba(11, 17, 32, 0.94);
+    --sh-accent: #38bdf8;
+    --sh-accent-hover: #0284c7;
+    --sh-accent-soft: rgba(56, 189, 248, 0.14);
+    --sh-gold: #fbbf24;
+    --sh-pill-bg: #0f172a;
+    --sh-code-bg: #020617;
+    --sh-code-text: #f1f5f9;
+    --sh-warn-bg: rgba(245, 158, 11, 0.12);
+    --sh-warn-border: #f59e0b;
+    --sh-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
+  }
+  html[data-theme="light"] {
+    --sh-bg: #f8fafc;
+    --sh-surface: #ffffff;
+    --sh-card: #ffffff;
+    --sh-card-alt: #f1f5f9;
+    --sh-text: #0f172a;
+    --sh-muted: #475569;
+    --sh-border: #cbd5e1;
+    --sh-header-bg: rgba(255, 255, 255, 0.94);
+    --sh-accent: #0284c7;
+    --sh-accent-hover: #0369a1;
+    --sh-accent-soft: #e0f2fe;
+    --sh-gold: #b45309;
+    --sh-pill-bg: #f1f5f9;
+    --sh-code-bg: #0f172a;
+    --sh-code-text: #f8fafc;
+    --sh-warn-bg: #fffbeb;
+    --sh-warn-border: #d97706;
+    --sh-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+  }
+
+  /* Unified Top Navbar */
+  .sh-navbar {
+    border-bottom: 1px solid var(--sh-border);
+    padding: 0.85rem 1.5rem;
+    background-color: var(--sh-header-bg);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .sh-nav-inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.85rem;
+  }
+  .sh-logo {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 1.45rem;
+    font-weight: 800;
+    color: var(--sh-text);
+    text-decoration: none;
+    letter-spacing: -0.5px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .sh-logo span { color: var(--sh-accent); }
+  .sh-nav-links {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.25rem;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 0.92rem;
+  }
+  .sh-nav-links a {
+    color: var(--sh-muted);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.25rem 0.1rem;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+  .sh-nav-links a:hover, .sh-nav-links a.active {
+    color: var(--sh-accent);
+    border-bottom-color: var(--sh-accent);
+  }
+  .sh-theme-btn {
+    background: var(--sh-card-alt);
+    color: var(--sh-text);
+    border: 1px solid var(--sh-border);
+    padding: 0.36rem 0.78rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    transition: all 0.2s ease;
+  }
+  .sh-theme-btn:hover {
+    border-color: var(--sh-accent);
+    color: var(--sh-accent);
+  }
+  .sh-footer {
+    text-align: center;
+    padding: 2rem 1.5rem;
+    color: var(--sh-muted);
+    font-size: 0.88rem;
+    border-top: 1px solid var(--sh-border);
+    background: var(--sh-surface);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  .sh-footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.25rem;
+    margin-bottom: 0.65rem;
+  }
+  .sh-footer-links a {
+    color: var(--sh-muted);
+    text-decoration: none;
+  }
+  .sh-footer-links a:hover { color: var(--sh-accent); }
+  @media print {
+    .sh-navbar, .sh-footer { display: none !important; }
+  }
+</style>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: var(--sh-bg);
+      color: var(--sh-text);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+    main {
+      flex: 1;
+      width: min(1180px, 100%);
+      margin: 0 auto;
+      padding: clamp(1.5rem, 3vw, 3rem) 1.5rem;
+    }
+    .profile-hero {
+      background: var(--sh-card);
+      border: 1px solid var(--sh-border);
+      border-radius: 12px;
+      padding: clamp(1.5rem, 4vw, 2.5rem);
+      margin-bottom: 2rem;
+    }
+    .profile-hero h1 { font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 0.25rem; }
+    .subtitle {
+      color: var(--sh-accent);
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    .location {
+      color: var(--sh-muted);
+      font-size: 0.92rem;
+      margin-bottom: 1.1rem;
+      font-weight: 500;
+    }
+    .recognition-banner {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      margin-bottom: 1.25rem;
+    }
+    .recognition-pill, .skill-pill {
+      background: var(--sh-pill-bg);
+      border: 1px solid var(--sh-border);
+      color: var(--sh-text);
+      padding: 0.45rem 0.85rem;
+      border-radius: 20px;
+      font-size: 0.84rem;
+    }
+    .bio-text {
+      margin-bottom: 1rem;
+      max-width: 78ch;
+      color: var(--sh-text);
+    }
+    .hero-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+      margin-top: 1.25rem;
+    }
+    .linkedin-btn {
+      display: inline-block;
+      background: var(--sh-accent);
+      color: #0b1120;
+      text-decoration: none;
+      padding: 0.72rem 1.25rem;
+      border-radius: 8px;
+      font-weight: 700;
+    }
+    html[data-theme="light"] .linkedin-btn { color: #ffffff; }
+    .linkedin-btn:hover { background: var(--sh-accent-hover); color: #ffffff; }
+    .secondary-btn {
+      display: inline-block;
+      background: var(--sh-pill-bg);
+      color: var(--sh-text);
+      border: 1px solid var(--sh-border);
+      text-decoration: none;
+      padding: 0.72rem 1.25rem;
+      border-radius: 8px;
+      font-weight: 600;
+    }
+    .secondary-btn:hover { border-color: var(--sh-accent); color: var(--sh-accent); }
+    .section-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 1.5rem;
+    }
+    .info-card {
+      background: var(--sh-card);
+      border: 1px solid var(--sh-border);
+      border-radius: 12px;
+      padding: 1.75rem;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+    .info-card:hover {
+      border-color: var(--sh-accent);
+      transform: translateY(-3px);
+    }
+    .info-card h2 {
+      color: var(--sh-gold);
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--sh-border);
+      font-size: 1.2rem;
+    }
+    .info-list { list-style: none; }
+    .info-list li { margin-bottom: 1rem; }
+    .item-title { font-weight: 700; display: block; }
+    .item-sub { color: var(--sh-muted); font-size: 0.92rem; }
+    .skills-wrap { display: flex; flex-wrap: wrap; gap: 0.65rem; }
+    @media (max-width: 768px) {
+      .profile-hero h1, .subtitle, .location { text-align: center; }
+      .recognition-banner, .hero-links { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+  <header class="sh-navbar">
+  <div class="sh-nav-inner">
+    <a href="index.html" class="sh-logo">Silicon<span>Hive</span></a>
+    <nav aria-label="Primary Navigation">
+      <ul class="sh-nav-links">
+        <li><a href="index.html">Home</a></li><li><a href="blog.html">Blog</a></li><li><a href="book.html">Book</a></li><li><a href="study_guide.html">DV Study Guide</a></li><li><a href="dv_cheat_sheet.html">DV Cheat Sheet</a></li><li><a href="about.html" class="active">About Me</a></li>
+        <li><button type="button" class="sh-theme-btn" onclick="toggleSiliconHiveTheme()" aria-label="Toggle Light or Dark Theme"><span data-theme-label>☀️ Light</span></button></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+  <main>
+    <section class="profile-hero">
+      <h1>Jagadish Rongali</h1>
+      <div class="subtitle">Semiconductor Technical Leader | Verification &amp; Emulation Architect</div>
+      <div class="recognition-banner">
+        <span class="recognition-pill">Senior IEEE Member</span>
+        <span class="recognition-pill">DAC Engineering Track TPC Member</span>
+        <span class="recognition-pill">IEEE Transactions Peer Reviewer</span>
+        <span class="recognition-pill">Inventor</span>
+        <span class="recognition-pill">Conference Speaker</span>
+        <span class="recognition-pill">STEM Site Lead</span>
+      </div>
+      <div class="location">Cedar Park, Texas, USA</div>
+      <p class="bio-text">I am a Semiconductor Technical Leader specializing in IP, subsystem, and SoC verification across automotive, wireless, mixed-signal, memory, graphics, and edge-computing domains.</p>
+      <p class="bio-text">My expertise spans verification architecture, UVM methodology, hardware-assisted verification, emulation, FPGA prototyping, ISO 26262 functional safety, silicon bring-up, and post-silicon debug. I lead verification initiatives focused on delivering high-quality silicon while driving methodology innovation and verification signoff.</p>
+      <p class="bio-text">Beyond product development, I actively contribute to the engineering community as a Senior IEEE Member, DAC Engineering Track Technical Program Committee Member, IEEE Transactions Peer Reviewer, conference speaker, inventor, mentor, and STEM Site Lead.</p>
+      <p class="bio-text">Through SiliconHive, I share practical insights on SystemVerilog, UVM, hardware emulation, DMA architectures, functional safety, AI acceleration, SoC design, and verification technologies.</p>
+      <div class="hero-links">
+        <a href="https://www.linkedin.com/in/jagadishrs" target="_blank" rel="noopener noreferrer" class="linkedin-btn">Connect on LinkedIn &#8599;</a>
+        <a href="https://www.linkedin.com/in/jagadishrs/recent-activity/articles/" target="_blank" rel="noopener noreferrer" class="secondary-btn">LinkedIn Articles &#8599;</a>
+        <a href="book.html" class="secondary-btn">Explore Book</a>
+      </div>
+    </section>
+
+    <div class="section-grid">
+      <section class="info-card">
+        <h2>Leadership &amp; Recognition</h2>
+        <ul class="info-list">
+          <li><span class="item-title">Senior IEEE Member</span><span class="item-sub">Professional recognition and technical leadership.</span></li>
+          <li><span class="item-title">DAC Engineering Track TPC Member</span><span class="item-sub">Contributing to a premier semiconductor conference.</span></li>
+          <li><span class="item-title">IEEE Transactions Peer Reviewer</span><span class="item-sub">Reviewer for engineering research publications.</span></li>
+          <li><span class="item-title">Conference Speaker</span><span class="item-sub">Verification Futures and industry events.</span></li>
+          <li><span class="item-title">STEM Site Lead</span><span class="item-sub">Mentoring and outreach initiatives.</span></li>
+        </ul>
+      </section>
+
+      <section class="info-card">
+        <h2>Technical Expertise</h2>
+        <div class="skills-wrap">
+          <span class="skill-pill">Verification Architecture</span>
+          <span class="skill-pill">IP/SoC Verification</span>
+          <span class="skill-pill">Hardware Emulation</span>
+          <span class="skill-pill">SystemVerilog</span>
+          <span class="skill-pill">UVM</span>
+          <span class="skill-pill">ISO 26262</span>
+          <span class="skill-pill">FPGA Prototyping</span>
+          <span class="skill-pill">Mixed-Signal Verification</span>
+          <span class="skill-pill">RNM Modeling</span>
+          <span class="skill-pill">DMA Architectures</span>
+          <span class="skill-pill">Palladium</span>
+          <span class="skill-pill">ZeBu</span>
+        </div>
+        <h2 style="margin-top:2rem">Patents &amp; Innovation</h2>
+        <ul class="info-list">
+          <li><span class="item-title">US Patent 11,176,051 B2</span></li>
+          <li><span class="item-title">US Patent 11,544,199 B2</span></li>
+          <li><span class="item-title">EP 3977294 B1</span></li>
+        </ul>
+      </section>
+    </div>
+  </main>
+
+  <footer class="sh-footer">
+  <div class="sh-footer-links">
+    <a href="index.html">Home</a>
+    <a href="blog.html">Blog</a>
+    <a href="book.html">From Vision to Wafer (Book)</a>
+    <a href="study_guide.html">DV Interview Study Guide</a>
+    <a href="dv_cheat_sheet.html">DV Cheat Sheet</a>
+    <a href="about.html">About Jagadish Rongali</a>
+    <a href="https://www.linkedin.com/in/jagadishrs" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+  </div>
+  <p>&copy; 2026 SiliconHive &bull; Jagadish Rongali. All rights reserved.</p>
+</footer>
+  <script>
+  function toggleSiliconHiveTheme() {
+    var html = document.documentElement;
+    var current = html.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+    var next = current === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    html.classList.toggle('dark', next === 'dark');
+    localStorage.setItem('siliconhive-theme', next);
+    updateThemeButtons(next);
+  }
+  function updateThemeButtons(theme) {
+    document.querySelectorAll('[data-theme-label]').forEach(function(el) {
+      el.textContent = theme === 'dark' ? '☀️ Light' : '🌙 Dark';
+    });
+  }
+  document.addEventListener('DOMContentLoaded', function() {
+    var current = document.documentElement.getAttribute('data-theme') || 'dark';
+    updateThemeButtons(current);
+  });
+</script>
+</body>
+</html>

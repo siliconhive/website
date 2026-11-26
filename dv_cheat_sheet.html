@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design Verification (DV) Technical Interview Complete Cheat Sheet | SiliconHive</title>
+<script>
+  (function() {
+    var saved = localStorage.getItem('siliconhive-theme');
+    var theme = saved || ((window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark');
+    document.documentElement.setAttribute('data-theme', theme);
+    if (theme === 'dark') document.documentElement.classList.add('dark');
+  })();
+</script>
+<style>
+  :root, html[data-theme="dark"] {
+    --sh-bg: #0b1120;
+    --sh-surface: #111827;
+    --sh-card: #1e293b;
+    --sh-card-alt: #151e2e;
+    --sh-text: #f8fafc;
+    --sh-muted: #94a3b8;
+    --sh-border: #334155;
+    --sh-header-bg: rgba(11, 17, 32, 0.94);
+    --sh-accent: #38bdf8;
+    --sh-accent-hover: #0284c7;
+    --sh-accent-soft: rgba(56, 189, 248, 0.14);
+    --sh-gold: #fbbf24;
+    --sh-pill-bg: #0f172a;
+    --sh-code-bg: #020617;
+    --sh-code-text: #f1f5f9;
+    --sh-warn-bg: rgba(245, 158, 11, 0.12);
+    --sh-warn-border: #f59e0b;
+    --sh-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
+  }
+  html[data-theme="light"] {
+    --sh-bg: #f8fafc;
+    --sh-surface: #ffffff;
+    --sh-card: #ffffff;
+    --sh-card-alt: #f1f5f9;
+    --sh-text: #0f172a;
+    --sh-muted: #475569;
+    --sh-border: #cbd5e1;
+    --sh-header-bg: rgba(255, 255, 255, 0.94);
+    --sh-accent: #0284c7;
+    --sh-accent-hover: #0369a1;
+    --sh-accent-soft: #e0f2fe;
+    --sh-gold: #b45309;
+    --sh-pill-bg: #f1f5f9;
+    --sh-code-bg: #0f172a;
+    --sh-code-text: #f8fafc;
+    --sh-warn-bg: #fffbeb;
+    --sh-warn-border: #d97706;
+    --sh-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+  }
+
+  /* Unified Top Navbar */
+  .sh-navbar {
+    border-bottom: 1px solid var(--sh-border);
+    padding: 0.85rem 1.5rem;
+    background-color: var(--sh-header-bg);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .sh-nav-inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.85rem;
+  }
+  .sh-logo {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 1.45rem;
+    font-weight: 800;
+    color: var(--sh-text);
+    text-decoration: none;
+    letter-spacing: -0.5px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .sh-logo span { color: var(--sh-accent); }
+  .sh-nav-links {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.25rem;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 0.92rem;
+  }
+  .sh-nav-links a {
+    color: var(--sh-muted);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.25rem 0.1rem;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+  .sh-nav-links a:hover, .sh-nav-links a.active {
+    color: var(--sh-accent);
+    border-bottom-color: var(--sh-accent);
+  }
+  .sh-theme-btn {
+    background: var(--sh-card-alt);
+    color: var(--sh-text);
+    border: 1px solid var(--sh-border);
+    padding: 0.36rem 0.78rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    transition: all 0.2s ease;
+  }
+  .sh-theme-btn:hover {
+    border-color: var(--sh-accent);
+    color: var(--sh-accent);
+  }
+  .sh-footer {
+    text-align: center;
+    padding: 2rem 1.5rem;
+    color: var(--sh-muted);
+    font-size: 0.88rem;
+    border-top: 1px solid var(--sh-border);
+    background: var(--sh-surface);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  .sh-footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.25rem;
+    margin-bottom: 0.65rem;
+  }
+  .sh-footer-links a {
+    color: var(--sh-muted);
+    text-decoration: none;
+  }
+  .sh-footer-links a:hover { color: var(--sh-accent); }
+  @media print {
+    .sh-navbar, .sh-footer { display: none !important; }
+  }
+</style>
+<style>
+  :root, html[data-theme="dark"] {
+    --bg: #0b1120;
+    --surface: #111827;
+    --surface-alt: #1e293b;
+    --text: #f8fafc;
+    --muted: #94a3b8;
+    --border: #334155;
+    --accent: #38bdf8;
+    --accent-dark: #7dd3fc;
+    --accent-soft: rgba(56, 189, 248, 0.14);
+    --h2-bg: #1e293b;
+    --h2-text: #f8fafc;
+    --code-bg: #020617;
+    --code-text: #f1f5f9;
+    --inline-code-bg: #1e293b;
+    --inline-code-text: #7dd3fc;
+    --warn-bg: rgba(245, 158, 11, 0.12);
+    --warn-border: #f59e0b;
+    --table-even: #162033;
+  }
+
+  html[data-theme="light"] {
+    --bg: #f1f5f9;
+    --surface: #ffffff;
+    --surface-alt: #f8fafc;
+    --text: #0f172a;
+    --muted: #475569;
+    --border: #cbd5e1;
+    --accent: #0284c7;
+    --accent-dark: #0369a1;
+    --accent-soft: #e0f2fe;
+    --h2-bg: #e2e8f0;
+    --h2-text: #0f172a;
+    --code-bg: #0f172a;
+    --code-text: #f8fafc;
+    --inline-code-bg: #e2e8f0;
+    --inline-code-text: #0f172a;
+    --warn-bg: #fffbeb;
+    --warn-border: #d97706;
+    --table-even: #f8fafc;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 9.5pt;
+    line-height: 1.45;
+    color: var(--text);
+    background: var(--bg);
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  /* Sub-Toolbar (hidden when printing) */
+  .toolbar {
+    background: var(--surface);
+    color: var(--text);
+    padding: 0.65rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .toolbar-title {
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+  .toolbar-sub {
+    font-size: 0.8rem;
+    color: var(--accent);
+    margin-left: 0.5rem;
+  }
+  .toolbar-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  .toolbar input {
+    padding: 0.42rem 0.75rem;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    color: var(--text);
+    font-size: 0.85rem;
+    width: 220px;
+  }
+  .btn {
+    background: var(--accent);
+    color: #0b1120;
+    border: none;
+    padding: 0.45rem 0.85rem;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 0.84rem;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+  html[data-theme="light"] .btn { color: #ffffff; }
+  .btn:hover { opacity: 0.9; }
+  .btn.secondary {
+    background: var(--surface-alt);
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+
+  .sheet-container {
+    max-width: 1180px;
+    margin: 1.25rem auto 2.5rem auto;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    box-shadow: var(--sh-shadow);
+    overflow: hidden;
+  }
+
+  .header-banner {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    color: #ffffff;
+    padding: 1.25rem 1.75rem;
+    border-bottom: 4px solid var(--accent);
+  }
+  .header-banner h1 {
+    margin: 0 0 0.3rem 0;
+    font-size: 1.45rem;
+    font-weight: 700;
+    letter-spacing: -0.2px;
+  }
+  .header-banner p {
+    margin: 0;
+    font-size: 0.86rem;
+    color: #cbd5e1;
+  }
+
+  .content-pad {
+    padding: 1rem 1.5rem 1.5rem 1.5rem;
+  }
+
+  h2 {
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: var(--h2-text);
+    background: var(--h2-bg);
+    border-left: 4px solid var(--accent);
+    padding: 0.38rem 0.75rem;
+    margin: 1.1rem 0 0.6rem 0;
+    text-transform: uppercase;
+    letter-spacing: 0.35px;
+    page-break-after: avoid;
+  }
+  h2:first-child { margin-top: 0.2rem; }
+
+  h3 {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--accent-dark);
+    margin: 0 0 0.35rem 0;
+    page-break-after: avoid;
+  }
+
+  p { margin: 0 0 0.45rem 0; }
+  ul, ol { margin: 0.2rem 0 0.55rem 0; padding-left: 1.2rem; }
+  li { margin-bottom: 0.22rem; }
+
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.85rem;
+    margin-bottom: 0.65rem;
+  }
+  @media (max-width: 820px) {
+    .grid-2 { grid-template-columns: 1fr; }
+  }
+
+  .box {
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.65rem 0.85rem;
+    page-break-inside: avoid;
+  }
+
+  .callout {
+    background: var(--accent-soft);
+    border: 1px solid var(--border);
+    border-left: 3.5px solid var(--accent);
+    padding: 0.55rem 0.8rem;
+    border-radius: 0 5px 5px 0;
+    margin: 0.5rem 0;
+    font-size: 0.88rem;
+    page-break-inside: avoid;
+  }
+
+  .warn-box {
+    background: var(--warn-bg);
+    border: 1px solid var(--warn-border);
+    border-left: 3.5px solid var(--warn-border);
+    padding: 0.55rem 0.8rem;
+    border-radius: 0 5px 5px 0;
+    margin: 0.5rem 0;
+    font-size: 0.88rem;
+    page-break-inside: avoid;
+  }
+
+  table.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0.45rem 0 0.7rem 0;
+    font-size: 0.86rem;
+    background: var(--surface);
+  }
+  table.data-table th {
+    background: #1e293b;
+    color: #ffffff;
+    font-weight: 600;
+    text-align: left;
+    padding: 0.42rem 0.6rem;
+    border: 1px solid var(--border);
+  }
+  table.data-table td {
+    padding: 0.38rem 0.6rem;
+    border: 1px solid var(--border);
+    vertical-align: top;
+  }
+  table.data-table tr:nth-child(even) td {
+    background: var(--table-even);
+  }
+  table.data-table tr {
+    page-break-inside: avoid;
+  }
+
+  pre {
+    background: var(--code-bg);
+    color: var(--code-text);
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.8rem;
+    line-height: 1.38;
+    padding: 0.6rem 0.8rem;
+    border-radius: 5px;
+    border: 1px solid var(--border);
+    margin: 0.4rem 0 0.55rem 0;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    page-break-inside: avoid;
+  }
+  code {
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.86em;
+    background: var(--inline-code-bg);
+    color: var(--inline-code-text);
+    padding: 0.08rem 0.28rem;
+    border-radius: 3px;
+  }
+  pre code {
+    background: transparent;
+    color: inherit;
+    padding: 0;
+    font-size: inherit;
+  }
+
+  .math {
+    font-family: Georgia, "Times New Roman", serif;
+    font-style: italic;
+    font-weight: 700;
+    color: var(--accent-dark);
+  }
+
+  @media print {
+    body { background: #fff !important; color: #0f172a !important; font-size: 8.4pt; line-height: 1.32; }
+    .toolbar { display: none !important; }
+    .sheet-container {
+      max-width: 100%;
+      margin: 0;
+      border: none;
+      border-radius: 0;
+      box-shadow: none;
+      background: #fff !important;
+    }
+    .box, table.data-table, table.data-table tr:nth-child(even) td { background: #fff !important; color: #0f172a !important; }
+    h2 { background: #e2e8f0 !important; color: #0f172a !important; margin: 0.7rem 0 0.4rem 0; padding: 0.25rem 0.5rem; font-size: 9.2pt; }
+    .header-banner { padding: 0.8rem 1rem; }
+    .content-pad { padding: 0.6rem 0.8rem; }
+    .grid-2 { grid-template-columns: 1fr 1fr; gap: 0.55rem; }
+    pre { font-size: 7.4pt; padding: 0.45rem 0.6rem; }
+    table.data-table { font-size: 7.8pt; }
+    table.data-table th, table.data-table td { padding: 0.28rem 0.45rem; }
+  }
+</style>
+</head>
+<body>
+<header class="sh-navbar">
+  <div class="sh-nav-inner">
+    <a href="index.html" class="sh-logo">Silicon<span>Hive</span></a>
+    <nav aria-label="Primary Navigation">
+      <ul class="sh-nav-links">
+        <li><a href="index.html">Home</a></li><li><a href="blog.html">Blog</a></li><li><a href="book.html">Book</a></li><li><a href="study_guide.html">DV Study Guide</a></li><li><a href="dv_cheat_sheet.html" class="active">DV Cheat Sheet</a></li><li><a href="about.html">About Me</a></li>
+        <li><button type="button" class="sh-theme-btn" onclick="toggleSiliconHiveTheme()" aria-label="Toggle Light or Dark Theme"><span data-theme-label>☀️ Light</span></button></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<div class="toolbar">
+  <div>
+    <span class="toolbar-title">Quick Filter &amp; Print Controls</span>
+    <span class="toolbar-sub">Supports Dark &amp; Light Modes + One-Click PDF Print</span>
+  </div>
+  <div class="toolbar-actions">
+    <input type="text" id="filterBox" placeholder="Quick filter (e.g. array, byte, UVM)..." onkeyup="filterSheet()">
+    <a href="study_guide.html" class="btn secondary">Full Q&amp;A Study Guide &rarr;</a>
+    <button class="btn" onclick="window.print()">&#128424; Print / Save as PDF</button>
+  </div>
+</div>
+<div class="sheet-container">
+  <div class="header-banner">
+    <h1>Design Verification (DV) Technical Interview Complete Cheat Sheet</h1>
+    <p>Verilog &amp; Digital Logic &bull; SV Data Types &amp; Arrays &bull; Concurrency &amp; SVA &bull; OOP &amp; Polymorphism &bull; UVM &bull; Protocols &bull; Architecture, Python &amp; Linux</p>
+  </div>
+
+  <div class="content-pad">
+
+    <!-- SECTION 1: VERILOG & DIGITAL DESIGN -->
+    <h2>1. Verilog RTL, Digital Design &amp; DFT Basics</h2>
+
+    <div class="grid-2">
+      <div class="box">
+        <h3><code>wire</code> vs. <code>reg</code> vs. SV <code>logic</code> &amp; RTL Gotchas</h3>
+        <ul>
+          <li><code>wire</code>: Continuous assignment (<code>assign</code>) or module port connections; holds no state.</li>
+          <li><code>reg</code>: Procedural assignment (<code>always</code>/<code>initial</code>); synthesizes to FF (clocked) or combinational/latch (unclocked).</li>
+          <li><code>logic</code> (SV): Replaces both <code>wire</code> and <code>reg</code> for single-driver nets/variables (compile error on multi-driver &rarr; catches contention early; use <code>wire</code> for tri-state buses).</li>
+          <li><strong>Why RTL outputs get stuck at <code>XXXX</code>:</strong> Missing/unasserted reset, uninitialized FFs, floating inputs, multi-driver bus contention, or <code>casex</code>/out-of-bounds indexing propagating <code>X</code>.</li>
+        </ul>
+      </div>
+
+      <div class="box">
+        <h3>Edge Detector, Ring Counter &amp; Clock Dividers</h3>
+        <ul>
+          <li><strong>Dual-Edge Pulse Generator:</strong> Register <code>a_d &lt;= a;</code> then <code>pulse &lt;= a ^ a_d;</code> (1-cycle pulse on every <code>0&rarr;1</code> or <code>1&rarr;0</code> toggle).</li>
+          <li><strong>N-Bit Ring Counter:</strong> One-hot circular shift register (<code>4'b0001</code>); reverts to initial state in <span class="math">N</span> cycles (<span class="math">N &times; T<sub>clk</sub></span>). <strong>Johnson Counter:</strong> Feeds <code>~q[N-1]</code> to LSB; reverts in <span class="math">2N</span> cycles.</li>
+        </ul>
+<pre><code>// Divide-by-2 &amp; Divide-by-4 (50% duty cycle) + Dual-Edge Detector
+always_ff @(posedge clk or negedge rst_n) begin
+  if (!rst_n) begin cnt &lt;= 2'b00; a_d &lt;= 1'b0; pulse &lt;= 1'b0; end
+  else begin
+    cnt &lt;= cnt + 2'b01;   // cnt[0] = clk/2, cnt[1] = clk/4
+    a_d &lt;= a;
+    pulse &lt;= a ^ a_d;     // 1-cycle pulse whenever 'a' toggles
+  end
+end</code></pre>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>DFT &amp; Fault Testing Essentials:</strong> <strong>Stuck-at-0 (SA0)</strong> on node <code>N</code> requires controlling <code>N=1</code> and sensitizing a path to an observable output. <strong>At-speed transition faults</strong> (slow-to-rise/fall) require a 2-vector launch-on-capture (LOC) or launch-on-shift (LOS) pattern running at functional clock frequency.
+    </div>
+
+    <!-- SECTION 2: SV DATA TYPES & ARRAYS -->
+    <h2>2. SystemVerilog Data Types (<code>bit</code> vs. <code>logic</code> vs. <code>byte</code>) &amp; Arrays</h2>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th style="width:13%;">Type</th>
+          <th style="width:14%;">State &amp; Width</th>
+          <th style="width:15%;">Signedness</th>
+          <th style="width:14%;">Default Init</th>
+          <th style="width:44%;">Key Usage &amp; Interview Gotchas</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>bit</code></td>
+          <td>2-state (<code>0, 1</code>)<br>User width</td>
+          <td>Unsigned</td>
+          <td><code>'0</code></td>
+          <td>Fast simulation in TB classes, transactions, loop counters. <strong>Danger in RTL:</strong> masks <code>X</code>/<code>Z</code> unknowns by converting them to <code>0</code>.</td>
+        </tr>
+        <tr>
+          <td><code>logic</code></td>
+          <td>4-state (<code>0,1,X,Z</code>)<br>User width</td>
+          <td>Unsigned</td>
+          <td><code>'x</code></td>
+          <td>Standard for RTL signals &amp; TB interfaces; preserves <code>X</code>/<code>Z</code> propagation and catches accidental multiple drivers at compile time.</td>
+        </tr>
+        <tr>
+          <td><code>byte</code></td>
+          <td>2-state (<code>0, 1</code>)<br>Fixed 8-bit</td>
+          <td><strong>Signed</strong><br>(<code>-128..127</code>)</td>
+          <td><code>8'sd0</code></td>
+          <td>Packet payloads &amp; byte streams. <strong>Gotcha:</strong> <code>byte</code> is <em>signed</em>! Values <code>&ge; 128</code> become negative in comparisons unless declared <code>byte unsigned</code>.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th style="width:18%;">Array Type</th>
+          <th style="width:22%;">Declaration Syntax</th>
+          <th style="width:28%;">Essential Built-in Methods</th>
+          <th style="width:32%;">Verification Application</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Packed Array</strong></td>
+          <td><code>bit [3:0][7:0] word;</code></td>
+          <td>Bit/part-select (<code>word[15:8]</code>), arithmetic &amp; bitwise ops</td>
+          <td>Contiguous bit vectors, registers, bus data words, union overlays.</td>
+        </tr>
+        <tr>
+          <td><strong>Fixed Unpacked</strong></td>
+          <td><code>int arr[8];</code></td>
+          <td><code>size()</code>, <code>sum()</code>, <code>min()</code>, <code>max()</code>, <code>sort()</code>, <code>rsort()</code>, <code>shuffle()</code></td>
+          <td>Fixed-depth register files, small lookup tables, randomized fixed packets.</td>
+        </tr>
+        <tr>
+          <td><strong>Dynamic Array</strong></td>
+          <td><code>byte payload[];</code></td>
+          <td><code>new[N]</code>, <code>size()</code>, <code>delete()</code>, plus locator methods</td>
+          <td>Variable-length Ethernet/AXI burst payloads sized at runtime via constraints.</td>
+        </tr>
+        <tr>
+          <td><strong>Queue</strong></td>
+          <td><code>tx_t sb_q[$];</code></td>
+          <td><code>push_back()</code>, <code>push_front()</code>, <code>pop_back()</code>, <code>pop_front()</code>, <code>insert()</code>, <code>delete(i)</code>, <code>size()</code></td>
+          <td>Scoreboard expected/actual FIFOs (<span class="math">O(1)</span> end access, <span class="math">O(N)</span> middle search/delete).</td>
+        </tr>
+        <tr>
+          <td><strong>Associative Array</strong></td>
+          <td><code>bit [63:0] mem[bit[31:0]];</code></td>
+          <td><code>exists(k)</code>, <code>delete(k)</code>, <code>num()</code>, <code>first(k)</code>, <code>next(k)</code>, <code>last(k)</code>, <code>prev(k)</code></td>
+          <td>Sparse memory models (GB/TB address spaces without allocating unused RAM).</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <strong>Array Locator &amp; Reduction Methods (<code>with</code> clause):</strong> <code>q.find(x) with (x &gt; 10)</code> (returns queue of matches), <code>q.find_first_index(x) with (x == id)</code>, <code>q.unique()</code>, <code>arr.sum() with (int'(item))</code> (cast to avoid bit-width overflow!).
+    </div>
+
+    <!-- SECTION 3: SV SCHEDULING, CONCURRENCY & SVA -->
+    <h2>3. SV Event Regions, Tasks/Functions, Concurrency &amp; SVA</h2>
+
+    <div class="grid-2">
+      <div class="box">
+        <h3>Blocking (<code>=</code>) vs. NBA (<code>&lt;=</code>) &amp; Event Queue</h3>
+        <ul>
+          <li><strong>Event Regions:</strong> <code>Preponed</code> (SVA sample) &rarr; <code>Active</code> (<code>=</code>, RHS of <code>&lt;=</code>, <code>$display</code>) &rarr; <code>Inactive</code> (<code>#0</code>) &rarr; <code>NBA</code> (LHS of <code>&lt;=</code>) &rarr; <code>Observed</code> (SVA eval) &rarr; <code>Reactive</code> (<code>program</code>) &rarr; <code>Postponed</code> (<code>$strobe</code>).</li>
+          <li><strong>Trace Puzzle:</strong> <code>a=1; b=5; b&lt;=a+1; a&lt;=10; c=a+b; d&lt;=b+c;</code><br>
+          In Active: <code>c = 1+5 = 6</code>; RHS of <code>d</code> captures <em>old</em> <code>b=5</code> &rarr; <code>5+6 = 11</code>. In NBA: <code>a=10, b=2, c=6, d=11</code>.</li>
+        </ul>
+      </div>
+
+      <div class="box">
+        <h3>Task vs. Function, <code>fork</code> &amp; Semaphore</h3>
+        <ul>
+          <li><strong>Timing inside Function:</strong> Illegal directly or in <code>fork...join/join_any</code>. <strong>Legal</strong> inside <code>fork...join_none</code> (spawns thread in 0 time).</li>
+          <li><strong>Loop Trap:</strong> Always copy loop index into an <code>automatic</code> variable inside <code>for</code> loops before <code>fork...join_none</code>.</li>
+          <li><strong>Isolated Watchdog:</strong> Wrap <code>fork ... join_any disable fork; end join</code> inside an outer <code>fork...join</code> so <code>disable fork</code> doesn't kill unrelated background threads.</li>
+          <li><strong>Semaphore(1) + 2 Tasks (<code>#10</code> each):</strong> Task 1 runs t=0..10, Task 2 runs t=10..20. Both complete by t=20 (well before <code>#50</code>).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="box">
+        <h3>Randomization &amp; Constraint Patterns</h3>
+        <ul>
+          <li><code>rand</code> vs. <code>randc</code> (cyclic without repeat).</li>
+          <li><code>dist {0 := 10, [1:5] :/ 20};</code> (<code>:=</code> per value; <code>:/</code> split across range).</li>
+          <li><code>solve mode before len;</code> &bull; <code>soft addr == 0;</code></li>
+          <li><strong>Matrix Constraints:</strong> Main diagonal <code>i == j</code>; Anti-diagonal <code>i + j == N - 1</code>; Upper triangle <code>i &lt;= j</code>; Lower triangle <code>i &gt;= j</code>.</li>
+          <li><strong>Unique &amp; Spacing:</strong> <code>unique {arr};</code> and <code>arr[i] - arr[j] &gt;= 5</code>.</li>
+        </ul>
+      </div>
+
+      <div class="box">
+        <h3>Code vs. Functional Coverage &amp; SVA</h3>
+        <ul>
+          <li><strong>Code Coverage (Auto):</strong> Line, Branch, Condition, Toggle, FSM.</li>
+          <li><strong>Functional Coverage (Manual):</strong> <code>covergroup</code>, <code>coverpoint</code>, <code>bins</code>, <code>ignore_bins</code>, <code>illegal_bins</code>, <code>cross</code>. Need <strong>both</strong> for sign-off.</li>
+          <li><strong>SVA Implication:</strong> <code>|-&gt;</code> (overlapping: same cycle) vs. <code>|=&gt;</code> (non-overlapping: next cycle); <code>##[1:3]</code> delay; <code>$rose()</code>, <code>$past()</code>, <code>$stable()</code>, <code>throughout</code>.</li>
+        </ul>
+<pre><code>assert property (@(posedge clk) disable iff (!rst_n)
+  $rose(req) |-&gt; (req throughout (##[1:3] ack)));</code></pre>
+      </div>
+    </div>
+
+    <!-- SECTION 4: OOP & POLYMORPHISM IN REAL WORLD + VERIFICATION -->
+    <h2>4. Object-Oriented Programming (OOP) &amp; Real-World Polymorphism</h2>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th style="width:16%;">OOP Pillar</th>
+          <th style="width:42%;">Core Mechanism &amp; SystemVerilog Syntax</th>
+          <th style="width:42%;">Real-World &amp; Verification Application</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Encapsulation</strong></td>
+          <td>Bundles data &amp; methods in a <code>class</code>; access controlled via <code>public</code> (all), <code>protected</code> (self + child), <code>local</code> (self only).</td>
+          <td><strong>Real World:</strong> Car dashboard exposes steering/pedals while hiding ECU fuel-injection internals.<br><strong>DV:</strong> Packet hides internal CRC state while exposing <code>pack()</code>.</td>
+        </tr>
+        <tr>
+          <td><strong>Inheritance</strong></td>
+          <td><code>class Child extends Parent;</code> reuses base fields, methods &amp; constraints; calls <code>super.new()</code>.</td>
+          <td><strong>Real World:</strong> ElectricCar &amp; Truck inherit wheels/brakes from Vehicle.<br><strong>DV:</strong> <code>AxiErrorTx</code> extends <code>AxiBaseTx</code> to add error injection.</td>
+        </tr>
+        <tr>
+          <td><strong>Polymorphism</strong></td>
+          <td>Base handle points to derived object; <code>virtual</code> method dispatches child implementation at runtime (<code>$cast</code> to downcast).</td>
+          <td><strong>Real World:</strong> Universal payment gateway calls <code>pay()</code> on CreditCard, UPI, or ApplePay objects identically.<br><strong>DV:</strong> UVM Factory swaps <code>base_tx</code> with <code>err_tx</code>; Driver calls <code>req.pack()</code> without knowing the subtype.</td>
+        </tr>
+        <tr>
+          <td><strong>Abstraction</strong></td>
+          <td><code>virtual class</code> cannot be instantiated directly; <code>pure virtual</code> methods enforce a mandatory interface contract.</td>
+          <td><strong>Real World:</strong> Power outlet standard defines voltage/pin shape without specifying what appliance plugs in.<br><strong>DV:</strong> <code>uvm_driver</code> / abstract scoreboard predictor templates.</td>
+        </tr>
+      </tbody>
+    </table>
+
+<pre><code>// Polymorphism Example: Base handle calling overridden virtual method
+virtual class BasePacket;
+  protected bit [31:0] addr;
+  pure virtual function void send(); // Subclasses MUST implement
+endclass
+
+class Axi16BPacket extends BasePacket;
+  function void send(); $display("Driving 16B-aligned AXI packet @ %0h", addr); endfunction
+endclass</code></pre>
+
+    <!-- SECTION 5: UVM ARCHITECTURE, PHASES & SEQUENCES -->
+    <h2>5. UVM Architecture, Phases, Factory &amp; Sequences</h2>
+
+    <div class="grid-2">
+      <div class="box">
+        <h3>UVM Execution Phases (Strict Order)</h3>
+        <ol>
+          <li><code>build_phase</code> <em>(Top-Down, Func)</em>: Create children via Factory; fetch <code>uvm_config_db</code>.</li>
+          <li><code>connect_phase</code> <em>(Bottom-Up, Func)</em>: Connect TLM ports/exports (Driver &harr; Sequencer, Monitor &rarr; Scoreboard).</li>
+          <li><code>end_of_elaboration_phase</code> <em>(Bottom-Up, Func)</em>: Topology check (<code>print_topology()</code>).</li>
+          <li><code>start_of_simulation_phase</code> <em>(Bottom-Up, Func)</em>: Pre-run banners.</li>
+          <li><code>run_phase</code> <em>(Parallel, Task — Time-Consuming)</em>: Main stimulus/checking; runs alongside 12 sub-phases (<code>reset</code>, <code>configure</code>, <code>main</code>, <code>shutdown</code> &times; <code>pre/main/post</code>). Controlled by <code>raise_objection</code> / <code>drop_objection</code>.</li>
+          <li><code>extract</code> &rarr; <code>check</code> &rarr; <code>report</code> &rarr; <code>final</code> <em>(Bottom-Up, Func)</em>: Collect coverage, check empty queues, print pass/fail summary.</li>
+        </ol>
+      </div>
+
+      <div class="box">
+        <h3>Factory, Config DB, Sequence Handshake &amp; Verif Plan</h3>
+        <ul>
+          <li><strong>Factory Override:</strong> <code>set_type_override_by_type(base::get_type(), child::get_type());</code></li>
+          <li><strong>Sequence &harr; Driver Handshake:</strong> Sequence calls <code>start_item(req)</code> &rarr; randomizes &rarr; <code>finish_item(req)</code>; Driver calls <code>get_next_item(req)</code> &rarr; drives pins &rarr; <code>item_done()</code>.</li>
+          <li><strong>Multi-Sequence Unique TIDs:</strong> Use a <code>static int next_id</code> counter inside the transaction class (incremented atomically in <code>post_randomize()</code>) so parallel sequences never collide.</li>
+          <li><strong>8-Bit Shift Register Verif Plan:</strong> (1) <em>Features:</em> reset, parallel load priority, left/right shift, hold; (2) <em>Stimulus:</em> walking-1s/0s, reset-on-the-fly, random control; (3) <em>Checkers:</em> cycle-accurate predictor + SVA hold check; (4) <em>Closure:</em> 100% bit toggle + mode cross coverage.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- SECTION 6: PROTOCOLS, CACHE & COMPUTER ARCHITECTURE -->
+    <h2>6. Bus Protocols, Cache Coherency &amp; Pipeline Architecture</h2>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th style="width:14%;">Protocol</th>
+          <th style="width:43%;">Handshake &amp; Architecture</th>
+          <th style="width:43%;">Critical Verification Checks</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>AMBA APB</strong></td>
+          <td>Non-pipelined 2-phase bus: <code>SETUP</code> (<code>PSEL=1, PENABLE=0</code>) &rarr; <code>ACCESS</code> (<code>PSEL=1, PENABLE=1</code>), stalls while <code>PREADY=0</code>.</td>
+          <td><code>PADDR</code>, <code>PWRITE</code>, <code>PWDATA</code> stay stable during wait states; verify <code>PSLVERR</code> handling &amp; zero-wait vs. multi-wait transfers.</td>
+        </tr>
+        <tr>
+          <td><strong>AMBA AXI4</strong></td>
+          <td>5 decoupled channels (<code>AW, W, B, AR, R</code>) using <code>VALID/READY</code>; out-of-order completion via <code>ID</code> tags; bursts up to 256 beats.</td>
+          <td><code>VALID</code> must never wait for <code>READY</code>; payload stable until handshake; <code>WLAST</code> on final beat; no 4KB boundary crossing.</td>
+        </tr>
+        <tr>
+          <td><strong>SPI / I2C</strong></td>
+          <td><strong>SPI:</strong> 4-wire full-duplex (4 CPOL/CPHA modes).<br><strong>I2C:</strong> 2-wire open-drain (<code>SDA, SCL</code>), ACK/NACK.</td>
+          <td><strong>SPI:</strong> Sample/launch edge alignment.<br><strong>I2C:</strong> START/STOP (<code>SDA</code> toggles while <code>SCL=1</code>), clock stretching, arbitration.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="grid-2">
+      <div class="box">
+        <h3>Pipeline Hazards &amp; MIPS Cycle Formula</h3>
+        <ul>
+          <li><strong>3 Hazard Types:</strong> <em>Structural</em> (hardware resource conflict), <em>Data</em> (RAW, WAR, WAW), <em>Control</em> (branch/jump flush).</li>
+          <li><strong>Ideal Pipeline (<span class="math">K</span> stages, <span class="math">N</span> instrs):</strong> <span class="math">Cycles = K + (N &minus; 1)</span> (7 instrs, 4 stages = <strong>10 cycles</strong>).</li>
+          <li><strong>RAW WITH Forwarding:</strong> ALU-to-ALU bypasses from <code>EX</code> to <code>EX</code> &rarr; <strong>0 stalls</strong> (10 cycles; 1 stall only for Load-Use).</li>
+          <li><strong>RAW WITHOUT Forwarding:</strong> Stalls in <code>ID</code> until <code>WB</code> &rarr; 2 stall bubbles per back-to-back RAW pair (<span class="math">10 + 6&times;2 = 22</span> cycles).</li>
+        </ul>
+      </div>
+
+      <div class="box">
+        <h3>Cache Policies, MESI &amp; CLI Overrides</h3>
+        <ul>
+          <li><strong>Write-Through vs. Write-Back:</strong> Write-Through updates cache + RAM simultaneously (simple, higher bus traffic). Write-Back updates cache only and sets a <strong>dirty bit</strong>, writing to RAM only on eviction (faster, lower bandwidth, requires coherency).</li>
+          <li><strong>MESI States:</strong> <em>Modified</em> (dirty, exclusive), <em>Exclusive</em> (clean, only copy), <em>Shared</em> (clean, multiple caches), <em>Invalid</em>.</li>
+          <li><strong>SV CLI Parameter Override:</strong><br>
+          VCS: <code>-pvalue+tb_top.WIDTH=32</code><br>
+          Questa: <code>-gWIDTH=32</code> &bull; Xcelium: <code>-defparam tb_top.WIDTH=32</code></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- SECTION 7: DATA STRUCTURES, CODING, PYTHON & LINUX -->
+    <h2>7. Data Structures, Coding Patterns, Python &amp; Linux</h2>
+
+    <div class="grid-2">
+      <div class="box">
+        <h3>Data Structures &amp; Bit/Array Coding</h3>
+        <ul>
+          <li><strong>Array Access:</strong> <span class="math">O(1)</span> via <span class="math">base + index &times; elem_size</span>.</li>
+          <li><strong>Reverse Singly Linked List (<span class="math">O(N)</span> time, <span class="math">O(1)</span> space):</strong> Save <code>nxt=curr.next</code>, set <code>curr.next=prev</code>, advance <code>prev=curr</code>, <code>curr=nxt</code>.</li>
+          <li><strong>Shortest Path in Grid/Maze:</strong> Use <strong>BFS</strong> (queue) for unweighted <span class="math">O(R &times; C)</span> shortest path.</li>
+        </ul>
+<pre><code>// Pack all 1s in a 32-bit number to MSB (e.g. 0x00E1_0F00 -&gt; 0xFF00_0000)
+function automatic bit [31:0] move_ones_msb(bit [31:0] a);
+  int ones = $countones(a);
+  return (ones == 0) ? 32'h0 : (32'hFFFF_FFFF &lt;&lt; (32 - ones));
+endfunction</code></pre>
+      </div>
+
+      <div class="box">
+        <h3>Python Log Filter &amp; Linux One-Liners</h3>
+<pre><code># Run commands from file &amp; save ERROR/FAILURE lines to output file
+import subprocess, re
+with open("cmds.txt") as f, open("errors.log", "w") as out:
+    for cmd in filter(None, map(str.strip, f)):
+        res = subprocess.run(cmd, shell=True, capture_output=True, text=True)
+        for line in (res.stdout + res.stderr).splitlines():
+            if re.search(r"(ERROR|FAILURE)", line):
+                out.write(f"[{cmd}] {line}
+")
+# Multi-replace word: text = re.sub(r"old", "new", text)</code></pre>
+        <ul>
+          <li><code>grep -rnE "ERROR|FATAL" ./logs/</code> &mdash; Recursive regex search with line #</li>
+          <li><code>sed -i 's/old/new/g' file.sv</code> &mdash; In-place whole-word replace</li>
+          <li><code>awk '/UVM_ERROR/ {print $2, $NF}' run.log</code> &mdash; Extract columns</li>
+          <li><code>find . -name "*_tb.sv" -exec sed -i 's/a/b/g' {} +</code> &mdash; Bulk replace</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-bottom:0;">
+      <strong>Behavioral &amp; Debug Story Formula (STAR-D):</strong> <strong>S</strong>ituation (RTL block &amp; protocol) &rarr; <strong>T</strong>ask (verification target) &rarr; <strong>A</strong>ction (constrained-random test + SVA/scoreboard check) &rarr; <strong>R</strong>esult (bug found pre-silicon + coverage closure %) &rarr; <strong>D</strong>ebug Flow (error signature &rarr; scoreboard queue inspection &rarr; waveform root-cause isolation).
+    </div>
+
+  </div>
+</div>
+
+<script>
+function filterSheet() {
+  const q = document.getElementById('filterBox').value.toLowerCase();
+  document.querySelectorAll('.box, table.data-table, .callout, .warn-box').forEach(el => {
+    el.style.display = el.innerText.toLowerCase().includes(q) ? '' : 'none';
+  });
+}
+</script>
+
+<footer class="sh-footer">
+  <div class="sh-footer-links">
+    <a href="index.html">Home</a>
+    <a href="blog.html">Blog</a>
+    <a href="book.html">From Vision to Wafer (Book)</a>
+    <a href="study_guide.html">DV Interview Study Guide</a>
+    <a href="dv_cheat_sheet.html">DV Cheat Sheet</a>
+    <a href="about.html">About Jagadish Rongali</a>
+    <a href="https://www.linkedin.com/in/jagadishrs" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+  </div>
+  <p>&copy; 2026 SiliconHive &bull; Jagadish Rongali. All rights reserved.</p>
+</footer>
+<script>
+  function toggleSiliconHiveTheme() {
+    var html = document.documentElement;
+    var current = html.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+    var next = current === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    html.classList.toggle('dark', next === 'dark');
+    localStorage.setItem('siliconhive-theme', next);
+    updateThemeButtons(next);
+  }
+  function updateThemeButtons(theme) {
+    document.querySelectorAll('[data-theme-label]').forEach(function(el) {
+      el.textContent = theme === 'dark' ? '☀️ Light' : '🌙 Dark';
+    });
+  }
+  document.addEventListener('DOMContentLoaded', function() {
+    var current = document.documentElement.getAttribute('data-theme') || 'dark';
+    updateThemeButtons(current);
+  });
+</script>
+</body>
+</html>

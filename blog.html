@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog &amp; Verification Resources | SiliconHive</title>
+  <script>
+  (function() {
+    var saved = localStorage.getItem('siliconhive-theme');
+    var theme = saved || ((window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark');
+    document.documentElement.setAttribute('data-theme', theme);
+    if (theme === 'dark') document.documentElement.classList.add('dark');
+  })();
+</script>
+<style>
+  :root, html[data-theme="dark"] {
+    --sh-bg: #0b1120;
+    --sh-surface: #111827;
+    --sh-card: #1e293b;
+    --sh-card-alt: #151e2e;
+    --sh-text: #f8fafc;
+    --sh-muted: #94a3b8;
+    --sh-border: #334155;
+    --sh-header-bg: rgba(11, 17, 32, 0.94);
+    --sh-accent: #38bdf8;
+    --sh-accent-hover: #0284c7;
+    --sh-accent-soft: rgba(56, 189, 248, 0.14);
+    --sh-gold: #fbbf24;
+    --sh-pill-bg: #0f172a;
+    --sh-code-bg: #020617;
+    --sh-code-text: #f1f5f9;
+    --sh-warn-bg: rgba(245, 158, 11, 0.12);
+    --sh-warn-border: #f59e0b;
+    --sh-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
+  }
+  html[data-theme="light"] {
+    --sh-bg: #f8fafc;
+    --sh-surface: #ffffff;
+    --sh-card: #ffffff;
+    --sh-card-alt: #f1f5f9;
+    --sh-text: #0f172a;
+    --sh-muted: #475569;
+    --sh-border: #cbd5e1;
+    --sh-header-bg: rgba(255, 255, 255, 0.94);
+    --sh-accent: #0284c7;
+    --sh-accent-hover: #0369a1;
+    --sh-accent-soft: #e0f2fe;
+    --sh-gold: #b45309;
+    --sh-pill-bg: #f1f5f9;
+    --sh-code-bg: #0f172a;
+    --sh-code-text: #f8fafc;
+    --sh-warn-bg: #fffbeb;
+    --sh-warn-border: #d97706;
+    --sh-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+  }
+
+  /* Unified Top Navbar */
+  .sh-navbar {
+    border-bottom: 1px solid var(--sh-border);
+    padding: 0.85rem 1.5rem;
+    background-color: var(--sh-header-bg);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .sh-nav-inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.85rem;
+  }
+  .sh-logo {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 1.45rem;
+    font-weight: 800;
+    color: var(--sh-text);
+    text-decoration: none;
+    letter-spacing: -0.5px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .sh-logo span { color: var(--sh-accent); }
+  .sh-nav-links {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.25rem;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 0.92rem;
+  }
+  .sh-nav-links a {
+    color: var(--sh-muted);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.25rem 0.1rem;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+  .sh-nav-links a:hover, .sh-nav-links a.active {
+    color: var(--sh-accent);
+    border-bottom-color: var(--sh-accent);
+  }
+  .sh-theme-btn {
+    background: var(--sh-card-alt);
+    color: var(--sh-text);
+    border: 1px solid var(--sh-border);
+    padding: 0.36rem 0.78rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    transition: all 0.2s ease;
+  }
+  .sh-theme-btn:hover {
+    border-color: var(--sh-accent);
+    color: var(--sh-accent);
+  }
+  .sh-footer {
+    text-align: center;
+    padding: 2rem 1.5rem;
+    color: var(--sh-muted);
+    font-size: 0.88rem;
+    border-top: 1px solid var(--sh-border);
+    background: var(--sh-surface);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  .sh-footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.25rem;
+    margin-bottom: 0.65rem;
+  }
+  .sh-footer-links a {
+    color: var(--sh-muted);
+    text-decoration: none;
+  }
+  .sh-footer-links a:hover { color: var(--sh-accent); }
+  @media print {
+    .sh-navbar, .sh-footer { display: none !important; }
+  }
+</style>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--sh-bg);
+      color: var(--sh-text);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+    main {
+      flex: 1;
+      max-width: 1180px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 4rem 1.5rem;
+    }
+    .page-header {
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--sh-border);
+      padding-bottom: 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 1rem;
+    }
+    .page-header h1 {
+      font-size: clamp(2rem, 4vw, 2.5rem);
+      margin-bottom: 0.45rem;
+    }
+    .page-header p {
+      color: var(--sh-muted);
+      font-size: 1.05rem;
+      max-width: 65ch;
+    }
+    .linkedin-follow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: var(--sh-accent);
+      color: #0b1120;
+      text-decoration: none;
+      padding: 0.65rem 1.15rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      transition: background-color 0.2s ease;
+    }
+    html[data-theme="light"] .linkedin-follow { color: #ffffff; }
+    .linkedin-follow:hover {
+      background: var(--sh-accent-hover);
+      color: #ffffff;
+    }
+    .section-heading {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin: 2.25rem 0 1.15rem 0;
+      color: var(--sh-text);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .section-heading span.pill {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      background: var(--sh-accent-soft);
+      color: var(--sh-accent);
+      border: 1px solid var(--sh-border);
+    }
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 1.5rem;
+    }
+    .post-card {
+      background-color: var(--sh-card);
+      border: 1px solid var(--sh-border);
+      border-radius: 12px;
+      padding: 1.65rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+    .post-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--sh-accent);
+    }
+    .post-card.featured {
+      border-left: 4px solid var(--sh-accent);
+    }
+    .post-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
+      color: var(--sh-muted);
+      margin-bottom: 0.75rem;
+    }
+    .tag {
+      background-color: var(--sh-accent-soft);
+      color: var(--sh-accent);
+      padding: 0.22rem 0.62rem;
+      border-radius: 5px;
+      font-weight: 700;
+      font-size: 0.74rem;
+    }
+    .post-card h2 {
+      font-size: 1.25rem;
+      margin-bottom: 0.7rem;
+      line-height: 1.32;
+    }
+    .post-card h2 a {
+      color: var(--sh-text);
+      text-decoration: none;
+    }
+    .post-card h2 a:hover {
+      color: var(--sh-accent);
+    }
+    .post-card p {
+      color: var(--sh-muted);
+      font-size: 0.93rem;
+      margin-bottom: 1.35rem;
+    }
+    .card-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+      align-items: center;
+    }
+    .read-more {
+      color: var(--sh-accent);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.92rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .read-more:hover {
+      text-decoration: underline;
+    }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      background: var(--sh-card-alt);
+      padding: 0.1rem 0.32rem;
+      border-radius: 4px;
+      font-size: 0.88em;
+    }
+  </style>
+</head>
+<body>
+  <header class="sh-navbar">
+  <div class="sh-nav-inner">
+    <a href="index.html" class="sh-logo">Silicon<span>Hive</span></a>
+    <nav aria-label="Primary Navigation">
+      <ul class="sh-nav-links">
+        <li><a href="index.html">Home</a></li><li><a href="blog.html" class="active">Blog</a></li><li><a href="book.html">Book</a></li><li><a href="study_guide.html">DV Study Guide</a></li><li><a href="dv_cheat_sheet.html">DV Cheat Sheet</a></li><li><a href="about.html">About Me</a></li>
+        <li><button type="button" class="sh-theme-btn" onclick="toggleSiliconHiveTheme()" aria-label="Toggle Light or Dark Theme"><span data-theme-label>☀️ Light</span></button></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+  <main>
+    <div class="page-header">
+      <div>
+        <h1>Semiconductor Articles &amp; Verification Guides</h1>
+        <p>Technical articles on SoC architecture, hardware verification, SystemVerilog/UVM, and Edge AI—plus interactive Design Verification interview prep resources.</p>
+      </div>
+      <a href="https://www.linkedin.com/in/jagadishrs/recent-activity/articles/" target="_blank" rel="noopener noreferrer" class="linkedin-follow">All LinkedIn Articles &#8599;</a>
+    </div>
+
+    <div class="section-heading">
+      <span>Design Verification Interview Prep</span>
+      <span class="pill">Interactive Guides</span>
+    </div>
+
+    <div class="blog-grid">
+      <!-- DV Study Guide Card -->
+      <article class="post-card featured">
+        <div>
+          <div class="post-meta">
+            <span class="tag">Interactive Q&amp;A Guide</span>
+            <span>27 Topics</span>
+          </div>
+          <h2><a href="study_guide.html">DV Technical Interview Deep Dive — Complete Q&amp;A Study Guide</a></h2>
+          <p>Comprehensive, searchable study guide progressing from Verilog RTL &amp; DFT to SystemVerilog, OOP, UVM sequences, MIPS/MESI architecture, Python, and Linux, complete with Self-Test Mode.</p>
+        </div>
+        <div class="card-actions">
+          <a href="study_guide.html" class="read-more">Open Study Guide &rarr;</a>
+        </div>
+      </article>
+
+      <!-- DV Cheat Sheet Card -->
+      <article class="post-card featured">
+        <div>
+          <div class="post-meta">
+            <span class="tag">Printable Cheat Sheet</span>
+            <span>Quick Reference</span>
+          </div>
+          <h2><a href="dv_cheat_sheet.html">Design Verification (DV) Technical Interview Complete Cheat Sheet</a></h2>
+          <p>Print-ready reference covering <code>bit</code> vs. <code>logic</code> vs. <code>byte</code>, SV array methods, real-world OOP polymorphism, UVM phases, APB/AXI4 checks, and STAR-D debug templates.</p>
+        </div>
+        <div class="card-actions">
+          <a href="dv_cheat_sheet.html" class="read-more">Open Cheat Sheet &rarr;</a>
+        </div>
+      </article>
+
+      <!-- Interactive Book Card -->
+      <article class="post-card featured">
+        <div>
+          <div class="post-meta">
+            <span class="tag">Technical Book</span>
+            <span>17 Chapters</span>
+          </div>
+          <h2><a href="book.html">From Vision to Wafer: Complete Guide to Semiconductor IP Development</a></h2>
+          <p>End-to-end walkthrough of specification, architecture, RTL, DFT, UPF, UVM verification, FPGA/emulation, synthesis, physical design, and post-silicon bring-up.</p>
+        </div>
+        <div class="card-actions">
+          <a href="book.html" class="read-more">Read the Book &rarr;</a>
+        </div>
+      </article>
+    </div>
+
+    <div class="section-heading">
+      <span>Published LinkedIn Articles</span>
+      <span class="pill">linkedin.com/in/jagadishrs</span>
+    </div>
+
+    <div class="blog-grid">
+      <!-- Post 1 -->
+      <article class="post-card">
+        <div>
+          <div class="post-meta">
+            <span class="tag">Architecture &amp; AI</span>
+            <span>Oct 2026</span>
+          </div>
+          <h2><a href="https://www.linkedin.com/in/jagadishrs/recent-activity/articles/" target="_blank" rel="noopener noreferrer">DMA: The Hidden Engine Behind AI Performance</a></h2>
+          <p>Exploring Direct Memory Access architecture, data movement bottlenecks, and verification strategies for modern AI SoCs.</p>
+        </div>
+        <div class="card-actions">
+          <a href="https://www.linkedin.com/in/jagadishrs/recent-activity/articles/" target="_blank" rel="noopener noreferrer" class="read-more">Read on LinkedIn &#8599;</a>
+          <a href="book.html#ch04-sec-5" class="read-more">Related Book Chapter &rarr;</a>
+        </div>
+      </article>
+
+      <!-- Post 2 -->
+      <article class="post-card">
+        <div>
+          <div class="post-meta">
+            <span class="tag">SystemVerilog / UVM</span>
+            <span>Feb 2026</span>
+          </div>
+          <h2><a href="https://www.linkedin.com/in/jagadishrs/recent-activity/articles/" target="_blank" rel="noopener noreferrer">Why SystemVerilog Constraints Might Be &ldquo;Shadowing&rdquo; Your Intent</a></h2>
+          <p>Debugging UVM sequence randomization loops and how the <code>local::</code> scope operator prevents silent constraint bugs.</p>
+        </div>
+        <div class="card-actions">
+          <a href="https://www.linkedin.com/in/jagadishrs/recent-activity/articles/" target="_blank" rel="noopener noreferrer" class="read-more">Read on LinkedIn &#8599;</a>
+          <a href="study_guide.html#sv8" class="read-more">SV Constraints Guide &rarr;</a>
+        </div>
+      </article>
+
+      <!-- Post 3 -->
+      <article class="post-card">
+        <div>
+          <div class="post-meta">
+            <span class="tag">Edge AI</span>
+            <span>Sep 2026</span>
+          </div>
+          <h2><a href="https://www.linkedin.com/in/jagadishrs/recent-activity/articles/" target="_blank" rel="noopener noreferrer">Bringing Intelligence to the Edge with Discrete NPUs</a></h2>
+          <p>Why running AI inference directly on local devices matters for latency, power efficiency, and real-time robotics.</p>
+        </div>
+        <div class="card-actions">
+          <a href="https://www.linkedin.com/in/jagadishrs/recent-activity/articles/" target="_blank" rel="noopener noreferrer" class="read-more">Read on LinkedIn &#8599;</a>
+          <a href="book.html#ch01-sec-6" class="read-more">TinyEdge-NPU Overview &rarr;</a>
+        </div>
+      </article>
+
+      <!-- Post 4 -->
+      <article class="post-card">
+        <div>
+          <div class="post-meta">
+            <span class="tag">Emulation &amp; Verification</span>
+            <span>Jan 2026</span>
+          </div>
+          <h2><a href="https://www.linkedin.com/in/jagadishrs/recent-activity/articles/" target="_blank" rel="noopener noreferrer">Hardware-Assisted Verification &amp; Pre-Silicon Readiness</a></h2>
+          <p>Lessons from deploying emulation platforms like Synopsys ZeBu to catch complex SoC bugs before tape-out.</p>
+        </div>
+        <div class="card-actions">
+          <a href="https://www.linkedin.com/in/jagadishrs/recent-activity/articles/" target="_blank" rel="noopener noreferrer" class="read-more">Read on LinkedIn &#8599;</a>
+          <a href="book.html#ch10" class="read-more">Emulation Chapter &rarr;</a>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="sh-footer">
+  <div class="sh-footer-links">
+    <a href="index.html">Home</a>
+    <a href="blog.html">Blog</a>
+    <a href="book.html">From Vision to Wafer (Book)</a>
+    <a href="study_guide.html">DV Interview Study Guide</a>
+    <a href="dv_cheat_sheet.html">DV Cheat Sheet</a>
+    <a href="about.html">About Jagadish Rongali</a>
+    <a href="https://www.linkedin.com/in/jagadishrs" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+  </div>
+  <p>&copy; 2026 SiliconHive &bull; Jagadish Rongali. All rights reserved.</p>
+</footer>
+  <script>
+  function toggleSiliconHiveTheme() {
+    var html = document.documentElement;
+    var current = html.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+    var next = current === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    html.classList.toggle('dark', next === 'dark');
+    localStorage.setItem('siliconhive-theme', next);
+    updateThemeButtons(next);
+  }
+  function updateThemeButtons(theme) {
+    document.querySelectorAll('[data-theme-label]').forEach(function(el) {
+      el.textContent = theme === 'dark' ? '☀️ Light' : '🌙 Dark';
+    });
+  }
+  document.addEventListener('DOMContentLoaded', function() {
+    var current = document.documentElement.getAttribute('data-theme') || 'dark';
+    updateThemeButtons(current);
+  });
+</script>
+</body>
+</html>
